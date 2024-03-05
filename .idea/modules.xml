@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/web-kotiki.iml" filepath="$PROJECT_DIR$/.idea/web-kotiki.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Web-kotiki.iml" filepath="$PROJECT_DIR$/.idea/Web-kotiki.iml" />
     </modules>
   </component>
 </project>
