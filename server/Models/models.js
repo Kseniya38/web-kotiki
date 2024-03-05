@@ -22,17 +22,17 @@ const Notice = sequelize.define('user', {
     comment: {type: DataTypes.STRING, unique: true, allowNull: true},
 })
 
-const Status = sequelize.define('user', {
+const NoticeStatus = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     status_name: {type: DataTypes.STRING, allowNull: false},
 })
 
 // модель животного и его справочники
 
-const Animals = sequelize.define('animals', {
+const Animal = sequelize.define('animals', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     nickname: {type: DataTypes.STRING, allowNull: true},
-    photo: {type: DataTypes.ARRAY}
+    photo: {type: DataTypes.ARRAY, allowNull: true}
 })
 
 const Sterilization = sequelize.define('sterilization', {
@@ -60,7 +60,7 @@ const AnimalType = sequelize.define('user', {
     animal_type_name: {type: DataTypes.STRING, allowNull: false},
 })
 
-const BreedAnimal = sequelize.define('user', {
+const AnimalTypeBreed = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
@@ -76,6 +76,55 @@ const AnimalStatus = sequelize.define('user', {
 
 const Color = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    color_name: {type: DataTypes.STRING, allowNull: false},
+    color_name: {type: DataTypes.ARRAY, allowNull: false},
 })
 
+NoticeStatus.hasMany(Notice)
+Notice.belongsTo(NoticeStatus)
+
+Animal.hasMany(Notice)
+Notice.belongsTo(Animal)
+
+Sterilization.hasMany(Animal)
+Animal.belongsTo(Sterilization)
+
+Health.hasMany(Animal)
+Animal.belongsTo(Health)
+
+Gender.hasMany(Animal)
+Animal.belongsTo(Gender)
+
+Age.hasMany(Animal)
+Animal.belongsTo(Age)
+
+Color.hasMany(Animal)
+Animal.belongsTo(Color)
+
+AnimalStatus.hasMany(Animal)
+Animal.belongsTo(AnimalStatus)
+
+AnimalTypeBreed.hasMany(Animal)
+Animal.belongsTo(AnimalTypeBreed)
+
+AnimalType.hasMany(Animal)
+Animal.belongsTo(AnimalType)
+
+AnimalTypeBreed.hasMany(Breed)
+Breed.belongsTo(AnimalTypeBreed)
+
+AnimalType.hasMany(AnimalTypeBreed)
+AnimalTypeBreed.belongsTo(AnimalType)
+
+// шаблоны для связей
+
+// one-to-many
+//Class1.hasMany(Class2)
+//Class2.belongsTo(Class1)
+
+// one-to-one
+//Class1.hasOne(Class2)
+//Class2.belongsTo(Class1)
+
+// many-to-many
+//Class1.belongsToMany(Class2, {through: Class1Class2 })
+//Class2.belongsToMany(Class1, {through: Class1Class2 })
