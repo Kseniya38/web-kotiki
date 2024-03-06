@@ -1,0 +1,11 @@
+# Default ignored files
+.idea
+/shelf/
+workspace.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+/server/node_modules/
+
+# Application npm log file
+npm-debug.log*
