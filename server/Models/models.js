@@ -1,5 +1,7 @@
 const sequelize = require('../db')
-const {DataTypes} = require('sequelize')
+const {DataTypes, STRING} = require('sequelize')
+
+// модель пользователя и его полномочий
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -10,9 +12,19 @@ const User = sequelize.define('user', {
     social_media: {type: DataTypes.STRING, unique: true, allowNull: true},
 })
 
+const Credential = sequelize.define('credential', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    password: {type: DataTypes.STRING, allowNull: false}
+})
+
+const Role = sequelize.define('role', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    role_name: {type: DataTypes.STRING, allowNull: false}
+})
+
 // модель объявления и ее справочник
 
-const Notice = sequelize.define('user', {
+const Notice = sequelize.define('notice', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     event_date: {type: DataTypes.DATE, allowNull: false},
     city: {type: DataTypes.STRING, allowNull: false},
@@ -22,17 +34,17 @@ const Notice = sequelize.define('user', {
     comment: {type: DataTypes.STRING, unique: true, allowNull: true},
 })
 
-const NoticeStatus = sequelize.define('user', {
+const NoticeStatus = sequelize.define('notice_status', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     status_name: {type: DataTypes.STRING, allowNull: false},
 })
 
 // модель животного и его справочники
 
-const Animal = sequelize.define('animals', {
+const Animal = sequelize.define('animal', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     nickname: {type: DataTypes.STRING, allowNull: true},
-    photo: {type: DataTypes.ARRAY, allowNull: true}
+    photo: {type: DataTypes.ARRAY(STRING), allowNull: true},
 })
 
 const Sterilization = sequelize.define('sterilization', {
@@ -55,32 +67,43 @@ const Age = sequelize.define('age', {
     age: {type: DataTypes.STRING, allowNull: false},
 })
 
-const AnimalType = sequelize.define('user', {
+const AnimalType = sequelize.define('animal_type', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     animal_type_name: {type: DataTypes.STRING, allowNull: false},
 })
 
-const AnimalTypeBreed = sequelize.define('user', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
-
-const Breed = sequelize.define('user', {
+const Breed = sequelize.define('breed', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     animal_breed_name: {type: DataTypes.STRING, allowNull: false},
 })
 
-const AnimalStatus = sequelize.define('user', {
+const AnimalStatus = sequelize.define('animal_status', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     animal_status_name: {type: DataTypes.STRING, allowNull: false},
 })
 
-const Color = sequelize.define('user', {
+const Color = sequelize.define('color', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    color_name: {type: DataTypes.ARRAY, allowNull: false},
+    color_name: {type: DataTypes.STRING, allowNull: false},
 })
+
+// связи пользователя, его полномочий и роли
+
+User.hasMany(Notice)
+Notice.belongsTo(User)
+
+User.hasOne(Credential)
+Credential.belongsTo(User)
+
+Role.hasMany(User)
+User.belongsTo(Role)
+
+// связи объявления, его статуса
 
 NoticeStatus.hasMany(Notice)
 Notice.belongsTo(NoticeStatus)
+
+// связи животного, его справочников
 
 Animal.hasMany(Notice)
 Notice.belongsTo(Animal)
@@ -103,17 +126,31 @@ Animal.belongsTo(Color)
 AnimalStatus.hasMany(Animal)
 Animal.belongsTo(AnimalStatus)
 
-AnimalTypeBreed.hasMany(Animal)
-Animal.belongsTo(AnimalTypeBreed)
-
 AnimalType.hasMany(Animal)
 Animal.belongsTo(AnimalType)
 
-AnimalTypeBreed.hasMany(Breed)
-Breed.belongsTo(AnimalTypeBreed)
+AnimalType.hasMany(Breed)
+Breed.belongsTo(AnimalType)
 
-AnimalType.hasMany(AnimalTypeBreed)
-AnimalTypeBreed.belongsTo(AnimalType)
+Breed.hasMany(Animal)
+Animal.belongsTo(Breed)
+
+module.exports = {
+    User,
+    Credential,
+    Role,
+    Notice,
+    NoticeStatus,
+    Animal,
+    AnimalType,
+    Breed,
+    Sterilization,
+    Health,
+    Gender,
+    Age,
+    Color,
+    AnimalStatus
+}
 
 // шаблоны для связей
 
