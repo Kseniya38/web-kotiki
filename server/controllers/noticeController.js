@@ -8,6 +8,6 @@ class NoticeController{
     async getOne(req, res){
 
     }
-    S
+
 }
 module.exports = new NoticeController()
