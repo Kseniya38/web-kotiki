@@ -1,7 +1,5 @@
 const ApiError = require('../error/ApiError')
-const {User,
-    Credential
-} = require('../models/models')
+const {User, Credential} = require('../models/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -47,13 +45,13 @@ class UserController {
         const {telephone, password} = req.body
         const user = await User.findOne({where: {telephone}})
         if (!user) {
-            return next(ApiError.internal('Пользователь не найден'))
+            return next(ApiError.badRequest('Пользователь не найден'))
         }
         const userId = user.id
         const credential = await Credential.findOne({where: {userId}})
         let comparePassword = bcrypt.compareSync(password, credential.password)
         if (!comparePassword) {
-            return next(ApiError.internal('Указан неверный пароль'))
+            return next(ApiError.badRequest('Указан неверный пароль'))
         }
         const token = generateJwt(user.id, user.telephone, user.role)
         return res.json({token})
