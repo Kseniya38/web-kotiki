@@ -151,17 +151,3 @@ module.exports = {
     Color,
     AnimalStatus
 }
-
-// шаблоны для связей
-
-// one-to-many
-//Class1.hasMany(Class2)
-//Class2.belongsTo(Class1)
-
-// one-to-one
-//Class1.hasOne(Class2)
-//Class2.belongsTo(Class1)
-
-// many-to-many
-//Class1.belongsToMany(Class2, {through: Class1Class2 })
-//Class2.belongsToMany(Class1, {through: Class1Class2 })
