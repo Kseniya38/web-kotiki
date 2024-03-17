@@ -28,10 +28,10 @@ const Notice = sequelize.define('notice', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     event_date: {type: DataTypes.DATE, allowNull: false},
     city: {type: DataTypes.STRING, allowNull: false},
-    district: {type: DataTypes.STRING, unique: true, allowNull: false},
-    street: {type: DataTypes.STRING, unique: true, allowNull: true},
-    house: {type: DataTypes.STRING, unique: true, allowNull: true},
-    comment: {type: DataTypes.STRING, unique: true, allowNull: true},
+    district: {type: DataTypes.STRING, allowNull: false},
+    street: {type: DataTypes.STRING, allowNull: true},
+    house: {type: DataTypes.STRING, allowNull: true},
+    comment: {type: DataTypes.STRING, allowNull: true},
 })
 
 const NoticeStatus = sequelize.define('notice_status', {

@@ -1,6 +1,9 @@
+const {NoticeStatus} = require('../models/models')
 class NoticeStatusController{
-    async getAll(req, res){
-
+    async create(req, res){
+        const {status_name} = req.body
+        const status = await NoticeStatus.create({status_name})
+        return res.json(status)
     }
 
 }
