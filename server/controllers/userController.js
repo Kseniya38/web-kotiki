@@ -3,11 +3,14 @@ const {User, Credential} = require('../models/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const generateJwt = (id, telephone, role) => {
+const TOKEN_EXPIRES_DEFAULT = '24h'
+const TOKEN_EXPIRES_KILL = 0
+
+const generateJwt = (id, telephone, role, expiresIn) => {
     return jwt.sign(
         {id, telephone, role},
         process.env.SECRET_KEY,
-        {expiresIn: '24h'}
+        {expiresIn}
     )
 }
 
@@ -36,8 +39,8 @@ class UserController {
             social_media,
             roleId: role
             })
-        const credential = await Credential.create({password: hashPassword, userId: user.id})
-        const token = generateJwt(user.id, user.telephone, user.role)
+        await Credential.create({password: hashPassword, userId: user.id})
+        const token = generateJwt(user.id, user.telephone, user.role, TOKEN_EXPIRES_DEFAULT)
         return res.json({token})
     }
 
@@ -53,12 +56,12 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.badRequest('Указан неверный пароль'))
         }
-        const token = generateJwt(user.id, user.telephone, user.role)
+        const token = generateJwt(user.id, user.telephone, user.role, TOKEN_EXPIRES_DEFAULT)
         return res.json({token})
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.telephone, req.user.role)
+        const token = generateJwt(req.user.id, req.user.telephone, req.user.role, TOKEN_EXPIRES_DEFAULT)
         return res.json({token})
     }
 
@@ -72,26 +75,57 @@ class UserController {
                 return next(ApiError.badRequest('Пользователь не найден'))
             }
 
-            if (name) user.name = name
-            if (surname) user.surname = surname
-            if (telephone) user.telephone = telephone
-            if (email) user.email = email
-            if (social_media) user.social_media = social_media
-            if (role) user.roleId = role
-            await user.save()
+            const updatedFields = {}
+            if (name) updatedFields.name = name
+            if (surname) updatedFields.surname = surname
+            if (telephone) updatedFields.telephone = telephone
+            if (email) updatedFields.email = email
+            if (social_media) updatedFields.social_media = social_media
+            if (role) updatedFields.roleId = role
+
+            await User.update(updatedFields, { where: { id } })
 
             if (password) {
                 const hashPassword = await bcrypt.hash(password, 5)
                 const userId = id
-                const credentials = await Credential.findOne({ where: { userId } })
-                if (!credentials) {
+                const [updatedCredentials] = await Credential.update({ password: hashPassword }, { where: { userId } })
+
+                if (updatedCredentials !== 1) {
                     return next(ApiError.badRequest('Учетные данные не найдены'))
                 }
-                credentials.password = hashPassword
-                await credentials.save()
             }
 
-            return res.json({ message: 'Данные пользователя успешно обновлены' })
+            const token = generateJwt(user.id, user.telephone, user.role, TOKEN_EXPIRES_DEFAULT)
+            return res.json({ message: 'Данные пользователя успешно обновлены', token })
+
+        } catch (error) {
+            return next(ApiError.internal(error.message))
+        }
+    }
+
+    async getOne(req, res, next) {
+        const {id} = req.params
+        try {
+            const user = await User.findByPk(id)
+            if (!user) {
+                return next(ApiError.badRequest('Пользователь не найден'))
+            }
+            return res.json(user)
+        } catch (error) {
+            return next(ApiError.internal(error.message))
+        }
+    }
+
+    async logout(req, res, next) {
+        const {id} = req.params
+        try {
+            const user = await User.findByPk(id)
+            if (!user) {
+                return next(ApiError.badRequest('Пользователь не найден'))
+            }
+            const expiredToken = generateJwt(req.user.id, req.user.telephone, req.user.role, TOKEN_EXPIRES_KILL)
+            res.cookie('token', expiredToken, { expires: new Date(0) })
+            return res.json({ message: 'Пользователь успешно разлогинен' })
         } catch (error) {
             return next(ApiError.internal(error.message))
         }
