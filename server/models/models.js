@@ -28,10 +28,10 @@ const Notice = sequelize.define('notice', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     event_date: {type: DataTypes.DATE, allowNull: false},
     city: {type: DataTypes.STRING, allowNull: false},
-    district: {type: DataTypes.STRING, unique: true, allowNull: false},
-    street: {type: DataTypes.STRING, unique: true, allowNull: true},
-    house: {type: DataTypes.STRING, unique: true, allowNull: true},
-    comment: {type: DataTypes.STRING, unique: true, allowNull: true},
+    district: {type: DataTypes.STRING, allowNull: false},
+    street: {type: DataTypes.STRING, allowNull: true},
+    house: {type: DataTypes.STRING, allowNull: true},
+    comment: {type: DataTypes.STRING, allowNull: true},
 })
 
 const NoticeStatus = sequelize.define('notice_status', {
@@ -49,22 +49,22 @@ const Animal = sequelize.define('animal', {
 
 const Sterilization = sequelize.define('sterilization', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    sterilization: {type: DataTypes.STRING, allowNull: false},
+    sterilization: {type: DataTypes.STRING, allowNull: true},
 })
 
 const Health = sequelize.define('health', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    health: {type: DataTypes.STRING, allowNull: false},
+    health: {type: DataTypes.STRING, allowNull: true},
 })
 
 const Gender = sequelize.define('gender', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    gender: {type: DataTypes.STRING, allowNull:false},
+    gender: {type: DataTypes.STRING, allowNull: true},
 })
 
 const Age = sequelize.define('age', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    age: {type: DataTypes.STRING, allowNull: false},
+    age: {type: DataTypes.STRING, allowNull: true},
 })
 
 const AnimalType = sequelize.define('animal_type', {
@@ -74,7 +74,7 @@ const AnimalType = sequelize.define('animal_type', {
 
 const Breed = sequelize.define('breed', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    animal_breed_name: {type: DataTypes.STRING, allowNull: false},
+    animal_breed_name: {type: DataTypes.STRING, allowNull: true},
 })
 
 const AnimalStatus = sequelize.define('animal_status', {
@@ -151,17 +151,3 @@ module.exports = {
     Color,
     AnimalStatus
 }
-
-// шаблоны для связей
-
-// one-to-many
-//Class1.hasMany(Class2)
-//Class2.belongsTo(Class1)
-
-// one-to-one
-//Class1.hasOne(Class2)
-//Class2.belongsTo(Class1)
-
-// many-to-many
-//Class1.belongsToMany(Class2, {through: Class1Class2 })
-//Class2.belongsToMany(Class1, {through: Class1Class2 })
