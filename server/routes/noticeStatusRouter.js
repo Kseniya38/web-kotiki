@@ -3,7 +3,7 @@ const router = new Router()
 const noticeStatusController =require('../controllers/noticeStatusController')
 const checkRole = require("../middleware/checkRoleMiddleware");
 
-router.get('/', checkRole('admin'), noticeStatusController.getAll)
+router.get('/add', checkRole('admin'), noticeStatusController.create)
 
 
 module.exports = router
