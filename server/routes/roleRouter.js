@@ -4,6 +4,6 @@ const roleController = require('../controllers/roleController')
 const checkRole = require("../middleware/checkRoleMiddleware");
 
 router.post('/', checkRole('admin'), roleController.create)
-router.get('/', roleController.getAll)
+router.get('/', checkRole('admin'), roleController.getAll)
 
 module.exports = router

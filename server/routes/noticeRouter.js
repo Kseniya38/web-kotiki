@@ -1,10 +1,10 @@
 const Router = require('express')
 const router = new Router()
 const noticeController =require('../controllers/noticeController')
-const checkRole = require('../middleware/checkRoleMiddleware')
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.post('/add', checkRole('author'), noticeController.create)
-router.post('/edit', checkRole('author'), noticeController.update)
+router.post('/add', authMiddleware, noticeController.create)
+router.post('/edit', authMiddleware, noticeController.update)
 //router.get('/',noticeController.getAll)
 //router.get('/:id',noticeController.getOne)
 
