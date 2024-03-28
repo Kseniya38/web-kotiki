@@ -12,6 +12,13 @@
     <atom-view_button>Посмотреть</atom-view_button>
     <atom-user_icons/>
     <atom-description_preview :date="date" :location="location" :color="color"/>
+    <atom-characteristic/>
+    <atom-checkboxinf/>
+    <atom-fieldname/>
+    <atom-input/>
+    <atom-p/>
+    <atom-selector/>
+    <atom-textarea/>
   </div>
 
 </template>
@@ -28,8 +35,23 @@ import AtomDrop_down_list from "@/components/atoms/DropDownList.vue";
 import AtomView_button from "@/components/atoms/ViewButton.vue";
 import AtomUser_icons from "@/components/atoms/UserIcons.vue";
 import AtomDescription_preview from "@/components/atoms/DescriptionPreview.vue";
+import AtomCharacteristic from "@/components/atoms/Characteristic.vue";
+import AtomTextarea from "@/components/atoms/TextArea.vue";
+import AtomCheckboxinf from "@/components/atoms/CheckBoxInf.vue";
+import AtomFieldname from "@/components/atoms/FieldName.vue";
+import AtomInput from "@/components/atoms/Input.vue";
+import AtomP from "@/components/atoms/P.vue";
+import AtomSelector from "@/components/atoms/Selector.vue";
+import AtomInfblock from "@/components/molecules/Infoblock.vue";
 export default {
   components: {
+    AtomSelector,
+    AtomP,
+    AtomInput,
+    AtomFieldname,
+    AtomCheckboxinf,
+    AtomTextarea,
+    AtomCharacteristic,
     AtomDescription_preview,
     AtomUser_icons,
     AtomView_button,
@@ -55,7 +77,7 @@ export default {
       file1: "@/src/assets/icons/activeNotice.png",
       date: '20 сентября 2020',
       location: 'Иркутск',
-      color: 'Белый'
+      color: 'Белый',
     }
   }
 }
