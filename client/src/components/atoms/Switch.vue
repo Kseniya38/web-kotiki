@@ -26,16 +26,17 @@ input[type="radio"] {
 }
 input[type="radio"]:checked + label {
   background-color: #dfBef9;
-  color: #fff;
+  color: #6504B5;
   box-shadow: -2px 2px 20px -8px #010101;
+  border: 1px solid #6504B5;
 }
 
 label {
   height: 52px;
   width: 279px;
-  border: 5px solid #dfBef9;
+  border: 1px solid #1C1B18;
   border-radius: 8px;
-  color: #dfBef9;
+  color: #1C1B18;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,9 +50,9 @@ label .fa {
 label span {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 1px;
-  font-size: 12px;
-  text-transform: uppercase;
-  margin-top: 10px;
+  font-size: 16px;
+  margin-top: 2px;
+  text-align: center;
 }
 div {
   display:  flex;

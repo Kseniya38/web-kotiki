@@ -16,5 +16,6 @@ h2 {
   color: #1C1B18;
   font-family: Montserrat-Bold, sans-serif;
   font-size: 36px;
+  text-align: left;
 }
 </style>
