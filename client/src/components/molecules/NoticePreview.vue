@@ -1,6 +1,9 @@
 <template>
   <div class="notice-preview">
+    <div class="notice-container">
     <img :src="imageSrc" alt="Notice Image" class="notice-preview-image" />
+      <ManageNoticeIconsBar class="preview-icons_bar"/>
+    </div>
     <DescriptionPreview :date="date" :location="location" :color="color"/>
     <Button class="preview-button" @click="handleButtonClick">Подробнее</Button>
   </div>
@@ -10,6 +13,7 @@
 import DescriptionPreview from "@/components/atoms/DescriptionPreview.vue";
 import Button from "@/components/atoms/ViewButton.vue";
 import AtomDescription_preview from "@/components/atoms/DescriptionPreview.vue";
+import ManageNoticeIconsBar from "@/components/atoms/ManageNoticeIconsBar.vue";
 
 export default {
   name: "NoticePreview",
@@ -17,6 +21,7 @@ export default {
     AtomDescription_preview,
     DescriptionPreview,
     Button,
+    ManageNoticeIconsBar,
   },
   props: {
     imageSrc:String,
@@ -43,8 +48,18 @@ export default {
   border-radius: 8px;
 }
 
+.notice-container {
+  position: relative;
+}
+
+.notice-container .preview-icons_bar {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+}
+
 .notice-preview-image {
-  max-width: 243px;
+  width: 100%;
   max-height: 258px;
   object-fit: cover;
 }

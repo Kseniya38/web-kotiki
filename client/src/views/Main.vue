@@ -24,7 +24,7 @@
     <molecules-manycheckboxes :drop_down_name="drop_name"/>
     <molecules-title-selector/>
     <molecules-titel-input/>
-    <NoticePreview :imageSrc="require('@/assets/pictures/cat.jpg')" :date="date" :location="location" :color="color"/>
+    <NoticePreview :imageSrc="require('@/assets/pictures/cat.svg')" :date="date" :location="location" :color="color"/>
     <NoticePreviewLine :items="previewItems"/>
     <RecommendationBlock :items="previewItems" :value="h2" :text="link" :url="url"/>
   </div>
@@ -41,7 +41,7 @@ import AtomLink from "@/components/atoms/Link.vue";
 import AtomCheckbox from "@/components/atoms/CheckBox.vue";
 import AtomDrop_down_list from "@/components/atoms/DropDownList.vue";
 import AtomView_button from "@/components/atoms/ViewButton.vue";
-import AtomUser_icons from "@/components/atoms/UserIcons.vue";
+import AtomUser_icons from "@/components/atoms/ManageNoticeIconsBar.vue";
 import AtomDescription_preview from "@/components/atoms/DescriptionPreview.vue";
 import AtomCharacteristic from "@/components/atoms/Characteristic.vue";
 import AtomTextarea from "@/components/atoms/TextArea.vue";
@@ -119,10 +119,10 @@ export default {
       breed: "Беспородный",
       sterilization: "Нет",
       previewItems:  [
-        { imageSrc: require('@/assets/pictures/cat.jpg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
-        { imageSrc: require('@/assets/pictures/dog.jpg'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
-        { imageSrc: require('@/assets/pictures/cat.jpg'), date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
-        { imageSrc: require('@/assets/pictures/dog.jpg'), date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
+        { imageSrc: require('@/assets/pictures/cat.svg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
+        { imageSrc: require('@/assets/pictures/dog.svg'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
+        { imageSrc: require('@/assets/pictures/cat.svg'), date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
+        { imageSrc: require('@/assets/pictures/dog.svg'), date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
       ]
     }
   }

@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .recommendation-block {
   text-align: right;
 }
