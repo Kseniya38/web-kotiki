@@ -19,6 +19,12 @@
     <atom-p/>
     <atom-selector/>
     <atom-textarea/>
+    <atom-switch/>
+    <molecules-infblock :date="date" :location="location" :color="color" :nickname="nickname" :age="age" :gender="gender" :breed="breed" :health="health" :sterilization="sterilization"/>
+    <molecules-comment/>
+    <molecules-manycheckboxes :drop_down_name="drop_name"/>
+    <molecules-title-selector/>
+    <molecules-titel-input/>
   </div>
 
 </template>
@@ -42,9 +48,28 @@ import AtomFieldname from "@/components/atoms/FieldName.vue";
 import AtomInput from "@/components/atoms/Input.vue";
 import AtomP from "@/components/atoms/P.vue";
 import AtomSelector from "@/components/atoms/Selector.vue";
-import AtomInfblock from "@/components/molecules/Infoblock.vue";
+import AtomSwitch from "@/components/atoms/Switch.vue";
+import MoleculesComment from "@/components/molecules/Comment.vue";
+import MoleculesInfblock from "@/components/molecules/Infoblock.vue";
+import MoleculesManycheckboxes from "@/components/molecules/ManyCheckboxes.vue";
+import dropDownList from "@/components/atoms/DropDownList.vue";
+import Molecule from "@/components/molecules/molecule.vue";
+import MoleculesTitleSelector from "@/components/molecules/TitleSelector.vue";
+import MoleculesTitelInput from "@/components/molecules/TitelInput.vue";
 export default {
+  computed: {
+    dropDownList() {
+      return dropDownList
+    }
+  },
   components: {
+    MoleculesTitelInput,
+    MoleculesTitleSelector,
+    Molecule,
+    MoleculesManycheckboxes,
+    MoleculesInfblock,
+    MoleculesComment,
+    AtomSwitch,
     AtomSelector,
     AtomP,
     AtomInput,
@@ -78,6 +103,12 @@ export default {
       date: '20 сентября 2020',
       location: 'Иркутск',
       color: 'Белый',
+      nickname: 'Капитан',
+      gender: "М",
+      health: "Да",
+      age: "Взрослый",
+      breed: "Беспородный",
+      sterilization: "Нет"
     }
   }
 }
