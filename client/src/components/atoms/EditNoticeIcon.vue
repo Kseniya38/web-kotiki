@@ -1,12 +1,12 @@
 <template>
   <button class="icon_btn">
-    <img src="@/assets/icons/editNotice.svg" alt="">
+    <img src="@/assets/icons/editNotice.svg" alt="Редактировать объявление">
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-user_icon_edit'
+  name: 'atom-edit-notice-icon'
 }
 </script>
 

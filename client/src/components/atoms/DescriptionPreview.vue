@@ -2,27 +2,26 @@
   <div class="container">
     <div class="item">
       <img src="@/assets/icons/datePreview.png" alt="" id="date" class="icon">
-      <label class="label" for="date">{{date}}</label>
+      <label class="label" for="date">{{date_preview}}</label>
     </div>
     <div class="item">
       <img src="@/assets/icons/locationPreview.png" alt="" id="location" class="icon">
-      <label class="label" for="location">{{location}}</label>
+      <label class="label" for="location">{{location_preview}}</label>
     </div>
     <div class="item">
       <img src="@/assets/icons/colorPreview.png" alt="" id="color" class="icon">
-      <label class="label" for="color">{{color}}</label>
+      <label class="label" for="color">{{color_preview}}</label>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'atom-description_preview',
+  name: 'atom-description-preview',
   props: {
-    date: String,
-    location: String,
-    color: String
+    date_preview: String,
+    location_preview: String,
+    color_preview: String
   }
 }
 </script>

@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'molecules-titleSelector'
+  name: 'molecule-title-selector'
 }
 </script>
 

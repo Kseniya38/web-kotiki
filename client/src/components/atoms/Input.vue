@@ -1,12 +1,15 @@
 <template>
   <div>
-    <input v-model="message" placeholder="Текст">
+    <input :placeholder="text_placeholder_input">
   </div>
 </template>
 
 <script>
 export default {
-  name: 'atom-input'
+  name: 'atom-input',
+  props: {
+    text_placeholder_input: String,
+  },
 }
 </script>
 

@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: 'molecules-infblock',
+  name: 'molecule-infoblock',
   props: {
     date: String,
     location: String,

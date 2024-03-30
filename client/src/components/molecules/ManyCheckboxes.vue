@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <label>{{ drop_down_name }}</label>
+      <label>{{ name_drop_down }}</label>
     </div>
     <div>
       <p>
@@ -41,9 +41,9 @@
 
 <script>
 export default {
-  name: 'molecules-manycheckboxes',
+  name: 'molecule-many-checkboxes',
   props: {
-    drop_down_name: String,
+    name_drop_down: String,
   }
   }
 </script>

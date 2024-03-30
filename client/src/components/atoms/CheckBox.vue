@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="checkbox" id="a-checkbox"/>
-    <label for="a-checkbox">{{label}}</label>
+    <label for="a-checkbox">{{label_checkbox}}</label>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   name: 'atom-checkbox',
   props: {
-    label: String
+    label_checkbox: String
   }
 }
 </script>

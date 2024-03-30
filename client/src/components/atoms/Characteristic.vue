@@ -1,13 +1,15 @@
 <template>
   <div>
-    <label><strong>Дата</strong></label>
+    <label><strong>{{ name_characteristic }}</strong></label>
   </div>
   </template>
 
 <script>
 export default {
   name: 'atom-characteristic',
-
+  props: {
+    name_characteristic:String,
+  },
 }
 </script>
 

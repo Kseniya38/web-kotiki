@@ -1,19 +1,19 @@
 <template>
   <div class="icons_bar">
-    <atom-user_icon_edit/>
-    <atom-user_icon_disactive/>
-    <atom-user_icon_active/>
+    <atom-edit-notice-icon/>
+    <atom-disactive-notice-icon/>
+    <atom-active-notice-icon/>
   </div>
 </template>
 
 <script>
-import AtomUser_icon_edit from "@/components/atoms/EditNoticeIcon.vue";
-import AtomUser_icon_active from "@/components/atoms/ActiveNoticeIcon.vue";
-import AtomUser_icon_disactive from "@/components/atoms/DisactiveNoticeIcon.vue";
+import AtomEditNoticeIcon from "@/components/atoms/EditNoticeIcon.vue";
+import AtomActiveNoticeIcon from "@/components/atoms/ActiveNoticeIcon.vue";
+import AtomDisactiveNoticeIcon from "@/components/atoms/DisactiveNoticeIcon.vue";
 
 export default {
-  name: 'atom-user_icons',
-  components: {AtomUser_icon_disactive, AtomUser_icon_active, AtomUser_icon_edit},
+  name: 'atom-manage-notice-icons-bar',
+  components: {AtomEditNoticeIcon, AtomActiveNoticeIcon, AtomDisactiveNoticeIcon},
   props: {
 
   }

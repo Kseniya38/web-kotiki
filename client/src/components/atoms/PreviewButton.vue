@@ -1,12 +1,12 @@
 <template>
-  <button>
+  <button class="preview-button">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-view_button'
+  name: 'atom-preview-button'
 }
 </script>
 

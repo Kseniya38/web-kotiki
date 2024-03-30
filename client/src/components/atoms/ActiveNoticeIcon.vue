@@ -1,12 +1,12 @@
 <template>
   <button class="icon_btn">
-    <img class="icon_act" src="@/assets/icons/activeNotice.svg" alt="">
+    <img class="icon_act" src="@/assets/icons/activeNotice.svg" alt="Активировать объявление">
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-user_icon_active'
+  name: 'atom-active-notice-icon'
 }
 </script>
 

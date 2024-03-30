@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button @click="toggleDropdown">{{ drop_down_name }}</button>
+    <button class="drop-down-btn" @click="toggleDropdown">{{ name_drop_down }}</button>
     <div v-if="isOpen" class="dropdown-content">
       <atom-checkbox
-          v-for="listItem in list"
-          :label="listItem"
+          v-for="listItem in list_drop_down"
+          :label_checkbox="listItem"
       />
     </div>
   </div>
@@ -16,10 +16,10 @@ export default {
   components: {
     AtomCheckbox
   },
-  name: 'atom-drop_down_list',
+  name: 'atom-drop-down-list',
   props: {
-    drop_down_name: String,
-    list: {
+    name_drop_down: String,
+    list_drop_down: {
       type: Array,
       default: () => []
     }
@@ -37,9 +37,8 @@ export default {
 }
 </script>
 
-<style scoped>
-button {
+<style>
+.drop-down-btn {
   border: none;
-  background-color: #FFFFFF;
 }
 </style>

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'molecules-TitelInput'
+  name: 'molecule-title-input'
 }
 </script>
 

@@ -1,19 +1,19 @@
 <template>
   <div class="preview-line">
-    <NoticePreview v-for="(item, index) in items" :key="index" :imageSrc="item.imageSrc" :date="item.date" :location="item.location" :color="item.color" />
+    <molecule-notice-preview v-for="(item, index) in items_preview" :key="index" :image_src_preview="item.imageSrc" :date_preview="item.date" :location_preview="item.location" :color_preview="item.color" />
   </div>
 </template>
 
 <script>
-import NoticePreview from "@/components/molecules/NoticePreview.vue";
+import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
 
 export default {
-  name: "PreviewLine",
+  name: "molecule-notice-preview-line",
   components: {
-    NoticePreview,
+    MoleculeNoticePreview,
   },
   props: {
-    items: {
+    items_preview: {
       type: Array,
       required: true,
     },

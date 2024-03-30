@@ -1,21 +1,25 @@
 <template>
 <div>
-  <input type="radio" name="type" id="cat">
-  <label for="cat">
-    <i class="fa fa-cat"></i>
-    <span>Кошка</span>
+  <input type="radio" name="type" id="left-switch">
+  <label for="left-switch">
+    <i class="fa fa-left-switch"></i>
+    <span>{{ name_left_switch }}</span>
   </label>
-  <input type="radio" name="type" id="dog">
-  <label for="dog">
-    <i class="fa fa-dog"></i>
-    <span>Собака</span>
+  <input type="radio" name="type" id="right-switch">
+  <label for="right-switch">
+    <i class="fa fa-right-switch"></i>
+    <span>{{ name_right_switch }}</span>
   </label>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'atom-switch'
+  name: 'atom-switch',
+  props: {
+    name_left_switch: String,
+    name_right_switch: String,
+  },
 }
 
 </script>

@@ -1,17 +1,14 @@
 <template>
 <div>
   <h3>Комментарий</h3>
-  <textarea maxlength = "565" v-model="message" placeholder="Текст"></textarea>
+  <textarea maxlength = "565" placeholder="Текст"></textarea>
 </div>
-
-
 </template>
 
 <script>
 
-
 export default {
-  name: 'molecules-comment'
+  name: 'molecule-comment'
 }
 </script>
 

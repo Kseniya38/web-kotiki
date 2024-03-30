@@ -1,12 +1,12 @@
 <template>
   <button class="icon_btn">
-    <img class="icon_dis" src="@/assets/icons/disactiveNotice.svg" alt="">
+    <img class="icon_dis" src="@/assets/icons/disactiveNotice.svg" alt="Снять с публикации">
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-user_icon_disactive'
+  name: 'atom-disactive-notice-icon'
 }
 </script>
 

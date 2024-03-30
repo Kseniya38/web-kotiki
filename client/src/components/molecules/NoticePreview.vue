@@ -1,33 +1,31 @@
 <template>
   <div class="notice-preview">
     <div class="notice-container">
-    <img :src="imageSrc" alt="Notice Image" class="notice-preview-image" />
-      <ManageNoticeIconsBar class="preview-icons_bar"/>
+    <img :src="image_src_preview" alt="Notice Image" class="notice-preview-image" />
+      <atom-manage-notice-icons-bar class="preview-icons_bar"/>
     </div>
-    <DescriptionPreview :date="date" :location="location" :color="color"/>
-    <Button class="preview-button" @click="handleButtonClick">Подробнее</Button>
+    <atom-description-preview :date_preview="date_preview" :location_preview="location_preview" :color_preview="color_preview"/>
+    <atom-preview-button class="preview-button" @click="handleButtonClick">Подробнее</atom-preview-button>
   </div>
 </template>
 
 <script>
-import DescriptionPreview from "@/components/atoms/DescriptionPreview.vue";
-import Button from "@/components/atoms/ViewButton.vue";
-import AtomDescription_preview from "@/components/atoms/DescriptionPreview.vue";
-import ManageNoticeIconsBar from "@/components/atoms/ManageNoticeIconsBar.vue";
+import AtomPreviewButton from "@/components/atoms/PreviewButton.vue";
+import AtomDescriptionPreview from "@/components/atoms/DescriptionPreview.vue";
+import AtomManageNoticeIconsBar from "@/components/atoms/ManageNoticeIconsBar.vue";
 
 export default {
-  name: "NoticePreview",
+  name: "molecule-notice-preview",
   components: {
-    AtomDescription_preview,
-    DescriptionPreview,
-    Button,
-    ManageNoticeIconsBar,
+    AtomManageNoticeIconsBar,
+    AtomDescriptionPreview,
+    AtomPreviewButton,
   },
   props: {
-    imageSrc:String,
-    date: String,
-    location:String,
-    color:String,
+    image_src_preview:String,
+    date_preview: String,
+    location_preview:String,
+    color_preview:String,
   },
   methods: {
     handleButtonClick() {

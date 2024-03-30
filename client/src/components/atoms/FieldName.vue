@@ -1,12 +1,15 @@
 <template>
   <div>
-    <label>Порода</label>
+    <label>{{name_field_label}}</label>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'atom-fieldname'
+  name: 'atom-field-name',
+  props: {
+    name_field_label:String,
+  },
 }
 </script>
 

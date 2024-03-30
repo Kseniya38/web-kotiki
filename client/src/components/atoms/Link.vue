@@ -1,12 +1,12 @@
 <template>
-  <a :href="url">{{text}}</a>
+  <a :href="url">{{text_link}}</a>
 </template>
 
 <script>
 export default {
   name: 'atom-link',
   props: {
-    text: String,
+    text_link: String,
     url: String
   }
 }

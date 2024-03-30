@@ -1,12 +1,12 @@
 <template>
-  <h2>{{value}}</h2>
+  <h2>{{value_h2}}</h2>
 </template>
 
 <script>
 export default {
   name: 'atom-h2',
   props: {
-    value: String
+    value_h2: String
   }
 }
 </script>
