@@ -31,7 +31,6 @@ input[type="radio"] {
 input[type="radio"]:checked + label {
   background-color: #dfBef9;
   color: #6504B5;
-  box-shadow: -2px 2px 20px -8px #010101;
   border: 1px solid #6504B5;
 }
 

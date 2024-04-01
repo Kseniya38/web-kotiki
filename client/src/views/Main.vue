@@ -14,20 +14,32 @@
     <atom-preview-button>Посмотреть</atom-preview-button>
     <atom-manage-notice-icons-bar/>
     <atom-description-preview :date_preview="date" :location_preview="location" :color_preview="color"/>
-    <atom-characteristic :name_characteristic="h1 + h2"/>
-    <atom-field-name :name_field_label="h1 +h2"/>
+    <atom-characteristic :name_characteristic="label" :value_characteristic="date"/>
+    <atom-field-name :name_field_label="name_field_label"/>
     <atom-input :text_placeholder_input="h3"/>
-    <atom-p :text_p="h1 + h2 + h3"/>
+    <atom-p :text_p="text_p"/>
     <atom-textarea :text_textarea_input="h3 + h2"/>
     <atom-switch :name_left_switch="h2" :name_right_switch="h3"/>
+    <atom-select :selectItems="selectItems"/>
+
 
     <h1>Тест молекулов @___@</h1>
 
-    <molecule-infoblock :date="date" :location="location" :color="color" :nickname="nickname" :age="age" :gender="gender" :breed="breed" :health="health" :sterilization="sterilization"/>
-    <molecule-comment/>
-    <molecule-many-checkboxes :name_drop_down="drop_name"/>
-    <molecule-title-selector/>
-    <molecule-title-input/>
+    <molecule-infoblock :title_data="title_data" :date="date"
+                        :title_publication_date="title_publication_date" :publication_date="publication_date"
+                        :location="location"
+                        :title_color="title_color"  :color="color"
+                        :title_nickname="title_nickname"  :nickname="nickname"
+                        :title_age="title_age"  :age="age"
+                        :title_gender="title_gender"  :gender="gender"
+                        :title_breed="title_breed" :breed="breed"
+                        :title_health="title_health" :health="health"
+                        :title_sterilization="title_sterilization" :sterilization="sterilization"/>
+    <molecule-comment :text_textarea_input="h3 + h2" :value_h3="comment"/>
+    <molecule-comment-infoblock :text_p="text_p+text_p" :value_h3="comment"/>
+    <molecule-many-checkboxes :name_field_label="name_field_label" :list_drop_down="list"/>
+    <molecule-title-select :name_field_label="name_field_label" :selectItems="selectItems"/>
+    <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="h3"/>
     <molecule-notice-preview :image_src_preview="require('@/assets/pictures/cat.svg')" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview-line :items_preview="previewItems"/>
     <molecule-recommendation-block :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
@@ -62,8 +74,13 @@ import MoleculeRecommendationBlock from "@/components/molecules/RecommendationBl
 import MoleculeComment from "@/components/molecules/Comment.vue";
 import MoleculeInfoblock from "@/components/molecules/Infoblock.vue";
 import MoleculeManyCheckboxes from "@/components/molecules/ManyCheckboxes.vue";
-import MoleculeTitleSelector from "@/components/molecules/TitleSelector.vue";
+import MoleculeTitleSelector from "@/components/molecules/TitleSelect.vue";
 import MoleculeTitleInput from "@/components/molecules/TitleInput.vue";
+import Molecule from "@/components/molecules/molecule.vue";
+import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
+import AtomSelect from "@/components/atoms/Select.vue";
+import MoleculeTitleSelect from "@/components/molecules/TitleSelect.vue";
+import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
 
 
 export default {
@@ -73,6 +90,11 @@ export default {
     }
   },
   components: {
+    AtomLocationIcon,
+    MoleculeTitleSelect,
+    AtomSelect,
+    MoleculeCommentInfoblock,
+    Molecule,
     // atoms
     AtomSwitch,
     AtomTextarea,
@@ -113,6 +135,7 @@ export default {
       drop_name: 'Окрас',
       list: ['Черный', 'Белый', 'Зебра', 'Инверсная зебра'],
       date: '2020-09-18',
+      publication_date: "2020-09-19",
       location: 'Иркутск',
       color: 'Белый',
       nickname: 'Капитан',
@@ -121,6 +144,24 @@ export default {
       age: "Взрослый",
       breed: "Беспородный",
       sterilization: "Нет",
+      name_field_label:"Название",
+      text_p: "Какой-то рандомный текст ",
+      comment: "Комментарий",
+       selectItems: [
+        {name: "Беспородный"},
+        {name: "Австралийский мист"},
+        {name: "Бирманская"},
+        {name: "Мэнск"},
+      ],
+      title_data:"Дата",
+      title_publication_date: "Дата публикации",
+      title_color: "Окрас",
+      title_nickname: "Кличка",
+      title_gender: "Пол",
+      title_health: "Состояние здоровья",
+      title_age: "Возраст",
+      title_breed: "Порода",
+      title_sterilization: "Стерилизация",
       previewItems:  [
         { imageSrc: require('@/assets/pictures/cat.svg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
         { imageSrc: require('@/assets/pictures/dog.svg'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },

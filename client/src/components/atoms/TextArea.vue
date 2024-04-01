@@ -1,6 +1,6 @@
 <template>
   <div class="comment_textarea">
-    <textarea maxlength = "565" :placeholder="text_textarea_input"></textarea>
+    <textarea maxlength = "566" :placeholder="text_textarea_input"></textarea>
   </div>
 </template>
 
@@ -14,5 +14,9 @@ export default {
 </script>
 
 <style >
+textarea {
+  resize: none;
+  overflow: auto;
+}
 
 </style>

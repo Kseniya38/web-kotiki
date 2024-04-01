@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="input">
     <input :placeholder="text_placeholder_input">
   </div>
 </template>
@@ -14,5 +14,8 @@ export default {
 </script>
 
 <style >
-
+.input {
+  margin-top: 4px;
+  margin-left:4px;
+}
 </style>
