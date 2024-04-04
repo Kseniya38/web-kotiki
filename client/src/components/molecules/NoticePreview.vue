@@ -5,7 +5,7 @@
       <atom-manage-notice-icons-bar :notice_status="notice_status" class="preview_icons_bar"/>
       <atom-animal-status-icon :animal_status="animal_status" :animal_type="animal_type" class="preview_animal_icon"/>
     </div>
-    <atom-description-preview :date_preview="date_preview" :location_preview="location_preview" :color_preview="color_preview"/>
+    <atom-description-preview class="preview_description" :date_preview="date_preview" :location_preview="location_preview" :color_preview="color_preview"/>
     <atom-preview-button class="preview_button" @click="handleButtonClick">Подробнее</atom-preview-button>
   </div>
 </template>
@@ -94,6 +94,10 @@ export default {
   height: 258px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.preview_description {
+  margin-top: 8px;
 }
 
 .preview_button {

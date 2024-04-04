@@ -43,8 +43,8 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 4px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 </style>
