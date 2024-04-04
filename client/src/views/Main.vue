@@ -28,7 +28,7 @@
     <atom-field-name :name_field_label="name_field_label"/>
     <atom-input :text_placeholder_input="h3"/>
     <atom-p :text_p="text_p"/>
-    <atom-textarea :text_textarea_input="h3 + h2"/>
+    <atom-textarea :textarea_placeholder="h3 + h2"/>
     <atom-switch :name_left_switch="h2" :name_right_switch="h3"/>
 
     <h1>Тест молекулов @___@</h1>
@@ -43,8 +43,10 @@
                         :title_breed="title_breed" :breed="breed"
                         :title_health="title_health" :health="health"
                         :title_sterilization="title_sterilization" :sterilization="sterilization"/>
-    <molecule-comment :text_textarea_input="h3 + h2" :value_h3="comment"/>
+
+    <molecule-comment :textarea_placeholder="h3 + h2" :value_h3="comment"/>
     <molecule-comment-infoblock :text_p="text_p+text_p" :value_h3="comment"/>
+
     <molecule-many-checkboxes :name_field_label="name_field_label" :list_drop_down="list"/>
 
     <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="h3"/>

@@ -6,12 +6,6 @@
 </template>
 
 <script>
-
-
-
-
-
-
 import AtomP from "@/components/atoms/P.vue";
 import AtomH3 from "@/components/atoms/H3.vue";
 
@@ -22,7 +16,6 @@ export default {
     value_h3: String,
     text_p:String
   }
-
 }
 </script>
 
