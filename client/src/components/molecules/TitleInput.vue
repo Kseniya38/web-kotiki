@@ -1,7 +1,7 @@
 <template>
-  <div class ="title-input">
-    <atom-field-name :name_field_label/>
-    <atom-input :text_placeholder_input/>
+  <div class ="title_input">
+    <atom-field-name :name_field_label="name_field_label"/>
+    <atom-input :text_placeholder_input="text_placeholder_input"/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style >
-.title-input {
+.title_input {
   display: flex;
   align-items: center;
   text-align: left;

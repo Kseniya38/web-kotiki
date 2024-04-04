@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type="checkbox" id="a-checkbox"/>
-    <label for="a-checkbox">{{label_checkbox}}</label>
+    <input type="checkbox" id="a_checkbox"/>
+    <label for="a_checkbox">{{label_checkbox}}</label>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ label {
   vertical-align: middle;
   margin: 0;
 }
-#a-checkbox {
+#a_checkbox {
   background-color: #1C1B18;
   padding: 4px;
   border: 2px solid #6504B5;

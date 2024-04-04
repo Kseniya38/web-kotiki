@@ -1,5 +1,5 @@
 <template>
-<div class="comment-infoblock">
+<div class="comment_infoblock">
   <atom-h3 :value_h3="value_h3"/>
   <atom-p :text_p="text_p"/>
 </div>

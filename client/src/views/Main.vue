@@ -12,16 +12,24 @@
     <atom-checkbox :label_checkbox="label"/>
     <atom-drop-down-list :name_drop_down="drop_name" :list_drop_down="list"/>
     <atom-preview-button>Посмотреть</atom-preview-button>
-    <atom-manage-notice-icons-bar/>
+
+    <atom-manage-notice-icons-bar :notice_status="'active'"/>
+    <atom-manage-notice-icons-bar :notice_status="'closed'"/>
+
+    <atom-animal-status-icon :animal_status="'lost'" :animal_type="'cat'"/>
+    <atom-animal-status-icon :animal_status="'found'" :animal_type="'dog'"/>
+    <atom-animal-status-icon :animal_status="'found'" :animal_type="'cat'"/>
+
     <atom-description-preview :date_preview="date" :location_preview="location" :color_preview="color"/>
+
     <atom-characteristic :name_characteristic="label" :value_characteristic="date"/>
+    <atom-characteristic :name_characteristic="LocationIcon" value_characteristic="Значение для LocationIcon"/>
+
     <atom-field-name :name_field_label="name_field_label"/>
     <atom-input :text_placeholder_input="h3"/>
     <atom-p :text_p="text_p"/>
     <atom-textarea :text_textarea_input="h3 + h2"/>
     <atom-switch :name_left_switch="h2" :name_right_switch="h3"/>
-    <atom-select :selectItems="selectItems"/>
-
 
     <h1>Тест молекулов @___@</h1>
 
@@ -38,9 +46,13 @@
     <molecule-comment :text_textarea_input="h3 + h2" :value_h3="comment"/>
     <molecule-comment-infoblock :text_p="text_p+text_p" :value_h3="comment"/>
     <molecule-many-checkboxes :name_field_label="name_field_label" :list_drop_down="list"/>
-    <molecule-title-select :name_field_label="name_field_label" :selectItems="selectItems"/>
+
     <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="h3"/>
-    <molecule-notice-preview :image_src_preview="require('@/assets/pictures/cat.svg')" :date_preview="date" :location_preview="location" :color_preview="color"/>
+
+    <molecule-notice-preview :animal_status="'lost'" :animal_type="'cat'" :notice_status="'active'" :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :animal_status="'found'" :animal_type="'cat'" :notice_status="'closed'" :image_src_preview="require('@/assets/pictures/test.png')" :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :animal_status="'found'" :animal_type="'dog'" :notice_status="'closed'" :date_preview="date" :location_preview="location" :color_preview="color"/>
+
     <molecule-notice-preview-line :items_preview="previewItems"/>
     <molecule-recommendation-block :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
   </div>
@@ -66,36 +78,34 @@ import AtomInput from "@/components/atoms/Input.vue";
 import AtomP from "@/components/atoms/P.vue";
 import dropDownList from "@/components/atoms/DropDownList.vue";
 import AtomSwitch from "@/components/atoms/Switch.vue";
+import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
+import AtomAnimalStatusIcon from "@/components/atoms/AnimalStatusIcon.vue";
 
 // import from molecules
 import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
-import MoleculeNoticePreviewLine from "@/components/molecules/NoticePreviewLine.vue";
-import MoleculeRecommendationBlock from "@/components/molecules/RecommendationBlock.vue";
 import MoleculeComment from "@/components/molecules/Comment.vue";
 import MoleculeInfoblock from "@/components/molecules/Infoblock.vue";
 import MoleculeManyCheckboxes from "@/components/molecules/ManyCheckboxes.vue";
-import MoleculeTitleSelector from "@/components/molecules/TitleSelect.vue";
 import MoleculeTitleInput from "@/components/molecules/TitleInput.vue";
-import Molecule from "@/components/molecules/molecule.vue";
 import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
-import AtomSelect from "@/components/atoms/Select.vue";
-import MoleculeTitleSelect from "@/components/molecules/TitleSelect.vue";
-import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
 
+// import from blocks
+import MoleculeNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
+import MoleculeRecommendationBlock from "@/components/blocks/RecommendationBlock.vue";
 
 export default {
   computed: {
+    LocationIcon() {
+      return AtomLocationIcon
+    },
     dropDownList() {
       return dropDownList
     }
   },
   components: {
-    AtomLocationIcon,
-    MoleculeTitleSelect,
-    AtomSelect,
-    MoleculeCommentInfoblock,
-    Molecule,
+    AtomAnimalStatusIcon,
     // atoms
+    AtomLocationIcon,
     AtomSwitch,
     AtomTextarea,
     AtomP,
@@ -119,13 +129,15 @@ export default {
     MoleculeNoticePreviewLine,
     MoleculeRecommendationBlock,
     MoleculeTitleInput,
-    MoleculeTitleSelector,
     MoleculeManyCheckboxes,
     MoleculeInfoblock,
     MoleculeComment,
+    MoleculeCommentInfoblock,
   },
   data() {
     return {
+      iconPath: require('@/assets/pictures/cat.svg'), // Передаем путь к иконке в качестве значения для name_characteristic
+      LocationIcon: AtomLocationIcon,
       h1: 'Котики',
       h2: 'Кошка',
       h3: 'Собака',
@@ -147,7 +159,7 @@ export default {
       name_field_label:"Название",
       text_p: "Какой-то рандомный текст ",
       comment: "Комментарий",
-       selectItems: [
+      selectItems: [
         {name: "Беспородный"},
         {name: "Австралийский мист"},
         {name: "Бирманская"},
@@ -163,10 +175,10 @@ export default {
       title_breed: "Порода",
       title_sterilization: "Стерилизация",
       previewItems:  [
-        { imageSrc: require('@/assets/pictures/cat.svg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
-        { imageSrc: require('@/assets/pictures/dog.svg'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
-        { imageSrc: require('@/assets/pictures/cat.svg'), date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
-        { imageSrc: require('@/assets/pictures/dog.svg'), date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
+        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test.png'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
+        { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
+        { animal_type: "cat", animal_status: "found", notice_status: "closed", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
+        { animal_type: "dog", animal_status: "lost", notice_status: "closed", imageSrc: "", date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
       ]
     }
   }

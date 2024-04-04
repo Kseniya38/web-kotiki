@@ -1,17 +1,14 @@
 <template>
-  <div class="many-checkboxes">
+  <div class="many_checkboxes">
    <atom-field-name :name_field_label/>
-<atom-checkbox
+   <atom-checkbox
     v-for="listItem in list_drop_down"
     :label_checkbox="listItem"
     />
-
 </div>
 </template>
 
 <script>
-
-
 import AtomFieldName from "@/components/atoms/FieldName.vue";
 import AtomCheckbox from "@/components/atoms/CheckBox.vue";
 
@@ -27,7 +24,7 @@ export default {
 </script>
 
 <style >
-.many-checkboxes{
+.many_checkboxes{
   display: flex;
   align-items: center;
   text-align: left;

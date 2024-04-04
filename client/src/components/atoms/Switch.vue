@@ -1,13 +1,13 @@
 <template>
 <div>
-  <input type="radio" name="type" id="left-switch">
-  <label for="left-switch">
-    <i class="fa fa-left-switch"></i>
+  <input type="radio" name="type" id="left_switch">
+  <label for="left_switch">
+    <i class="fa fa_left_switch"></i>
     <span>{{ name_left_switch }}</span>
   </label>
-  <input type="radio" name="type" id="right-switch">
-  <label for="right-switch">
-    <i class="fa fa-right-switch"></i>
+  <input type="radio" name="type" id="right_switch">
+  <label for="right_switch">
+    <i class="fa fa_right_switch"></i>
     <span>{{ name_right_switch }}</span>
   </label>
 </div>

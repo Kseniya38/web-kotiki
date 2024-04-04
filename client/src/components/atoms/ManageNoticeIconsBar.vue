@@ -1,8 +1,12 @@
 <template>
   <div class="icons_bar">
-    <atom-edit-notice-icon/>
-    <atom-disactive-notice-icon/>
-    <atom-active-notice-icon/>
+    <template v-if="notice_status === 'active'">
+      <atom-edit-notice-icon/>
+      <atom-disactive-notice-icon/>
+    </template>
+    <template v-else-if="notice_status === 'closed'">
+      <atom-active-notice-icon/>
+    </template>
   </div>
 </template>
 
@@ -15,7 +19,7 @@ export default {
   name: 'atom-manage-notice-icons-bar',
   components: {AtomEditNoticeIcon, AtomActiveNoticeIcon, AtomDisactiveNoticeIcon},
   props: {
-
+    notice_status: String,
   }
 }
 </script>

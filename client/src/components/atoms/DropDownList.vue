@@ -1,7 +1,9 @@
+// добавить иконку стрелочку, две свг лежат в иконках
+
 <template>
   <div>
-    <button class="drop-down-btn" @click="toggleDropdown">{{ name_drop_down }}</button>
-    <div v-if="isOpen" class="dropdown-content">
+    <button class="drop_down_btn" @click="toggleDropdown">{{ name_drop_down }}</button>
+    <div v-if="isOpen" class="dropdown_content">
       <atom-checkbox
           v-for="listItem in list_drop_down"
           :label_checkbox="listItem"
@@ -12,6 +14,7 @@
 
 <script>
 import AtomCheckbox from "@/components/atoms/CheckBox.vue";
+
 export default {
   components: {
     AtomCheckbox
@@ -38,7 +41,7 @@ export default {
 </script>
 
 <style>
-.drop-down-btn {
+.drop_down_btn {
   border: none;
 }
 </style>

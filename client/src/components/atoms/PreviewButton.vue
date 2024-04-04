@@ -1,5 +1,5 @@
 <template>
-  <button class="preview-button">
+  <button class="preview_button_atom">
     <slot></slot>
   </button>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-button {
+.preview_button_atom {
   background-color: #00BE57;
   color: #FFFFFF;
   border-radius: 8px;

@@ -1,6 +1,6 @@
 <template>
-  <div class="comment_textarea">
-    <textarea maxlength = "566" :placeholder="text_textarea_input"></textarea>
+  <div class="atom_textarea">
+    <textarea v-model="text" rows="2" @input="adjustTextareaSize" maxlength = "1000" :placeholder="textarea_placeholder"></textarea>
   </div>
 </template>
 
@@ -8,15 +8,30 @@
 export default {
   name: 'atom-textarea',
   props: {
-    text_textarea_input: String,
+    textarea_placeholder: String,
   },
+  data() {
+    return {
+      text: ''
+    };
+  },
+  methods: {
+    adjustTextareaSize(event) {
+      event.target.style.height = 'auto'; // Сбрасываем высоту
+      event.target.style.height = event.target.scrollHeight + 'px'; // Устанавливаем высоту в зависимости от содержимого
+    }
   }
+}
 </script>
 
 <style >
 textarea {
-  resize: none;
+  max-width: 800px; /* Ограничиваем максимальную ширину textarea */
   overflow: auto;
+  min-width: 300px;
 }
-
 </style>
+
+
+
+

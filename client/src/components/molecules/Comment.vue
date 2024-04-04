@@ -1,7 +1,7 @@
 <template>
 <div class="comment">
 <atom-h3 :value_h3="value_h3" />
-  <atom-textarea :text_textarea_input="text_textarea_input"/>
+  <atom-textarea :textarea_placeholder="textarea_placeholder"/>
 </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   components: {AtomH3, AtomTextarea},
   props: {
     value_h3: String,
-    text_textarea_input: String,
+    textarea_placeholder: String,
   }
 }
 </script>

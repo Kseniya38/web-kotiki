@@ -1,22 +1,17 @@
 <template>
-<div class="icon">
-  <img src="@/assets/icons/locationPreview.png" alt="" id="location" class="icon">
-  <label class="label" for="location">{{location_icon}} {{location}}</label>
+<div class="icon_location">
+  <img src="@/assets/icons/locationPreview.svg" alt="" id="location" class="icon">
 </div>
 </template>
 
 <script>
 export default {
-name: 'atom-location-icon',
-    props: {
-      location_icon: String,
-      location:String
-}
+name: 'atom-location-icon'
 }
 </script>
 
-<style scoped>
-.icon{
+<style>
+.icon_location{
   display: flex;
   align-items: center;
   text-align: left;
