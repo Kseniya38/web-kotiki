@@ -1,7 +1,7 @@
 <template>
   <div class="infoblock">
     <div>
-      <atom-characteristic v-for="(characteristic, index) in mandatory_characteristics" :key="index" :name_characteristic="characteristic.name" :value_characteristic="characteristic.value" />
+      <atom-characteristic v-for="(characteristic, index) in mandatory_characteristics" :key="index" :name_characteristic="characteristic.name" :value_characteristic="characteristic.value"/>
     </div>
     <div v-for="(characteristic) in optional_characteristics">
       <atom-characteristic :name_characteristic="characteristic.name" :value_characteristic="characteristic.value" />

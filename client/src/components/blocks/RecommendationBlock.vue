@@ -1,21 +1,21 @@
 <template>
   <div class="recommendation_block">
     <atom-h2 :value_h2="value_h2" />
-    <molecule-notice-preview-line :items_preview="items_preview" />
+    <block-notice-preview-line :items_preview="items_preview" />
     <atom-link class="link" :text_link="text_link" :url="url" />
   </div>
 </template>
 
 <script>
 import AtomH2 from "@/components/atoms/H2.vue";
-import MoleculeNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
+import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import AtomLink from "@/components/atoms/Link.vue";
 
 export default {
-  name: "molecule-recommendation-block",
+  name: "block-recommendations",
   components: {
     AtomLink,
-    MoleculeNoticePreviewLine,
+    BlockNoticePreviewLine,
     AtomH2,
   },
   props: {

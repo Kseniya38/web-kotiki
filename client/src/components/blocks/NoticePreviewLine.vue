@@ -16,7 +16,7 @@
 import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
 
 export default {
-  name: "molecule-notice-preview-line",
+  name: "block-notice-preview-line",
   components: {
     MoleculeNoticePreview,
   },

@@ -7,10 +7,9 @@
     <atom-h1 :value_h1="h1"/>
     <atom-h2 :value_h2="h2"/>
     <atom-h3 :value_h3="h3"/>
+
     <atom-button>Кнопка</atom-button>
-    <atom-link :url="url" :text_link="link"></atom-link>
-    <atom-checkbox :label_checkbox="label"/>
-    <atom-drop-down-list :name_drop_down="drop_name" :list_drop_down="list"/>
+    <atom-link :url="url" :text_link="link"/>
     <atom-preview-button>Посмотреть</atom-preview-button>
 
     <atom-manage-notice-icons-bar :notice_status="'active'"/>
@@ -25,29 +24,35 @@
     <atom-characteristic :name_characteristic="label" :value_characteristic="date"/>
     <atom-characteristic :name_characteristic="LocationIcon" value_characteristic="Значение для LocationIcon"/>
 
+    <atom-checkbox :label_checkbox="label"/>
+    <atom-drop-down-list :name_drop_down="drop_name" :list_drop_down="list"/>
+
     <atom-field-name :name_field_label="name_field_label"/>
-    <atom-input :text_placeholder_input="h3"/>
+    <atom-input :text_placeholder_input="placeholderTest"/>
+    <atom-select-input :select_items="list" :placeholder_select_input="placeholderTest"/>
+    <atom-textarea :textarea_placeholder="placeholderTest"/>
+
     <atom-p :text_p="text_p"/>
-    <atom-textarea :textarea_placeholder="h3 + h2"/>
     <atom-switch :name_left_switch="h2" :name_right_switch="h3"/>
 
     <h1>Тест молекулов @___@</h1>
 
+    <molecule-title-select :name_field_label="name_field_label" :select_items="list" :placeholder_select_input="placeholderTest"/>
+    <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="placeholderTest"/>
+
     <molecule-infoblock :mandatory_characteristics="mandatoryCharacteristics" :optional_characteristics="optionalCharacteristics"/>
 
-    <molecule-comment :textarea_placeholder="h3 + h2" :value_h3="comment"/>
+    <molecule-comment :textarea_placeholder="placeholderTest" :value_h3="comment"/>
     <molecule-comment-infoblock :text_p="text_p+text_p" :value_h3="comment"/>
 
     <molecule-many-checkboxes :name_field_label="name_field_label" :list_drop_down="list"/>
-
-    <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="h3"/>
 
     <molecule-notice-preview :animal_status="'lost'" :animal_type="'cat'" :notice_status="'active'" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview :animal_status="'found'" :animal_type="'cat'" :notice_status="'closed'" :image_src_preview="require('@/assets/pictures/test.png')" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview :animal_status="'found'" :animal_type="'dog'" :notice_status="'closed'" :date_preview="date" :location_preview="location" :color_preview="color"/>
 
-    <molecule-notice-preview-line :items_preview="previewItems"/>
-    <molecule-recommendation-block :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
+    <block-notice-preview-line :items_preview="previewItems"/>
+    <block-recommendations :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
   </div>
 </template>
 
@@ -72,6 +77,7 @@ import AtomP from "@/components/atoms/P.vue";
 import AtomSwitch from "@/components/atoms/Switch.vue";
 import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
 import AtomAnimalStatusIcon from "@/components/atoms/AnimalStatusIcon.vue";
+import AtomSelectInput from "@/components/atoms/SelectInput.vue";
 
 // import from molecules
 import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
@@ -80,14 +86,16 @@ import MoleculeInfoblock from "@/components/molecules/Infoblock.vue";
 import MoleculeManyCheckboxes from "@/components/molecules/ManyCheckboxes.vue";
 import MoleculeTitleInput from "@/components/molecules/TitleInput.vue";
 import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
+import MoleculeTitleSelect from "@/components/molecules/TitleSelectInput.vue";
 
 // import from blocks
-import MoleculeNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
-import MoleculeRecommendationBlock from "@/components/blocks/RecommendationBlock.vue";
+import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
+import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
 
 export default {
   components: {
     // atoms
+    AtomSelectInput,
     AtomAnimalStatusIcon,
     AtomLocationIcon,
     AtomSwitch,
@@ -110,13 +118,16 @@ export default {
 
     // molecules
     MoleculeNoticePreview,
-    MoleculeNoticePreviewLine,
-    MoleculeRecommendationBlock,
     MoleculeTitleInput,
     MoleculeManyCheckboxes,
     MoleculeInfoblock,
     MoleculeComment,
     MoleculeCommentInfoblock,
+    MoleculeTitleSelect,
+
+    // blocks
+    BlockRecommendations,
+    BlockNoticePreviewLine,
   },
   data() {
     return {
@@ -128,7 +139,7 @@ export default {
       url: "https://www.google.com/",
       label: "Название характеристики",
       drop_name: 'Окрас',
-      list: ['Черный', 'Белый', 'Зебра', 'Инверсная зебра'],
+      list: ['Черный', 'Белый', 'Зебра', 'Инверсная зебра', 'Черный', 'Белый', 'Зебра', 'Инверсная зебра'],
       date: '2020-09-18',
       publication_date: "2020-09-19",
       location: 'Иркутск',
@@ -136,7 +147,12 @@ export default {
       name_field_label:"Название",
       text_p: "Какой-то рандомный текст ",
       comment: "Комментарий",
+      placeholderTest: "Плейсхолдер всякий",
       selectItems: [
+        {name: "Беспородный"},
+        {name: "Австралийский мист"},
+        {name: "Бирманская"},
+        {name: "Мэнск"},
         {name: "Беспородный"},
         {name: "Австралийский мист"},
         {name: "Бирманская"},
@@ -149,7 +165,7 @@ export default {
         { animal_type: "dog", animal_status: "lost", notice_status: "closed", imageSrc: "", date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
       ],
       mandatoryCharacteristics: [
-        {name: "Дата инцидента", value: "2020-09-18"},
+        {name: "Дата находки/пропажи", value: "2020-09-18"},
         {name: "Дата публикации", value: "2020-09-19"},
         {name: AtomLocationIcon, value: "г. Ангарск, мкр Университетский, ул. Рабочая"},
         {name: "Окрас", value: "белый, рыжий, черный, полосатый"},

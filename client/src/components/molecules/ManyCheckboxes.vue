@@ -1,10 +1,7 @@
 <template>
   <div class="many_checkboxes">
    <atom-field-name :name_field_label/>
-   <atom-checkbox
-    v-for="listItem in list_drop_down"
-    :label_checkbox="listItem"
-    />
+   <atom-checkbox v-for="item in list_drop_down" :label_checkbox="item" />
 </div>
 </template>
 

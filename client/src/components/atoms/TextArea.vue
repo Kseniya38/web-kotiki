@@ -29,6 +29,8 @@ textarea {
   max-width: 800px; /* Ограничиваем максимальную ширину textarea */
   overflow: auto;
   min-width: 300px;
+  font-family: Montserrat-Medium, sans-serif;
+  font-size: 16px;
 }
 </style>
 

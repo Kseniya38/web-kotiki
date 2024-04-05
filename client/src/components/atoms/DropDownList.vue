@@ -1,13 +1,10 @@
-// добавить иконку стрелочку, две свг лежат в иконках
-
 <template>
   <div>
-    <button class="drop_down_btn" @click="toggleDropdown">{{ name_drop_down }}</button>
+    <button class="drop_down_btn" @click="toggleDropdown">
+      <img :src="arrowIcon" alt="Arrow Icon" class="arrow_icon" />
+      {{ name_drop_down }}</button>
     <div v-if="isOpen" class="dropdown_content">
-      <atom-checkbox
-          v-for="listItem in list_drop_down"
-          :label_checkbox="listItem"
-      />
+      <atom-checkbox v-for="item in list_drop_down" :label_checkbox="item"/>
     </div>
   </div>
 </template>
@@ -32,6 +29,11 @@ export default {
       isOpen: false
     }
   },
+  computed: {
+    arrowIcon() {
+      return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg');
+    }
+  },
   methods: {
     toggleDropdown() {
       this.isOpen = !this.isOpen;
@@ -43,5 +45,13 @@ export default {
 <style>
 .drop_down_btn {
   border: none;
+  display: flex;
+  align-items: center;
+}
+
+.arrow_icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 </style>
