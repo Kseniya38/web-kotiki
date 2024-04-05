@@ -33,16 +33,7 @@
 
     <h1>Тест молекулов @___@</h1>
 
-    <molecule-infoblock :title_data="title_data" :date="date"
-                        :title_publication_date="title_publication_date" :publication_date="publication_date"
-                        :location="location"
-                        :title_color="title_color"  :color="color"
-                        :title_nickname="title_nickname"  :nickname="nickname"
-                        :title_age="title_age"  :age="age"
-                        :title_gender="title_gender"  :gender="gender"
-                        :title_breed="title_breed" :breed="breed"
-                        :title_health="title_health" :health="health"
-                        :title_sterilization="title_sterilization" :sterilization="sterilization"/>
+    <molecule-infoblock :mandatory_characteristics="mandatoryCharacteristics" :optional_characteristics="optionalCharacteristics"/>
 
     <molecule-comment :textarea_placeholder="h3 + h2" :value_h3="comment"/>
     <molecule-comment-infoblock :text_p="text_p+text_p" :value_h3="comment"/>
@@ -78,7 +69,6 @@ import AtomTextarea from "@/components/atoms/TextArea.vue";
 import AtomFieldName from "@/components/atoms/FieldName.vue";
 import AtomInput from "@/components/atoms/Input.vue";
 import AtomP from "@/components/atoms/P.vue";
-import dropDownList from "@/components/atoms/DropDownList.vue";
 import AtomSwitch from "@/components/atoms/Switch.vue";
 import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
 import AtomAnimalStatusIcon from "@/components/atoms/AnimalStatusIcon.vue";
@@ -96,17 +86,9 @@ import MoleculeNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue
 import MoleculeRecommendationBlock from "@/components/blocks/RecommendationBlock.vue";
 
 export default {
-  computed: {
-    LocationIcon() {
-      return AtomLocationIcon
-    },
-    dropDownList() {
-      return dropDownList
-    }
-  },
   components: {
-    AtomAnimalStatusIcon,
     // atoms
+    AtomAnimalStatusIcon,
     AtomLocationIcon,
     AtomSwitch,
     AtomTextarea,
@@ -138,7 +120,6 @@ export default {
   },
   data() {
     return {
-      iconPath: require('@/assets/pictures/cat.svg'), // Передаем путь к иконке в качестве значения для name_characteristic
       LocationIcon: AtomLocationIcon,
       h1: 'Котики',
       h2: 'Кошка',
@@ -152,12 +133,6 @@ export default {
       publication_date: "2020-09-19",
       location: 'Иркутск',
       color: 'Белый',
-      nickname: 'Капитан',
-      gender: "М",
-      health: "Да",
-      age: "Взрослый",
-      breed: "Беспородный",
-      sterilization: "Нет",
       name_field_label:"Название",
       text_p: "Какой-то рандомный текст ",
       comment: "Комментарий",
@@ -167,21 +142,26 @@ export default {
         {name: "Бирманская"},
         {name: "Мэнск"},
       ],
-      title_data:"Дата",
-      title_publication_date: "Дата публикации",
-      title_color: "Окрас",
-      title_nickname: "Кличка",
-      title_gender: "Пол",
-      title_health: "Состояние здоровья",
-      title_age: "Возраст",
-      title_breed: "Порода",
-      title_sterilization: "Стерилизация",
       previewItems:  [
         { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test.png'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
         { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
         { animal_type: "cat", animal_status: "found", notice_status: "closed", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
         { animal_type: "dog", animal_status: "lost", notice_status: "closed", imageSrc: "", date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
-      ]
+      ],
+      mandatoryCharacteristics: [
+        {name: "Дата инцидента", value: "2020-09-18"},
+        {name: "Дата публикации", value: "2020-09-19"},
+        {name: AtomLocationIcon, value: "г. Ангарск, мкр Университетский, ул. Рабочая"},
+        {name: "Окрас", value: "белый, рыжий, черный, полосатый"},
+      ],
+      optionalCharacteristics: [
+        {name: "Кличка", value: "Капитан"},
+        {name: "Возраст", value: "Подросток (0,5 - 1 год)"},
+        {name: "Пол", value: "Мальчик"},
+        {name: "Порода", value: "Кличка"},
+        {name: "Состояние здоровья", value:"Здоров"},
+        {name: "Стерилизация", value: "нет"}
+      ],
     }
   }
 }

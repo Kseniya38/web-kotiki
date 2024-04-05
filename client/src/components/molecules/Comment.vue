@@ -1,6 +1,6 @@
 <template>
 <div class="comment">
-<atom-h3 :value_h3="value_h3" />
+  <atom-h3 :value_h3="value_h3" />
   <atom-textarea :textarea_placeholder="textarea_placeholder"/>
 </div>
 </template>
