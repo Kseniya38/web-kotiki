@@ -35,11 +35,6 @@ export default {
 .select_input {
   margin-top: 4px;
   margin-left: 4px;
-  select{
-    width: 586px;
-    height: 52px;
-
-  }
 }
 
 .custom_select_container {
@@ -47,15 +42,13 @@ export default {
   display: inline-block;
   font-family: Montserrat-Medium, sans-serif;
   font-size: 16px;
-
 }
 
 .custom_select {
   appearance: none;
   background-repeat: no-repeat;
   background-position: right center;
-  border-radius: 8px;
-  border: 1px solid #1C1B18;
+  border-radius: 4px;
   padding: 5px 25px 5px 5px;
   cursor: pointer;
   min-width: 300px;

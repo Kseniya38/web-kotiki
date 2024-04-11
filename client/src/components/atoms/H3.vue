@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 h3 {
+  color: #1C1B18;
   font-family: Montserrat-SemiBold, sans-serif;
   font-size: 24px;
 }

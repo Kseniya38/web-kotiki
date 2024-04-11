@@ -11,9 +11,6 @@ export default {
 }
 </script>
 
-<style>
-p{
-  font-weight: 500;
-  font-size: 16px;
-}
+<style >
+
 </style>

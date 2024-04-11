@@ -43,14 +43,9 @@ export default {
 .characteristic {
   display: flex;
   align-items: center;
-  margin-top: 10px;
 }
 .name_characteristic {
   font-weight: bold;
-  font-size: 20px;
   margin-right: 5px;
-}
-.value_characteristic{
-  font-size: 20px;
 }
 </style>

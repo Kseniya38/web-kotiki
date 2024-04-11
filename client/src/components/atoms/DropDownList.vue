@@ -44,8 +44,6 @@ export default {
 
 <style>
 .drop_down_btn {
-  font-size: 16px;
-  font-weight: 600;
   border: none;
   display: flex;
   align-items: center;

@@ -20,7 +20,5 @@ export default {
 </script>
 
 <style >
-.comment{
-  margin-top: 30px;
-}
+
 </style>

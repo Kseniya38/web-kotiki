@@ -24,6 +24,6 @@ export default {
 .title_select{
   display: flex;
   align-items: center;
-  gap: 20px;
+  text-align: left;
 }
 </style>

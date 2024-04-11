@@ -1,5 +1,5 @@
 <template>
-  <div  class="FieldName">
+  <div>
     <label>{{name_field_label}}</label>
   </div>
 </template>
@@ -13,9 +13,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.FieldName{
-  font-weight: 500;
-  font-size: 20px;
-}
+<style>
+
 </style>
