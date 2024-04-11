@@ -23,6 +23,6 @@ export default {
 .title_input {
   display: flex;
   align-items: center;
-  text-align: left;
+  gap: 20px;
 }
 </style>
