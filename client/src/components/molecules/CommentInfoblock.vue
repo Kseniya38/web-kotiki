@@ -20,5 +20,8 @@ export default {
 </script>
 
 <style >
-
+.comment_infoblock{
+  line-height: 150%;
+  margin-top: 12px;
+}
 </style>

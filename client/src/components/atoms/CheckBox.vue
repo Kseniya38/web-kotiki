@@ -16,14 +16,12 @@ export default {
 
 <style scoped>
 label {
-  color: #1C1B18;
   font-family: Montserrat-Medium, sans-serif;
   font-size: 14px;
   vertical-align: middle;
   margin: 0;
 }
 #a_checkbox {
-  background-color: #1C1B18;
   padding: 4px;
   border: 2px solid #6504B5;
   border-radius: 4px;

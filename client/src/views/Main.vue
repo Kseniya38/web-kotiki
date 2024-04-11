@@ -9,6 +9,8 @@
     <atom-h3 :value_h3="h3"/>
 
     <atom-button>Кнопка</atom-button>
+    <atom-del-button>Удалить</atom-del-button>
+    <atom-edit-button>Редактировать</atom-edit-button>
     <atom-link :url="url" :text_link="link"/>
     <atom-preview-button>Посмотреть</atom-preview-button>
 
@@ -50,6 +52,7 @@
     <molecule-notice-preview :animal_status="'lost'" :animal_type="'cat'" :notice_status="'active'" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview :animal_status="'found'" :animal_type="'cat'" :notice_status="'closed'" :image_src_preview="require('@/assets/pictures/test.png')" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview :animal_status="'found'" :animal_type="'dog'" :notice_status="'closed'" :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-edit-delete-btn></molecule-edit-delete-btn>
 
     <block-notice-preview-line :items_preview="previewItems"/>
     <block-recommendations :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
@@ -62,6 +65,8 @@ import AtomH1 from "@/components/atoms/H1.vue";
 import AtomH2 from "@/components/atoms/H2.vue";
 import AtomH3 from "@/components/atoms/H3.vue";
 import AtomButton from "@/components/atoms/Button.vue";
+import AtomDelButton from "@/components/atoms/DeleteButton.vue";
+import AtomEditButton from "@/components/atoms/EditButton.vue";
 import AtomLogo from "@/components/atoms/Logo.vue";
 import AtomLink from "@/components/atoms/Link.vue";
 import AtomCheckbox from "@/components/atoms/CheckBox.vue";
@@ -87,13 +92,20 @@ import MoleculeManyCheckboxes from "@/components/molecules/ManyCheckboxes.vue";
 import MoleculeTitleInput from "@/components/molecules/TitleInput.vue";
 import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
 import MoleculeTitleSelect from "@/components/molecules/TitleSelectInput.vue";
+import MoleculeEditDeleteBtn from "@/components/molecules/EditAndDeleteButton.vue";
 
 // import from blocks
 import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
 
+
+
+
 export default {
   components: {
+    MoleculeEditDeleteBtn,
+
+
     // atoms
     AtomSelectInput,
     AtomAnimalStatusIcon,
@@ -111,6 +123,8 @@ export default {
     AtomCheckbox,
     AtomLink,
     AtomLogo,
+    AtomEditButton,
+    AtomDelButton,
     AtomButton,
     AtomH3,
     AtomH2,
@@ -145,7 +159,7 @@ export default {
       location: 'Иркутск',
       color: 'Белый',
       name_field_label:"Название",
-      text_p: "Какой-то рандомный текст ",
+      text_p: "Какой-то рандомный текст Какой-то рандомный текст Какой-то рандомный текст Какой-то рандомный текст  Какой-то рандомный текст Какой-то рандомный текст",
       comment: "Комментарий",
       placeholderTest: "Плейсхолдер всякий",
       selectItems: [
@@ -186,5 +200,11 @@ export default {
 <style scoped>
 .main {
   background: #EFEEF1;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #1C1B18;
+
 }
 </style>
