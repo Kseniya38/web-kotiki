@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const {Animal, Notice} = require('../models/models')
 const ApiError = require('../error/ApiError')
-const {JSONB, DATE} = require("sequelize");
+const {JSONB, DATE, Op} = require("sequelize");
 
 class AnimalController {
     async create(req, res, next) {
@@ -144,7 +144,6 @@ class AnimalController {
 
     async getAll(req, res){
         let {
-            nickname,
             sterilizationId,
             healthId,
             genderId,
@@ -154,16 +153,17 @@ class AnimalController {
             animalTypeId,
             breedId,
             address,
-            event_date,
             userId,
-            noticeStatusId
+            noticeStatusId,
+            date_lowerRange,
+            date_upperRange
         } = req.query
         let {page, limit} = req.query
         page = page || 1
         limit = limit || 9
         let offset = page * limit - limit
 
-        let filterAnimal = {}
+        let filterAnimal = []
         let filterNotice = {noticeStatusId: 1}
         let adr = {}
         let animals
@@ -176,32 +176,106 @@ class AnimalController {
             if (address.hasOwnProperty('house')){adr.house = address.house}
             filterNotice.address = adr
         }
-        if (event_date){filterNotice.event_date = event_date}
 
-        if (nickname){filterAnimal.nickname = nickname}
+        if (date_lowerRange && date_upperRange){
+            const lowerRange = new Date(date_lowerRange)
+            const upperRange = new Date(date_upperRange)
+            filterNotice.event_date = {[Op.between]: [lowerRange, upperRange]}
+        } else if (date_lowerRange && date_upperRange === undefined){
+            const lowerRange = new Date(date_lowerRange)
+            filterNotice.event_date = {[Op.gte]: lowerRange}
+        } else if (date_lowerRange === undefined && date_upperRange){
+            const upperRange = new Date(date_upperRange)
+            filterNotice.event_date = {[Op.lte]: upperRange}
+        }
 
-        if (sterilizationId){filterAnimal.sterilizationId = sterilizationId}
+        if (sterilizationId){
+            sterilizationId = JSON.parse(sterilizationId)
+            let sterilizationArray = []
+            for (let sterilizationIdElement of sterilizationId.numbers) {
+                let sterilization = {sterilizationId: sterilizationIdElement}
+                sterilizationArray.push(sterilization)
+            }
+            filterAnimal.push({[Op.or]: sterilizationArray})
+        }
 
-        if (healthId){filterAnimal.healthId = healthId}
+        if (healthId){
+            healthId = JSON.parse(healthId)
+            let healthArray = []
+            for (let healthIdElement of healthId.numbers) {
+                let health = {healthId: healthIdElement}
+                healthArray.push(health)
+            }
+            filterAnimal.push({[Op.or]: healthArray})
+        }
 
-        if (genderId){filterAnimal.genderId = genderId}
+        if (genderId){
+            genderId = JSON.parse(genderId)
+            let genderArray = []
+            for (let genderIdElement of genderId.numbers) {
+                let gender = {genderId: genderIdElement}
+                genderArray.push(gender)
+            }
+            filterAnimal.push({[Op.or]: genderArray})
+        }
 
-        if (ageId){filterAnimal.ageId = ageId}
+        if (ageId){
+            ageId = JSON.parse(ageId)
+            let ageArray = []
+            for (let ageIdElement of ageId.numbers) {
+                let age = {ageId: ageIdElement}
+                ageArray.push(age)
+            }
+            filterAnimal.push({[Op.or]: ageArray})
+        }
 
-        if (colorId){filterAnimal.colorId = colorId}
+        if (colorId){
+            colorId = JSON.parse(colorId)
+            let colorArray = []
+            for (let colorIdElement of colorId.numbers) {
+                let color = {colorId: colorIdElement}
+                colorArray.push(color)
+            }
+            filterAnimal.push({[Op.or]: colorArray})
+        }
 
-        if (animalStatusId){filterAnimal.animalStatusId = animalStatusId}
+        if (animalStatusId){
+            animalStatusId = JSON.parse(animalStatusId)
+            let statusArray = []
+            for (let animalStatusIdElement of animalStatusId.numbers) {
+                let status = {animalStatusId: animalStatusIdElement}
+                statusArray.push(status)
+            }
+            filterAnimal.push({[Op.or]: statusArray})
+        }
 
-        if (animalTypeId){filterAnimal.animalTypeId = animalTypeId}
+        if (animalTypeId){
+            animalTypeId = JSON.parse(animalTypeId)
+            let typeArray = []
+            for (let animalTypeIdElement of animalTypeId.numbers) {
+                let type = {animalTypeId: animalTypeIdElement}
+                typeArray.push(type)
+            }
+            filterAnimal.push({[Op.or]: typeArray})
+        }
 
-        if (breedId){filterAnimal.breedId = breedId}
+        if (breedId){
+            breedId = JSON.parse(breedId)
+            let breedArray = []
+            for (let breedIdElement of breedId.numbers) {
+                let breed = {breedId: breedIdElement}
+                breedArray.push(breed)
+            }
+            filterAnimal.push({[Op.or]: breedArray})
+        }
 
+        console.log(colorId)
         console.log(filterAnimal)
         console.log(filterNotice)
 
         if (userId){
             animals = await Animal.findAll({
-                where: {animalStatusId},
+                where: {[Op.and]: filterAnimal},
                 attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                 include: {
                     model: Notice,
@@ -211,7 +285,7 @@ class AnimalController {
             )
         }
         else {
-            if (Object.keys(filterAnimal).length === 0){
+            if (filterAnimal.length === 0){
                 animals = await Animal.findAndCountAll({
                     limit, offset,
                     attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
@@ -222,9 +296,9 @@ class AnimalController {
                     }}
                 )
             }
-            else if (Object.keys(filterAnimal).length !== 0){
+            else if (filterAnimal.length !== 0){
                 animals = await Animal.findAndCountAll({
-                    where: filterAnimal,
+                    where: {[Op.and]: filterAnimal},
                     limit, offset,
                     attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: {
