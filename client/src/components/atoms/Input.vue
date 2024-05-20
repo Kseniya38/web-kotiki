@@ -16,7 +16,6 @@ export default {
 <style>
 .input_field {
   border: 1px solid #1C1B18;
-  width: 100%;
   height: 48px;
   border-radius: 8px;
   font-family: Montserrat-Medium, sans-serif;

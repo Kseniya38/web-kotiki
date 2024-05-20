@@ -15,4 +15,8 @@ export default {
 
 <style>
 @import "@/assets/fonts/fonts.css";
+body {
+  padding: 0;
+  margin: 0;
+}
 </style>

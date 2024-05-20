@@ -282,6 +282,5 @@ export default {
   font-style: normal;
   font-weight: normal;
   color: #1C1B18;
-
 }
 </style>
