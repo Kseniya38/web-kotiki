@@ -7,6 +7,7 @@
       <atom-checkbox v-for="item in list_drop_down" :label_checkbox="item"/>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -14,7 +15,7 @@ import AtomCheckbox from "@/components/atoms/CheckBox.vue";
 
 export default {
   components: {
-    AtomCheckbox
+    AtomCheckbox,
   },
   name: 'atom-drop-down-list',
   props: {
@@ -49,6 +50,8 @@ export default {
   border: none;
   display: flex;
   align-items: center;
+  background-color: transparent;
+  padding: 0;
 }
 
 .arrow_icon {

@@ -3,6 +3,9 @@
 
     <h1>Тест атомов</h1>
 
+    <atom-contact-item :contact_type="'phone'" :contact_info="'89041234567'"/>
+    <atom-contact-item :contact_type="'link'" :contact_info="'vk.com/blablabla123blablabla123blablabla123'"/>
+
     <atom-logo/>
     <atom-h1 :value_h1="h1"/>
     <atom-h2 :value_h2="h2"/>
@@ -37,7 +40,12 @@
     <atom-p :text_p="text_p"/>
     <atom-switch :name_left_switch="h2" :name_right_switch="h3"/>
 
+    <atom-main-icons-bar/>
+
     <h1>Тест молекулов @___@</h1>
+
+    <molecule-search-line :text_placeholder_input="sort_ph"/>
+    <molecule-sort-button :name_field_label="sort"/>
 
     <molecule-title-select :name_field_label="name_field_label" :select_items="list" :placeholder_select_input="placeholderTest"/>
     <molecule-title-input :name_field_label="name_field_label" :text_placeholder_input="placeholderTest"/>
@@ -53,6 +61,30 @@
     <molecule-notice-preview :animal_status="'found'" :animal_type="'cat'" :notice_status="'closed'" :image_src_preview="require('@/assets/pictures/test.png')" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-notice-preview :animal_status="'found'" :animal_type="'dog'" :notice_status="'closed'" :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-edit-delete-btn></molecule-edit-delete-btn>
+
+    <h1>Тест блоков Х___Х</h1>
+
+    <block-header :user_status="true"/>
+    <block-header :user_status="false"/>
+
+    <block-main-banner/>
+
+    <block-footer/>
+
+    <block-filter-bar :items_drop_down="filterBarItems"/>
+    <block-search-and-sort :name_field_label="sort" :text_placeholder_input="sort_ph"/>
+
+    <block-contacts :contacts_list="contacts_list"/>
+    <block-photo-viewer :photos="photos"/>
+
+    <block-menu-personal-cabinet/>
+
+    <block-navigation-line/>
+    <block-navigation-line :step="2"/>
+
+    <block-add-photo/>
+
+    <block-photo-line :images="images"/>
 
     <block-notice-preview-line :items_preview="previewItems"/>
     <block-recommendations :items_preview="previewItems" :value_h2="h2" :text_link="link" :url="url"/>
@@ -97,12 +129,40 @@ import MoleculeEditDeleteBtn from "@/components/molecules/EditAndDeleteButton.vu
 // import from blocks
 import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
+import BlockNavigationLine from "@/components/blocks/NavigationLine.vue";
+import BlockAddPhoto from "@/components/blocks/AddPhotoBlock.vue";
+import BlockPhotoLine from "@/components/blocks/PhotoLine.vue";
+import BlockHeader from "@/components/blocks/Header.vue";
+import BlockFooter from "@/components/blocks/Footer.vue";
+import BlockFilterBar from "@/components/blocks/FilterBar.vue";
+import AtomMainIconsBar from "@/components/atoms/MainIconsBar.vue";
+import BlockMainBanner from "@/components/blocks/MainBanner.vue";
+import MoleculeSearchLine from "@/components/molecules/SearchLine.vue";
+import MoleculeSortButton from "@/components/molecules/SortButton.vue";
+import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue";
+import BlockContacts from "@/components/blocks/ContactsBlock.vue";
+import AtomContactItem from "@/components/atoms/ContactButton.vue";
+import BlockPhotoViewer from "@/components/blocks/DetailPhotoBlock.vue";
+import BlockMenuPersonalCabinet from "@/components/blocks/MenuPersonalCabinet.vue";
 
 
 
 
 export default {
   components: {
+    BlockMenuPersonalCabinet,
+    BlockPhotoViewer,
+    AtomContactItem,
+    BlockContacts,
+    BlockSearchAndSort,
+    MoleculeSortButton,
+    MoleculeSearchLine,
+    BlockMainBanner,
+    AtomMainIconsBar,
+    BlockFilterBar,
+    BlockFooter,
+    BlockHeader,
+    BlockPhotoLine,
     MoleculeEditDeleteBtn,
 
 
@@ -142,6 +202,8 @@ export default {
     // blocks
     BlockRecommendations,
     BlockNoticePreviewLine,
+    BlockNavigationLine,
+    BlockAddPhoto,
   },
   data() {
     return {
@@ -159,6 +221,8 @@ export default {
       location: 'Иркутск',
       color: 'Белый',
       name_field_label:"Название",
+      sort: "Сортировать по дате",
+      sort_ph: "Начните вводить адрес",
       text_p: "Какой-то рандомный текст Какой-то рандомный текст Какой-то рандомный текст Какой-то рандомный текст  Какой-то рандомный текст Какой-то рандомный текст",
       comment: "Комментарий",
       placeholderTest: "Плейсхолдер всякий",
@@ -173,7 +237,7 @@ export default {
         {name: "Мэнск"},
       ],
       previewItems:  [
-        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test.png'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
+        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test2.jpg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
         { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
         { animal_type: "cat", animal_status: "found", notice_status: "closed", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
         { animal_type: "dog", animal_status: "lost", notice_status: "closed", imageSrc: "", date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
@@ -192,6 +256,19 @@ export default {
         {name: "Состояние здоровья", value:"Здоров"},
         {name: "Стерилизация", value: "нет"}
       ],
+      images: [require('@/assets/pictures/test1.png'), require('@/assets/pictures/test.png'), require('@/assets/pictures/test2.jpg')],
+      filterBarItems: [
+        { name_drop_down: "Статус животного", list_drop_down: ['Нашлось', 'Потерялось']},
+        { name_drop_down: "Тип животного", list_drop_down: ['Кошка', 'Собака']},
+        { name_drop_down: "Окрас", list_drop_down: ['Черный', 'Белый', 'Зебра', 'Инверсная зебра', 'Черный', 'Белый', 'Зебра', 'Инверсная зебра']},
+        { name_drop_down: "Возраст", list_drop_down: ['Детеныш', 'Подросток', 'Взрослый', 'Старый', 'Новорожденный']},
+        { name_drop_down: "Порода", list_drop_down: ['Беспородный', 'Породистый' ]},
+        { name_drop_down: "Пол", list_drop_down: ['Мальчик', 'Девочка']},
+        { name_drop_down: "Состояние здоровья", list_drop_down: ['Здоров', 'Травмирован', 'Истощен', 'Беременная', 'Инвалид', 'Болен']},
+        { name_drop_down: "Стерилизация", list_drop_down: ['Да', 'Нет']}
+      ],
+      contacts_list: [{contact_type:"phone", contact_info: "89041234567"}, {contact_type: "link", contact_info: "vk.com/blablabla123"}],
+      photos: [require('@/assets/pictures/test1.png'), require('@/assets/pictures/test2.jpg'), require('@/assets/pictures/test.png'), require('@/assets/pictures/dog.svg')]
     }
   }
 }

@@ -15,17 +15,22 @@ export default {
 
 <style>
 .input_field {
-  margin-top: 4px;
-  margin-left:4px;
-  input{
-    border: 1px solid #1C1B18;
-    width: 580px;
-    height: 48px;
-    border-radius: 8px;
-    font-family: Montserrat-Medium, sans-serif;
-    font-size: 16px;
-  }
+  border: 1px solid #1C1B18;
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  font-family: Montserrat-Medium, sans-serif;
+  font-size: 16px;
+  padding-left: 12px;
+  align-content: center;
+  background-color: white;
 }
-
-
+input {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  font-family: Montserrat-Medium, sans-serif;
+  font-size: 16px;
+}
 </style>

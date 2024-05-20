@@ -24,5 +24,6 @@ export default {
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 784px;
 }
 </style>
