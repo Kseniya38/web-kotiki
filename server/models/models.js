@@ -27,10 +27,7 @@ const Role = sequelize.define('role', {
 const Notice = sequelize.define('notice', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     event_date: {type: DataTypes.DATE, allowNull: false},
-    city: {type: DataTypes.STRING, allowNull: false},
-    district: {type: DataTypes.STRING, allowNull: false},
-    street: {type: DataTypes.STRING, allowNull: true},
-    house: {type: DataTypes.STRING, allowNull: true},
+    address: {type: DataTypes.JSONB, allowNull: false},
     comment: {type: DataTypes.STRING, allowNull: true},
 })
 
@@ -44,7 +41,7 @@ const NoticeStatus = sequelize.define('notice_status', {
 const Animal = sequelize.define('animal', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     nickname: {type: DataTypes.STRING, allowNull: true},
-    photo: {type: DataTypes.ARRAY(STRING), allowNull: true},
+    photo: {type: DataTypes.JSONB, allowNull: true},
 })
 
 const Sterilization = sequelize.define('sterilization', {

@@ -125,7 +125,7 @@ class UserController {
             }
             const expiredToken = generateJwt(req.user.id, req.user.telephone, req.user.role, TOKEN_EXPIRES_KILL)
             res.cookie('token', expiredToken, { expires: new Date(0) })
-            return res.json({ message: 'Пользователь успешно разлогинен' })
+            return res.json([{ message: 'Пользователь успешно разлогинен' }, {expiredToken}])
         } catch (error) {
             return next(ApiError.internal(error.message))
         }
