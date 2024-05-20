@@ -6,7 +6,7 @@
 
 <script>
 export default {
-name: 'atom-location-icon'
+  name: 'atom-location-icon'
 }
 </script>
 

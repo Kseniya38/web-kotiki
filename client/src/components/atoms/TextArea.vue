@@ -24,23 +24,20 @@ export default {
 }
 </script>
 
-<style >
-.atom_textarea{
-  margin-top: 4px;
-  margin-left: 4px;
-}
+<style>
 textarea {
   width: 580px;
   height: 48px;
   border-radius: 8px;
   border: 1px solid #1C1B18;
-  max-width: 800px; /* Ограничиваем максимальную ширину textarea */
+  max-width: 800px;
   overflow: auto;
   min-width: 300px;
   font-family: Montserrat-Medium, sans-serif;
   font-size: 16px;
+  align-content: center;
+  padding-left: 12px;
 }
-
 </style>
 
 

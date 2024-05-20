@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="logo">
     <p>БАЗА ПОТЕРЯШЕК.РФ</p>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-p {
+.logo {
   font-family: Montserrat-Medium, sans-serif;
   font-size: 20px;
 }

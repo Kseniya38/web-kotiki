@@ -24,10 +24,12 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .switch{
   flex-direction: row;
   display:  flex;
+  justify-content: space-between;
+  max-width: 582px;
   input[type="radio"] {
     -webkit-appearance: none;
   }

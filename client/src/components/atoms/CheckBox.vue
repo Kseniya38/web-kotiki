@@ -29,6 +29,7 @@ label {
   height: 20px;
   vertical-align: middle;
   margin: 0 12px 0 4px;
+
 }
 div {
   margin: 5px 5px 5px 0;

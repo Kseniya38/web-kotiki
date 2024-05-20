@@ -1,5 +1,5 @@
 <template>
-  <div><p>{{text_p}}</p></div>
+  <div class="text"><p>{{text_p}}</p></div>
 </template>
 
 <script>
@@ -12,8 +12,12 @@ export default {
 </script>
 
 <style>
-p{
+.text{
   font-weight: 500;
   font-size: 16px;
+}
+p {
+  margin: 0;
+  padding: 0;
 }
 </style>
