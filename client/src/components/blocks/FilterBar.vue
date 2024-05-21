@@ -72,6 +72,7 @@ export default {
   border-radius: 8px;
   max-width: 270px;
   padding: 16px;
+  height: fit-content;
 }
 .filter_button {
   width: 100%;

@@ -1,8 +1,8 @@
 <template>
   <div class="recommendation_block">
     <atom-h2 :value_h2="value_h2" />
-    <block-notice-preview-line :items_preview="items_preview" />
-    <atom-link class="link" :text_link="text_link" :url="url" />
+    <block-notice-preview-line :user_status="user_status" :items_preview="items_preview" />
+    <atom-link :text_link="'Перейти в поиск'" :url="'/search'" />
   </div>
 </template>
 
@@ -19,10 +19,9 @@ export default {
     AtomH2,
   },
   props: {
-      value_h2: String,
-      items_preview: Array,
-      text_link: String,
-      url: String,
+    items_preview: Array,
+    value_h2: String,
+    user_status: Boolean
   },
 };
 </script>
@@ -30,5 +29,7 @@ export default {
 <style>
 .recommendation_block {
   text-align: right;
+  margin: 0 69px 50px 69px;
+  height: auto;
 }
 </style>

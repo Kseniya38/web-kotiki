@@ -21,4 +21,7 @@ export default {
   padding: 16px 32px;
   cursor: pointer;
 }
+.btn:hover, .btn:focus {
+  background-color: #6504B5;
+}
 </style>

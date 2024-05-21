@@ -2,8 +2,8 @@
   <div class="footer_block d_flex">
     <div class="footer d_flex">
       <atom-logo class="logo"/>
-      <atom-link class="link" :url="politic_url" :text_link='"Политика конфиденциальности"'/>
-      <atom-link :url="mail_url" :text_link='"Напишите нам: email@gmail.com"'/>
+      <atom-link class="footer_link" :url="politic_url" :text_link='"Политика конфиденциальности"'/>
+      <atom-link class="footer_link" :url="mail_url" :text_link='"Напишите нам: email@gmail.com"'/>
       </div>
     </div>
 
@@ -54,8 +54,19 @@ export default {
   font-size: 20px;
   margin-right: 30px;
 }
-.link {
-  text-decoration-line: underline;
+
+.footer_link {
+  color: white;
+  text-decoration: underline;
+  transition: color 0.3s ease;
   cursor: pointer;
+}
+
+.footer_link:hover, .footer_link:focus {
+  color: #DFBEF9;
+}
+
+.footer_link.visited {
+  color: #7F9AE6;
 }
 </style>

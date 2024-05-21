@@ -1,11 +1,11 @@
 <template>
   <div class="icons_bar">
     <template v-if="notice_status === 'active'">
-      <atom-edit-notice-icon/>
-      <atom-disactive-notice-icon/>
+      <atom-edit-notice-icon class="clickable_icon"/>
+      <atom-disactive-notice-icon class="clickable_icon"/>
     </template>
     <template v-else-if="notice_status === 'closed'">
-      <atom-active-notice-icon/>
+      <atom-active-notice-icon class="clickable_icon"/>
     </template>
   </div>
 </template>
@@ -29,5 +29,8 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: right;
+}
+.clickable_icon {
+  cursor: pointer;
 }
 </style>
