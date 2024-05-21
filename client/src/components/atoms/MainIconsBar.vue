@@ -1,15 +1,15 @@
 <template>
   <div class="main_icons_bar">
-    <button class="main_icon_btn">
-      <img src="@/assets/icons/lostPetMainIcon.svg" alt="Потеряли питомца">
+    <button class="main_icon_btn" @click="$router.push('/search')">
+      <img class="main_icon_svg" src="@/assets/icons/lostPetMainIcon.svg" alt="Потеряли питомца">
       <span class="btn_title">Потеряли</span>
     </button>
-    <button class="main_icon_btn">
-      <img src="@/assets/icons/foundPetMainIcon.svg" alt="Нашли питомца">
+    <button class="main_icon_btn" @click="$router.push('/search')">
+      <img class="main_icon_svg" src="@/assets/icons/foundPetMainIcon.svg" alt="Нашли питомца">
       <span class="btn_title">Нашли</span>
     </button>
     <button class="main_icon_btn">
-      <img src="@/assets/icons/createNoticeMainIcon.svg" alt="Создать объявление">
+      <img class="main_icon_svg" src="@/assets/icons/createNoticeMainIcon.svg" alt="Создать объявление">
       <span class="btn_title">Создать объявление</span>
     </button>
   </div>
@@ -44,6 +44,10 @@ export default {
 }
 .main_icon_btn:hover {
   background-color: #DFBEF9;
+  .main_icon_svg {
+    fill: white;
+    stroke: white;
+  }
 }
 .btn_title {
   text-align: center;

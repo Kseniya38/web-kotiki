@@ -21,4 +21,7 @@ export default {
   padding: 6px 32px;
   cursor: pointer;
 }
+.preview_button_atom:hover, .preview_button_atom:focus {
+  background-color: #6504B5;
+}
 </style>

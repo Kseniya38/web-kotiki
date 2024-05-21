@@ -1,5 +1,5 @@
 <template>
-  <div class="logo">
+  <div class="logo" @click="$router.push('/')">
     <p>БАЗА ПОТЕРЯШЕК.РФ</p>
   </div>
 </template>
@@ -14,6 +14,7 @@ export default {
 .logo {
   font-family: Montserrat-Medium, sans-serif;
   font-size: 20px;
+  cursor: pointer;
 }
 
 </style>

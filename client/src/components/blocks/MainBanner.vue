@@ -49,7 +49,7 @@ export default {
   width: 580px;
   left: 0;
   position: absolute;
-  padding: 20px 20px 20px 120px;
+  padding: 20px 20px 20px 69px;
 }
 
 .main_icons_bar_container {

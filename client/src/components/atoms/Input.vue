@@ -18,7 +18,6 @@ export default {
   border: 1px solid #1C1B18;
   height: 48px;
   border-radius: 8px;
-  font-family: Montserrat-Medium, sans-serif;
   font-size: 16px;
   padding-left: 12px;
   align-content: center;
@@ -29,7 +28,7 @@ input {
   margin: 0;
   border: none;
   background: transparent;
-  font-family: Montserrat-Medium, sans-serif;
   font-size: 16px;
+  outline: none;
 }
 </style>

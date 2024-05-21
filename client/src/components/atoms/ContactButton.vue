@@ -6,7 +6,6 @@
     <div class="contact_info_wrapper">
       <span>{{ displayedContactInfo }}</span>
     </div>
-
   </div>
 </template>
 
@@ -16,6 +15,7 @@ export default {
   props: {
     contact_info: String,
     contact_type: String,
+    user_status: Boolean
   },
   data() {
     return {
@@ -31,7 +31,9 @@ export default {
       }
     },
     displayedContactInfo() {
-      if (this.isContactInfoVisible) {
+      if (!this.user_status) {
+        return this.contact_info.replace(/./g, "x");
+      } else if ( this.user_status && this.isContactInfoVisible) {
         return this.contact_info;
       } else {
         return this.contact_info.replace(/./g, "x");

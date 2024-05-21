@@ -2,11 +2,11 @@
   <div :class="['notice_preview', { 'active': notice_status === 'active', 'closed': notice_status === 'closed' }]">
     <div class="notice_container">
         <img :src="displayedImageSrc" alt="Фото питомца" class="notice_preview_image" />
-      <atom-manage-notice-icons-bar :notice_status="notice_status" class="preview_icons_bar"/>
+      <atom-manage-notice-icons-bar v-if="user_status" :notice_status="notice_status" class="preview_icons_bar"/>
       <atom-animal-status-icon :animal_status="animal_status" :animal_type="animal_type" class="preview_animal_icon"/>
     </div>
     <atom-description-preview class="preview_description" :date_preview="date_preview" :location_preview="location_preview" :color_preview="color_preview"/>
-    <atom-preview-button class="preview_button" @click="handleButtonClick">Подробнее</atom-preview-button>
+    <atom-preview-button class="preview_button" @click="$router.push(`/notice/${id}`)">Подробнее</atom-preview-button>
   </div>
 </template>
 
@@ -32,6 +32,8 @@ export default {
     notice_status: String,
     animal_status: String,
     animal_type: String,
+    id: Number,
+    user_status: Boolean,
   },
   methods: {
     handleButtonClick() {
@@ -63,6 +65,7 @@ export default {
   color: #1C1B18;
   font-family: Montserrat-Medium, sans-serif;
   border-radius: 8px;
+  margin-bottom: 50px;
 }
 
 .notice_preview.active {

@@ -3,8 +3,8 @@
   <div class="header d_flex">
     <atom-logo class="logo"/>
     <div class="d_flex btn_bar_header">
-    <atom-button class="pets_button">ПОТЕРЯННЫЕ ПИТОМЦЫ</atom-button>
-    <atom-button class="pets_button">НАЙДЕННЫЕ ПИТОМЦЫ</atom-button>
+    <atom-button class="pets_button" @click="$router.push('/search')">ПОТЕРЯННЫЕ ПИТОМЦЫ</atom-button>
+    <atom-button class="pets_button" @click="$router.push('/search')">НАЙДЕННЫЕ ПИТОМЦЫ</atom-button>
     <atom-button class="create_notice_button">СОЗДАТЬ ОБЪЯВЛЕНИЕ</atom-button>
     <atom-user-button :user_status="user_status"/>
     </div>
@@ -53,11 +53,18 @@ export default {
   padding: 0;
   margin-right: 40px;
 }
+.pets_button:hover, .pets_button:focus {
+  text-decoration: underline;
+}
 .create_notice_button {
   background-color: white;
   color: #6504B5;
   font-family: Montserrat-Medium, sans-serif;
   font-size: 16px
+}
+.create_notice_button:hover, .create_notice_button:focus {
+  background-color: #DFBEF9;
+  color: white;
 }
 .header_block {
   width: 100%;

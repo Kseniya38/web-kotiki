@@ -1,6 +1,6 @@
 <template>
   <div class="sort_container">
-    <atom-field-name class="sort_label" :name_field_label="name_field_label"/>
+    <atom-field-name class="sort_label" :name_field_label="'Сортировать по дате'"/>
     <div >
       <button class="icon_btn_sort" @click="toggleSortDirection">
         <span>{{ sortDirection }}</span>
@@ -17,7 +17,6 @@ export default {
   name: "molecule-sort-button",
   components: {AtomFieldName},
   props: {
-    name_field_label: String
   },
   data() {
     return {
@@ -55,6 +54,7 @@ export default {
   width: 193px;
   justify-content: space-between;
   padding: 0 16px 0 16px;
+  cursor: pointer;
 }
 .sort_label {
   font-weight: bold;

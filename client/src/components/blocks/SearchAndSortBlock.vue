@@ -1,7 +1,7 @@
 <template>
   <div class ="search_sort_block">
-    <molecule-search-line class="search_line_block" :text_placeholder_input="text_placeholder_input"/>
-    <molecule-sort-button class="sort_btn_block" :name_field_label="name_field_label"/>
+    <molecule-search-line class="search_line_block"/>
+    <molecule-sort-button class="sort_btn_block"/>
   </div>
 </template>
 
@@ -15,8 +15,6 @@ export default {
   name: 'block-search-and-sort',
   components: {MoleculeSortButton, MoleculeSearchLine},
   props: {
-    text_placeholder_input: String,
-    name_field_label: String
   },
 }
 </script>
