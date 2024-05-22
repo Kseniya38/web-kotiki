@@ -21,4 +21,7 @@ export default {
   padding: 16px 48px;
   cursor: pointer;
 }
+.edit_btn:hover, .edit_btn:focus {
+  background-color: #6504B5;
+}
 </style>
