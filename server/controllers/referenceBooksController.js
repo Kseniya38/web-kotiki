@@ -11,16 +11,16 @@ const {
 
 class ReferenceBooksController {
     async getAll(req, res){
-        let referenceBooks = {
-            "Типы животных": [],
-            "Породы": [],
-            "Статусы животных": [],
-            "Цвета": [],
-            "Возраст": [],
-            "Пол": [],
-            "Здоровье": [],
-            "Стерилизация": []
-        }
+        let referenceBooks = []
+        let a = []
+        let b = []
+        let c = []
+        let d = []
+        let e = []
+        let j = []
+        let g = []
+        let h = []
+
 
         const animal_types = await AnimalType.findAll()
         const breeds = await Breed.findAll()
@@ -32,29 +32,40 @@ class ReferenceBooksController {
         const sterilizations = await Sterilization.findAll()
 
         for (let i = 0; i < animal_types.length; i++){
-            referenceBooks["Типы животных"].push(animal_types[i].animal_type_name)
+            a.push(animal_types[i].animal_type_name)
         }
         for (let i = 0; i < breeds.length; i++){
-            referenceBooks["Породы"].push(breeds[i].animal_breed_name)
+            b.push(breeds[i].animal_breed_name)
         }
         for (let i = 0; i < animal_statuses.length; i++){
-            referenceBooks["Статусы животных"].push(animal_statuses[i].animal_status_name)
+            c.push(animal_statuses[i].animal_status_name)
         }
         for (let i = 0; i < colors.length; i++){
-            referenceBooks["Цвета"].push(colors[i].color_name)
+            d.push(colors[i].color_name)
         }
         for (let i = 0; i < ages.length; i++){
-            referenceBooks["Возраст"].push(ages[i].age)
+            e.push(ages[i].age)
         }
         for (let i = 0; i < genders.length; i++){
-            referenceBooks["Пол"].push(genders[i].gender)
+            j.push(genders[i].gender)
         }
         for (let i = 0; i < health.length; i++){
-            referenceBooks["Здоровье"].push(health[i].health)
+            g.push(health[i].health)
         }
         for (let i = 0; i < sterilizations.length; i++){
-            referenceBooks["Стерилизация"].push(sterilizations[i].sterilization)
+            h.push(sterilizations[i].sterilization)
         }
+
+        const aa = {name_drop_down: "Тип животного",list_drop_down: a }
+        const bb = {name_drop_down: "Порода",list_drop_down: b }
+        const cc = {name_drop_down: "Статус животного",list_drop_down: c }
+        const dd = {name_drop_down: "Окрас",list_drop_down: d }
+        const ee = {name_drop_down: "Возраст",list_drop_down: e }
+        const jj = {name_drop_down: "Пол",list_drop_down: j }
+        const gg = {name_drop_down: "Состояние здоровья",list_drop_down: g }
+        const hh = {name_drop_down: "Стерилизация",list_drop_down: h }
+
+        referenceBooks.push(aa, bb, cc, dd, ee, jj, gg, hh)
 
         return res.json(referenceBooks)
     }

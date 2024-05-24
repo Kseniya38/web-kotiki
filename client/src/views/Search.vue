@@ -58,18 +58,13 @@ export default {
     async fetchFilterBarData() {
       try {
         const response = await axios.get('http://localhost:5000/api/referenceBooks/');
-        this.filterBarItems = this.transformReferenceBooks(response.data);
+        this.filterBarItems = response.data;
       } catch (error) {
         console.error('Error fetching reference books:', error);
       }
     }
   },
-  transformReferenceBooks(referenceBooks) {
-    return Object.entries(referenceBooks).map(([key, value]) => ({
-      name_drop_down: key,
-      list_drop_down: value
-    }));
-  },
+
   mounted() {
     this.fetchData()
     this.fetchFilterBarData()

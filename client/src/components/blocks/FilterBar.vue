@@ -4,7 +4,7 @@
       <VueDatePicker class="drop_down_filter_item" calendar-cell-class-name="dp-custom-cell" v-model="date" :format="format" locale="ru" range auto-apply :max-date="new Date()" :enable-time-picker="false"/>
     </div>
     <div>
-      <atom-drop-down-list class="drop_down_filter_item" v-for="(index, item) in items_drop_down"
+      <atom-drop-down-list class="drop_down_filter_item" v-for="(item, index) in items_drop_down"
                                :key="index"
                                :name_drop_down="item.name_drop_down"
                                :list_drop_down="item.list_drop_down"/>
