@@ -35,11 +35,11 @@ export default {
       return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg');
     },
     formattedDropdownList() {
-      return this.list_drop_down.map((item) => ({
-        id: item.id,
-        label: item[Object.keys(item)[1]],
+      return this.list_drop_down.map((item, index) => ({
+        id: index,
+        label: item
       }));
-    },
+    }
   },
   methods: {
     toggleDropdown() {
