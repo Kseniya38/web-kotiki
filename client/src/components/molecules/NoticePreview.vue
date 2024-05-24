@@ -29,7 +29,7 @@ export default {
     date_preview: String,
     location_preview:String,
     color_preview:String,
-    notice_status: String,
+    //notice_status: String,
     animal_status: String,
     animal_type: String,
     id: Number,
@@ -38,6 +38,11 @@ export default {
   methods: {
     handleButtonClick() {
       // Логика обработки нажатия кнопки
+    }
+  },
+  data() {
+    return {
+      notice_status: 'active'
     }
   },
   computed: {

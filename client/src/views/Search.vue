@@ -18,14 +18,86 @@ import BlockFilterBar from "@/components/blocks/FilterBar.vue";
 import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue";
 import AtomH1 from "@/components/atoms/H1.vue";
+import axios from "axios";
+
+
 
 export default {
   components: {AtomH1, BlockSearchAndSort, BlockNoticePreviewLine, BlockFilterBar},
   props: {
     user_status: Boolean
   },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/animal/', {
+          params: {
+            page: this.page,
+            limit: this.limit,
+            sterilizationId: this.sterilizationId,
+            healthId: this.healthId,
+            genderId: this.genderId,
+            ageId: this.ageId,
+            colorId: this.colorId,
+            animalStatusId: this.animalStatusId,
+            animalTypeId: this.animalTypeId,
+            breedId: this.breedId,
+            address: this.address,
+            userId: this.userId,
+            noticeStatusId: this.noticeStatusId,
+            date_lowerRange: this.date_lowerRange,
+            date_upperRange: this.date_upperRange
+          }
+        })
+        this.previewItems = response.data.rows
+        this.totalCount = response.data.count
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    },
+    async fetchFilterBarData() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/referenceBooks/');
+        this.filterBarItems = this.transformReferenceBooks(response.data);
+      } catch (error) {
+        console.error('Error fetching reference books:', error);
+      }
+    }
+  },
+  transformReferenceBooks(referenceBooks) {
+    return Object.entries(referenceBooks).map(([key, value]) => ({
+      name_drop_down: key,
+      list_drop_down: value
+    }));
+  },
+  mounted() {
+    this.fetchData()
+    this.fetchFilterBarData()
+  },
+
   data() {
     return {
+      filterBarItems: [],
+      previewItems: [],
+      page: 1,
+      limit: 9,
+      totalCount: 0,
+      // Добавьте новые параметры фильтрации
+      sterilizationId: null,
+      healthId: null,
+      genderId: null,
+      ageId: null,
+      colorId: null,
+      animalStatusId: null,
+      animalTypeId: null,
+      breedId: null,
+      address: null,
+      userId: null,
+      noticeStatusId: 1,
+      date_lowerRange: null,
+      date_upperRange: null
+    }
+    /*return {
       filterBarItems: [
         { name_drop_down: "Статус животного", list_drop_down: ['Нашлось', 'Потерялось']},
         { name_drop_down: "Тип животного", list_drop_down: ['Кошка', 'Собака']},
@@ -45,9 +117,10 @@ export default {
         { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
         { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" }
       ]
-    }
+    }*/
   }
 }
+
 </script>
 
 <style>

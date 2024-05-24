@@ -11,6 +11,17 @@ const {
 
 class ReferenceBooksController {
     async getAll(req, res){
+        let referenceBooks = {
+            "Типы животных": [],
+            "Породы": [],
+            "Статусы животных": [],
+            "Цвета": [],
+            "Возраст": [],
+            "Пол": [],
+            "Здоровье": [],
+            "Стерилизация": []
+        }
+
         const animal_types = await AnimalType.findAll()
         const breeds = await Breed.findAll()
         const animal_statuses = await AnimalStatus.findAll()
@@ -20,16 +31,32 @@ class ReferenceBooksController {
         const health = await Health.findAll()
         const sterilizations = await Sterilization.findAll()
 
-        return res.json([
-            {animal_types},
-            {breeds},
-            {animal_statuses},
-            {colors},
-            {ages},
-            {genders},
-            {health},
-            {sterilizations}
-        ])
+        for (let i = 0; i < animal_types.length; i++){
+            referenceBooks["Типы животных"].push(animal_types[i].animal_type_name)
+        }
+        for (let i = 0; i < breeds.length; i++){
+            referenceBooks["Породы"].push(breeds[i].animal_breed_name)
+        }
+        for (let i = 0; i < animal_statuses.length; i++){
+            referenceBooks["Статусы животных"].push(animal_statuses[i].animal_status_name)
+        }
+        for (let i = 0; i < colors.length; i++){
+            referenceBooks["Цвета"].push(colors[i].color_name)
+        }
+        for (let i = 0; i < ages.length; i++){
+            referenceBooks["Возраст"].push(ages[i].age)
+        }
+        for (let i = 0; i < genders.length; i++){
+            referenceBooks["Пол"].push(genders[i].gender)
+        }
+        for (let i = 0; i < health.length; i++){
+            referenceBooks["Здоровье"].push(health[i].health)
+        }
+        for (let i = 0; i < sterilizations.length; i++){
+            referenceBooks["Стерилизация"].push(sterilizations[i].sterilization)
+        }
+
+        return res.json(referenceBooks)
     }
 
     async create(req, res){

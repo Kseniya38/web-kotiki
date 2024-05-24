@@ -1,6 +1,6 @@
 <template>
   <div class="preview_line">
-    <molecule-notice-preview :user_status="user_status" v-for="(item, index) in items_preview"
+    <molecule-notice-preview :user_status="user_status" v-for="(item, index) in formattedItems"
                              :id="index"
                              :animal_type="item.animal_type"
                              :animal_status="item.animal_status"
@@ -11,7 +11,6 @@
                              :color_preview="item.color" />
   </div>
 </template>
-// выше в качестве id объявления взят номер из массива только для тестирования, после привязки бэка уникальный id объявления нужно брать из бд
 <script>
 import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
 
@@ -27,6 +26,25 @@ export default {
     },
     user_status: Boolean
   },
+  computed: {
+    formattedItems() {
+      return this.items_preview.map((item, index) => {
+        const eventDate = new Date(item.notices[0].event_date);
+        const formattedDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`;
+
+        return {
+          id: index,
+          animal_type: item.animalTypeId,
+          animal_status: item.animalStatusId,
+          notice_status: item.notices[0].noticeStatusId,
+          imageSrc: `http://localhost:5000/static/${item.photo.first}`,
+          date: formattedDate,
+          location: `${item.notices[0].address.city}, ${item.notices[0].address.district}, ${item.notices[0].address.street}`,
+          color: item.colorId
+        };
+      });
+    }
+  }
 };
 </script>
 
