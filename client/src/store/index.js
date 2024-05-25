@@ -2,13 +2,21 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-  },
-  getters: {
+    previewItems: []
   },
   mutations: {
+    setPreviewItems(state, items) {
+      state.previewItems = items
+    }
   },
   actions: {
+    updatePreviewItems({ commit }, items) {
+      commit('setPreviewItems', items)
+    }
   },
-  modules: {
+  getters: {
+    getPreviewItems(state) {
+      return state.previewItems
+    }
   }
 })

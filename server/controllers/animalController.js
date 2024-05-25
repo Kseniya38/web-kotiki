@@ -239,14 +239,19 @@ class AnimalController {
             filterAnimal.push({[Op.or]: colorArray})
         }
 
-        if (animalStatusId){
-            animalStatusId = JSON.parse(animalStatusId)
-            let statusArray = []
-            for (let animalStatusIdElement of animalStatusId.numbers) {
-                let status = {animalStatusId: animalStatusIdElement}
-                statusArray.push(status)
+        if (animalStatusId) {
+            try {
+                animalStatusId = JSON.parse(animalStatusId);
+                if (Array.isArray(animalStatusId)) {
+                    let statusArray = animalStatusId.map(id => ({ animalStatusId: id }));
+                    filterAnimal.push({ [Op.or]: statusArray });
+                } else {
+                    filterAnimal.push({ animalStatusId: animalStatusId });
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке animalStatusId:', error);
+                filterAnimal.push({ animalStatusId: animalStatusId });
             }
-            filterAnimal.push({[Op.or]: statusArray})
         }
 
         if (animalTypeId){

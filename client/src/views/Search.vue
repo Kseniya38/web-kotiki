@@ -19,16 +19,38 @@ import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue";
 import AtomH1 from "@/components/atoms/H1.vue";
 import axios from "axios";
-
-
+import {mapGetters} from "vuex";
 
 export default {
+  name: "Search",
   components: {AtomH1, BlockSearchAndSort, BlockNoticePreviewLine, BlockFilterBar},
   props: {
     user_status: Boolean
   },
+  data() {
+    return {
+      filterBarItems: [],
+      previewItems: [],
+      page: 1,
+      limit: 9,
+      totalCount: 0,
+      sterilizationId: null,
+      healthId: null,
+      genderId: null,
+      ageId: null,
+      colorId: null,
+      animalStatusId: null,
+      animalTypeId: null,
+      breedId: null,
+      address: null,
+      userId: null,
+      noticeStatusId: 1,
+      date_lowerRange: null,
+      date_upperRange: null,
+    }
+  },
   methods: {
-    async fetchData() {
+    async fetchDefaultPreviewItems() {
       try {
         const response = await axios.get('http://localhost:5000/api/animal/', {
           params: {
@@ -57,65 +79,25 @@ export default {
     },
     async fetchFilterBarData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/referenceBooks/');
+        const response = await axios.get('http://localhost:5000/api/referenceBooks/')
         this.filterBarItems = response.data;
       } catch (error) {
-        console.error('Error fetching reference books:', error);
+        console.error('Error fetching reference books:', error)
       }
     }
   },
-
-  mounted() {
-    this.fetchData()
-    this.fetchFilterBarData()
+  computed: {
+    ...mapGetters(['getPreviewItems'])
   },
-
-  data() {
-    return {
-      filterBarItems: [],
-      previewItems: [],
-      page: 1,
-      limit: 9,
-      totalCount: 0,
-      // Добавьте новые параметры фильтрации
-      sterilizationId: null,
-      healthId: null,
-      genderId: null,
-      ageId: null,
-      colorId: null,
-      animalStatusId: null,
-      animalTypeId: null,
-      breedId: null,
-      address: null,
-      userId: null,
-      noticeStatusId: 1,
-      date_lowerRange: null,
-      date_upperRange: null
+  mounted() {
+    if (this.getPreviewItems.length > 0) {
+      this.previewItems = this.getPreviewItems
+    } else {
+      this.fetchDefaultPreviewItems()
     }
-    /*return {
-      filterBarItems: [
-        { name_drop_down: "Статус животного", list_drop_down: ['Нашлось', 'Потерялось']},
-        { name_drop_down: "Тип животного", list_drop_down: ['Кошка', 'Собака']},
-        { name_drop_down: "Окрас", list_drop_down: ['Черный', 'Белый', 'Зебра', 'Инверсная зебра', 'Черный', 'Белый', 'Зебра', 'Инверсная зебра']},
-        { name_drop_down: "Возраст", list_drop_down: ['Детеныш', 'Подросток', 'Взрослый', 'Старый', 'Новорожденный']},
-        { name_drop_down: "Порода", list_drop_down: ['Беспородный', 'Породистый' ]},
-        { name_drop_down: "Пол", list_drop_down: ['Мальчик', 'Девочка']},
-        { name_drop_down: "Состояние здоровья", list_drop_down: ['Здоров', 'Травмирован', 'Истощен', 'Беременная', 'Инвалид', 'Болен']},
-        { name_drop_down: "Стерилизация", list_drop_down: ['Да', 'Нет']}
-      ],
-      previewItems:  [
-        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test2.jpg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
-        { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
-        { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
-        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test2.jpg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
-        { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
-        { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
-        { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" }
-      ]
-    }*/
+    this.fetchFilterBarData()
   }
 }
-
 </script>
 
 <style>

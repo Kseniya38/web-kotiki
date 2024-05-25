@@ -30,8 +30,8 @@ export default {
     location_preview:String,
     color_preview:String,
     //notice_status: String,
-    animal_status: String,
-    animal_type: String,
+    animal_status: Number,
+    animal_type: Number,
     id: Number,
     user_status: Boolean,
   },
@@ -50,9 +50,9 @@ export default {
       if (this.image_src_preview) {
         return this.image_src_preview
       } else {
-        if (this.animal_type === 'cat') {
+        if (this.animal_type === 3) {
           return require('@/assets/pictures/cat.svg')
-        } else if (this.animal_type === 'dog') {
+        } else if (this.animal_type === 5) {
           return require('@/assets/pictures/dog.svg')
         }
       }
