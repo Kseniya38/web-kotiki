@@ -21,4 +21,7 @@ export default {
   padding: 16px 48px;
   cursor: pointer;
 }
+.del_btn:hover, .del_btn:focus {
+  background-color: #6504B5;
+}
 </style>
