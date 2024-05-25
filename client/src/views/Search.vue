@@ -19,7 +19,7 @@ import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
 import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue";
 import AtomH1 from "@/components/atoms/H1.vue";
 import axios from "axios";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "Search",
@@ -50,6 +50,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems', 'updatePreviewItems']),
+    async handleLostPetClick(previewItems) {
+      this.updateLostPetPreviewItems(previewItems)
+    },
+    async handleFoundPetClick(previewItems) {
+      this.updateFoundPetPreviewItems(previewItems)
+    },
     async fetchDefaultPreviewItems() {
       try {
         const response = await axios.get('http://localhost:5000/api/animal/', {
@@ -71,7 +78,7 @@ export default {
             date_upperRange: this.date_upperRange
           }
         })
-        this.previewItems = response.data.rows
+        this.updatePreviewItems(response.data.rows)
         this.totalCount = response.data.count
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -87,13 +94,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getPreviewItems'])
+    ...mapGetters(['getPreviewItems']),
+    previewItems() {
+      return this.getPreviewItems;
+    }
   },
   mounted() {
-    if (this.getPreviewItems.length > 0) {
-      this.previewItems = this.getPreviewItems
-    } else {
-      this.fetchDefaultPreviewItems()
+    if (this.getPreviewItems.length === 0) {
+    this.fetchDefaultPreviewItems()
     }
     this.fetchFilterBarData()
   }

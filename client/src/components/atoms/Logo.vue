@@ -1,12 +1,22 @@
 <template>
-  <div class="logo" @click="$router.push('/')">
+  <div class="logo" @click="handleLogoClick">
     <p>БАЗА ПОТЕРЯШЕК.РФ</p>
   </div>
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
 export default {
-  name: 'atom-logo'
+  name: 'atom-logo',
+  setup() {
+    const router = useRouter()
+    return { router }
+  },
+  methods: {
+    handleLogoClick() {
+      this.router.replace('/')
+    }
+  }
 }
 </script>
 

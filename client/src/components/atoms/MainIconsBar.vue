@@ -18,6 +18,7 @@
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router'
+import {mapActions, mapMutations} from "vuex";
 export default {
   name: 'atom-main-icons-bar',
   setup() {
@@ -25,6 +26,8 @@ export default {
     return { router };
   },
   methods: {
+    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems']),
+    ...mapMutations(['setLostPetPreviewItems', 'setFoundPetPreviewItems']),
     async handleLostPetClick() {
       try {
         const response = await axios.get('http://localhost:5000/api/animal', {
@@ -33,7 +36,7 @@ export default {
           }
         });
         this.$emit('handleLostPetClick', response.data.rows)
-        await this.router.push({ name: 'Search' })
+        await this.router.replace({ name: 'Search' })
       } catch (error) {
         console.error('Error fetching lost pets:', error);
       }
@@ -46,7 +49,7 @@ export default {
           }
         });
         this.$emit('handleFoundPetClick', response.data.rows)
-        await this.router.push({ name: 'Search' })
+        await this.router.replace({ name: 'Search' })
       } catch (error) {
         console.error('Error fetching lost pets:', error);
       }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <block-main-banner :handle_lost_pet_click="updatePreviewItems" :handle_found_pet_click="updatePreviewItems"/>
+    <block-main-banner :handle_lost_pet_click="handleLostPetClick" :handle_found_pet_click="handleFoundPetClick"/>
     <div class="search_line_main_container">
       <molecule-search-line class="search_line_main"/>
     </div>
@@ -18,7 +18,7 @@ import { mapActions } from 'vuex'
 export default {
   components: {BlockRecommendations, MoleculeSearchLine, BlockMainBanner},
   props: {
-    user_status: Boolean
+    user_status: Boolean,
   },
   data() {
     return {
@@ -43,12 +43,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['updatePreviewItems']),
+    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems']),
     handleLostPetClick(previewItems) {
-      this.updatePreviewItems(previewItems)
+      this.updateLostPetPreviewItems(previewItems)
     },
     handleFoundPetClick(previewItems) {
-      this.updatePreviewItems(previewItems)
+      this.updateFoundPetPreviewItems(previewItems)
     },
     async fetchData() {
       try {
@@ -81,7 +81,7 @@ export default {
     setLatestPreviewItems() {
       this.latestPreviewItems = this.previewItems
           .slice(0, 4)
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     },
   },
   mounted() {
