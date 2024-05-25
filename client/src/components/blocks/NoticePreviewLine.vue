@@ -1,6 +1,6 @@
 <template>
   <div class="preview_line">
-    <molecule-notice-preview :user_status="user_status" v-for="(item, index) in formattedItems"
+    <molecule-notice-preview class="item_preview_line" :user_status="user_status" v-for="(item, index) in formattedItems"
                              :id="index"
                              :animal_type="item.animal_type"
                              :animal_status="item.animal_status"
@@ -52,9 +52,13 @@ export default {
 .preview_line {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 20px;
   height: fit-content;
   flex-wrap: wrap;
+}
+.item_preview_line {
+  margin-right: 25px;
+  margin-left: 25px;
 }
 </style>
