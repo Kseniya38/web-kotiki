@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="checkbox" id="a_checkbox" :checked="isChecked" @input="$emit('update:isChecked', $event.target.checked)"/>
+    <input type="checkbox" id="a_checkbox" :checked="isChecked" @change="handleCheckboxChange"/>
     <label for="a_checkbox">{{label_checkbox}}</label>
   </div>
 </template>
@@ -15,8 +15,12 @@ export default {
       default: false
     }
   },
-  emits: ['update:isChecked']
-
+  emits: ['update:isChecked'],
+  methods: {
+    handleCheckboxChange(event) {
+      this.$emit('update:isChecked', event.target.checked);
+    }
+  }
 }
 </script>
 

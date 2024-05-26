@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import BlockFilterBar from "@/components/blocks/FilterBar.vue";
-import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
-import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue";
-import AtomH1 from "@/components/atoms/H1.vue";
-import axios from "axios";
-import {mapActions, mapGetters} from "vuex";
+import BlockFilterBar from "@/components/blocks/FilterBar.vue"
+import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue"
+import BlockSearchAndSort from "@/components/blocks/SearchAndSortBlock.vue"
+import AtomH1 from "@/components/atoms/H1.vue"
+import axios from "axios"
+import {mapActions, mapGetters} from "vuex"
 
 export default {
   name: "Search",

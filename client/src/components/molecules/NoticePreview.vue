@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import AtomPreviewButton from "@/components/atoms/PreviewButton.vue";
-import AtomDescriptionPreview from "@/components/atoms/DescriptionPreview.vue";
-import AtomManageNoticeIconsBar from "@/components/atoms/ManageNoticeIconsBar.vue";
-import AtomAnimalStatusIcon from "@/components/atoms/AnimalStatusIcon.vue";
+import AtomPreviewButton from "@/components/atoms/PreviewButton.vue"
+import AtomDescriptionPreview from "@/components/atoms/DescriptionPreview.vue"
+import AtomManageNoticeIconsBar from "@/components/atoms/ManageNoticeIconsBar.vue"
+import AtomAnimalStatusIcon from "@/components/atoms/AnimalStatusIcon.vue"
 
 export default {
   name: "molecule-notice-preview",
@@ -34,11 +34,6 @@ export default {
     animal_type: Number,
     id: Number,
     user_status: Boolean,
-  },
-  methods: {
-    handleButtonClick() {
-      // Логика обработки нажатия кнопки
-    }
   },
   data() {
     return {

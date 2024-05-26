@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue";
+import MoleculeNoticePreview from "@/components/molecules/NoticePreview.vue"
 
 export default {
   name: "block-notice-preview-line",
@@ -29,8 +29,8 @@ export default {
   computed: {
     formattedItems() {
       return this.items_preview.map((item) => {
-        const eventDate = new Date(item.notices[0].event_date);
-        const formattedDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`;
+        const eventDate = new Date(item.notices[0].event_date)
+        const formattedDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`
 
         return {
           id: item.id,
@@ -39,13 +39,13 @@ export default {
           notice_status: item.notices[0].noticeStatusId,
           imageSrc: `http://localhost:5000/static/${item.photo.first}`,
           date: formattedDate,
-          location: `г. ${item.notices[0].address.city}, р-н. ${item.notices[0].address.district}, ${item.notices[0].address.street}`,
+          location: `г. ${item.notices[0].address.city}, р-н. ${item.notices[0].address.district || "не указан"}, ул. ${item.notices[0].address.street || "не указана"}`,
           color: item.color.color_name
-        };
-      });
+        }
+      })
     }
   }
-};
+}
 </script>
 
 <style>

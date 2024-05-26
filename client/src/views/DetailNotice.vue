@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import AtomH1 from "@/components/atoms/H1.vue";
-import BlockPhotoViewer from "@/components/blocks/DetailPhotoBlock.vue";
-import BlockContacts from "@/components/blocks/ContactsBlock.vue";
-import MoleculeInfoblock from "@/components/molecules/Infoblock.vue";
-import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
-import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
-import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
-import axios from "axios";
+import AtomH1 from "@/components/atoms/H1.vue"
+import BlockPhotoViewer from "@/components/blocks/DetailPhotoBlock.vue"
+import BlockContacts from "@/components/blocks/ContactsBlock.vue"
+import MoleculeInfoblock from "@/components/molecules/Infoblock.vue"
+import AtomLocationIcon from "@/components/atoms/LocationIcon.vue"
+import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue"
+import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue"
+import axios from "axios"
 
 export default {
   components: {BlockRecommendations, MoleculeCommentInfoblock, MoleculeInfoblock, BlockContacts, BlockPhotoViewer, AtomH1},
@@ -114,12 +114,12 @@ export default {
           { name: "Окрас", value: response.data.color.color_name },
         ]
         this.optionalCharacteristics = [
-          {name: "Кличка", value: response.data.nickname ? response.data.nickname: "Не указано"},
-          {name: "Возраст", value: response.data.age.age ? response.data.age.age: "Не указано"},
-          {name: "Пол", value: response.data.gender.gender ? response.data.gender.gender : "Не указано"},
-          {name: "Порода", value: response.data.breed.animal_breed_name ? response.data.breed.animal_breed_name : "Не указано"},
-          {name: "Состояние здоровья", value: response.data.health.health ? response.data.health.health : "Не указано"},
-          {name: "Стерилизация", value: response.data.sterilization.sterilization ? response.data.sterilization.sterilization : "Не указано"}
+          {name: "Кличка", value: response.data.nickname || "Не указано"},
+          {name: "Возраст", value: response.data.age.age || "Не указано"},
+          {name: "Пол", value: response.data.gender.gender || "Не указано"},
+          {name: "Порода", value: response.data.breed|| "Не указано"},
+          {name: "Состояние здоровья", value: response.data.health.health || "Не указано"},
+          {name: "Стерилизация", value: response.data.sterilization.sterilization || "Не указано"}
         ]
         this.text_comment = response.data.notices[0].comment || "Не указано"
       } catch (error) {

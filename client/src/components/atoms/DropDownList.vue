@@ -8,7 +8,8 @@
           v-for="item in formattedDropdownList"
           :key="item.id"
           :label_checkbox="item.label"
-          @update:isChecked="updateCheckboxState(index, $event)"
+          :isChecked.sync="item.isChecked"
+          @update:isChecked="handleCheckboxStateChange(item.id, $event)"
       />
     </div>
   </div>
@@ -16,8 +17,7 @@
 </template>
 
 <script>
-import AtomCheckbox from "@/components/atoms/CheckBox.vue";
-import index from "vuex";
+import AtomCheckbox from "@/components/atoms/CheckBox.vue"
 
 export default {
   components: {
@@ -38,11 +38,8 @@ export default {
     }
   },
   computed: {
-    index() {
-      return index
-    },
     arrowIcon() {
-      return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg');
+      return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg')
     },
     formattedDropdownList() {
       return this.list_drop_down.map((item, index) => ({
@@ -54,10 +51,11 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
     },
-    updateCheckboxState(index, checked) {
-      this.$set(this.checkboxStates, index, checked);
+    handleCheckboxStateChange(id, isChecked) {
+      this.checkboxStates[id] = isChecked
+      this.$emit('update:checkboxStates', this.checkboxStates)
     }
   }
 }
