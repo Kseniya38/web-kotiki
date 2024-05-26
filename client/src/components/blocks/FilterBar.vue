@@ -121,8 +121,8 @@ export default {
       const params = {
         page: 1,
         limit: 9,
-        //date_lowerRange: this.date[0].toISOString(),
-        //date_upperRange: this.date[1].toISOString(),
+        date_lowerRange: this.date[0].toISOString(),
+        date_upperRange: this.date[1].toISOString(),
         ...filters
       }
       const response = await axios.get('http://localhost:5000/api/animal/', {params})
