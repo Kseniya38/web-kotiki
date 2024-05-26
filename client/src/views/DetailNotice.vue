@@ -24,7 +24,6 @@ import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
 import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
 import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
 import axios from "axios";
-import index from "vuex";
 
 export default {
   components: {BlockRecommendations, MoleculeCommentInfoblock, MoleculeInfoblock, BlockContacts, BlockPhotoViewer, AtomH1},
@@ -90,9 +89,7 @@ export default {
       }
     },
     setLatestPreviewItems() {
-      this.latestPreviewItems = this.previewItems
-          .slice(0, 4)
-          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 4)
     },
     async fetchNoticeDetails() {
       try {
@@ -105,10 +102,10 @@ export default {
         if (response.data.photo.fourth) this.photos[3] = `http://localhost:5000/static/${response.data.photo.fourth}`
         if (this.photos.length === 0) this.photos[0] = 'http://localhost:5000/static/noPhoto.svg'
 
-        const eventDate = new Date(response.data.notices[0].event_date);
-        const formattedEventDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`;
-        const createdAtDate = new Date(response.data.notices[0].createdAt);
-        const formattedAtDate = `${createdAtDate.getDate()}.${createdAtDate.getMonth() + 1}.${createdAtDate.getFullYear()}`;
+        const eventDate = new Date(response.data.notices[0].event_date)
+        const formattedEventDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`
+        const createdAtDate = new Date(response.data.notices[0].createdAt)
+        const formattedAtDate = `${createdAtDate.getDate()}.${createdAtDate.getMonth() + 1}.${createdAtDate.getFullYear()}`
 
         this.mandatoryCharacteristics = [
           { name: "Дата находки/пропажи", value: formattedEventDate },
@@ -128,11 +125,16 @@ export default {
       } catch (error) {
         console.error('Error fetching notice details:', error)
       }
-    }
+    },
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.id = to.params.id
+    this.fetchNoticeDetails()
+    next()
   },
   mounted() {
-    this.id = this.route.params.id;
-    this.fetchNoticeDetails();
+    this.id = this.route.params.id
+    this.fetchNoticeDetails()
     this.fetchRecommendationsData()
   },
 }

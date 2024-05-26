@@ -1,12 +1,22 @@
 <template>
-  <button class="preview_button_atom">
+  <button class="preview_button_atom" :class="{ 'active': isButtonClicked }" @click="handleButtonClick">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-preview-button'
+  name: 'atom-preview-button',
+  data() {
+    return {
+      isButtonClicked: false
+    }
+  },
+  methods: {
+    handleButtonClick() {
+      this.isButtonClicked = true;
+    }
+  }
 }
 </script>
 
@@ -23,5 +33,8 @@ export default {
 }
 .preview_button_atom:hover, .preview_button_atom:focus {
   background-color: #6504B5;
+}
+.preview_button_atom.active {
+  background-color: #00BE57;
 }
 </style>
