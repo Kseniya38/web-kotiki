@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const {Animal, Notice, Color, AnimalStatus, AnimalType, User} = require('../models/models')
+const {Animal, Notice, Color, AnimalStatus, AnimalType, User, Age, Gender, Breed, Health, Sterilization} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const {JSONB, DATE, Op} = require("sequelize");
 
@@ -143,6 +143,30 @@ class AnimalController {
                         include: {
                             model: User
                         }
+                    },
+                    {
+                        model: Color,
+                        attributes: ['color_name']
+                    },
+                    {
+                        model: Age,
+                        attributes: ['age']
+                    },
+                    {
+                        model: Gender,
+                        attributes: ['gender']
+                    },
+                    {
+                        model: Breed,
+                        attributes: ['animal_breed_name']
+                    },
+                    {
+                        model: Health,
+                        attributes: ['health']
+                    },
+                    {
+                        model: Sterilization,
+                        attributes: ['sterilization']
                     }
                 ]
         }
@@ -328,7 +352,7 @@ class AnimalController {
                 include: [
                     {
                         model: Notice,
-                        where: {userId, noticeStatusId},
+                        where: {userId, noticeStatusId: 1},
                         attributes: ['event_date', 'address']
                     },
                     {

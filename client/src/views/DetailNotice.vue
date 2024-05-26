@@ -111,15 +111,15 @@ export default {
           { name: "Дата находки/пропажи", value: formattedEventDate },
           { name: "Дата публикации", value: formattedAtDate },
           { name: AtomLocationIcon, value: `г. ${response.data.notices[0].address.city}, р-н. ${response.data.notices[0].address.district || "не указан"}, ул. ${response.data.notices[0].address.street || "не указана"}` },
-          { name: "Окрас", value: response.data.colorId },
+          { name: "Окрас", value: response.data.color.color_name },
         ]
         this.optionalCharacteristics = [
           {name: "Кличка", value: response.data.nickname ? response.data.nickname: "Не указано"},
-          {name: "Возраст", value: response.data.ageId ? response.data.ageId: "Не указано"},
-          {name: "Пол", value: response.data.genderId ? response.data.genderId : "Не указано"},
-          {name: "Порода", value: response.data.breedId ? response.data.breedId : "Не указано"},
-          {name: "Состояние здоровья", value: response.data.healthId ? response.data.healthId : "Не указано"},
-          {name: "Стерилизация", value: response.data.sterilizationId ? response.data.sterilizationId : "Не указано"}
+          {name: "Возраст", value: response.data.age.age ? response.data.age.age: "Не указано"},
+          {name: "Пол", value: response.data.gender.gender ? response.data.gender.gender : "Не указано"},
+          {name: "Порода", value: response.data.breed.animal_breed_name ? response.data.breed.animal_breed_name : "Не указано"},
+          {name: "Состояние здоровья", value: response.data.health.health ? response.data.health.health : "Не указано"},
+          {name: "Стерилизация", value: response.data.sterilization.sterilization ? response.data.sterilization.sterilization : "Не указано"}
         ]
         this.text_comment = response.data.notices[0].comment || "Не указано"
       } catch (error) {
