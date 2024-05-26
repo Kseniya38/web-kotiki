@@ -83,7 +83,7 @@ export default {
     setLatestPreviewItems() {
       this.latestPreviewItems = this.previewItems
           .slice(0, 4)
-          .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     },
   },
   mounted() {

@@ -190,88 +190,123 @@ class AnimalController {
         }
 
         if (sterilizationId){
-            sterilizationId = JSON.parse(sterilizationId)
-            let sterilizationArray = []
-            for (let sterilizationIdElement of sterilizationId.numbers) {
-                let sterilization = {sterilizationId: sterilizationIdElement}
-                sterilizationArray.push(sterilization)
+            try {
+                sterilizationId = JSON.parse(sterilizationId)
+                if (Array.isArray(sterilizationId)) {
+                    let sterilizationArray = sterilizationId.map(id => ({sterilizationId: id}))
+                    filterAnimal.push({[Op.or]: sterilizationArray})
+                } else {
+                    filterAnimal.push({sterilizationId: sterilizationId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке sterilizationId:', error)
+                filterAnimal.push({ sterilizationId: sterilizationId })
             }
-            filterAnimal.push({[Op.or]: sterilizationArray})
         }
 
         if (healthId){
-            healthId = JSON.parse(healthId)
-            let healthArray = []
-            for (let healthIdElement of healthId.numbers) {
-                let health = {healthId: healthIdElement}
-                healthArray.push(health)
+            try {
+                healthId = JSON.parse(healthId)
+                if (Array.isArray(healthId)) {
+                    let healthArray = healthId.map(id => ({healthId: id}))
+                    filterAnimal.push({[Op.or]: healthArray})
+                } else {
+                    filterAnimal.push({healthId: healthId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке healthId:', error)
+                filterAnimal.push({ healthId: healthId })
             }
-            filterAnimal.push({[Op.or]: healthArray})
         }
 
         if (genderId){
-            genderId = JSON.parse(genderId)
-            let genderArray = []
-            for (let genderIdElement of genderId.numbers) {
-                let gender = {genderId: genderIdElement}
-                genderArray.push(gender)
+            try {
+                genderId = JSON.parse(genderId)
+                if (Array.isArray(genderId)) {
+                    let genderArray = genderId.map(id => ({genderId: id}))
+                    filterAnimal.push({[Op.or]: genderArray})
+                } else {
+                    filterAnimal.push({genderId: genderId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке genderId:', error)
+                filterAnimal.push({ genderId: genderId })
             }
-            filterAnimal.push({[Op.or]: genderArray})
         }
 
         if (ageId){
-            ageId = JSON.parse(ageId)
-            let ageArray = []
-            for (let ageIdElement of ageId.numbers) {
-                let age = {ageId: ageIdElement}
-                ageArray.push(age)
+            try {
+                ageId = JSON.parse(ageId)
+                if (Array.isArray(ageId)) {
+                    let ageArray = ageId.map(id => ({ageId: id}))
+                    filterAnimal.push({[Op.or]: ageArray})
+                } else {
+                    filterAnimal.push({ageId: ageId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке ageId:', error)
+                filterAnimal.push({ ageId: ageId })
             }
-            filterAnimal.push({[Op.or]: ageArray})
         }
 
         if (colorId){
-            colorId = JSON.parse(colorId)
-            let colorArray = []
-            for (let colorIdElement of colorId.numbers) {
-                let color = {colorId: colorIdElement}
-                colorArray.push(color)
+            try {
+                colorId = JSON.parse(colorId)
+                if (Array.isArray(colorId)) {
+                   let colorArray = colorId.map(id => ({colorId: id}))
+                    filterAnimal.push({[Op.or]: colorArray})
+                }    else {
+                    filterAnimal.push({colorId: colorId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке colorId:', error)
+                filterAnimal.push({ colorId: colorId })
             }
-            filterAnimal.push({[Op.or]: colorArray})
         }
 
         if (animalStatusId) {
             try {
-                animalStatusId = JSON.parse(animalStatusId);
+                animalStatusId = JSON.parse(animalStatusId)
                 if (Array.isArray(animalStatusId)) {
-                    let statusArray = animalStatusId.map(id => ({ animalStatusId: id }));
-                    filterAnimal.push({ [Op.or]: statusArray });
+                    let animalStatusArray = animalStatusId.map(id => ({ animalStatusId: id }))
+                    filterAnimal.push({ [Op.or]: animalStatusArray })
                 } else {
-                    filterAnimal.push({ animalStatusId: animalStatusId });
+                    filterAnimal.push({ animalStatusId: animalStatusId })
                 }
             } catch (error) {
-                console.error('Ошибка при обработке animalStatusId:', error);
-                filterAnimal.push({ animalStatusId: animalStatusId });
+                console.error('Ошибка при обработке animalStatusId:', error)
+                filterAnimal.push({ animalStatusId: animalStatusId })
             }
         }
 
         if (animalTypeId){
-            animalTypeId = JSON.parse(animalTypeId)
-            let typeArray = []
-            for (let animalTypeIdElement of animalTypeId.numbers) {
-                let type = {animalTypeId: animalTypeIdElement}
-                typeArray.push(type)
+            try {
+                animalTypeId = JSON.parse(animalTypeId)
+                if (Array.isArray(animalTypeId)) {
+                    let animalTypeArray = animalTypeId.map(id => ({animalTypeId: id}))
+                    filterAnimal.push({[Op.or]: animalTypeArray})
+                }    else {
+                    filterAnimal.push({animalTypeId: animalTypeId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке animalTypeId:', error)
+                filterAnimal.push({ animalTypeId: animalTypeId })
             }
-            filterAnimal.push({[Op.or]: typeArray})
         }
 
         if (breedId){
-            breedId = JSON.parse(breedId)
-            let breedArray = []
-            for (let breedIdElement of breedId.numbers) {
-                let breed = {breedId: breedIdElement}
-                breedArray.push(breed)
+            try {
+                breedId = JSON.parse(breedId)
+                if (Array.isArray(breedId)) {
+                    let breedArray = breedId.map(id => ({ breedId: id }))
+                    filterAnimal.push({ [Op.or]: breedArray })
+                } else {
+                    filterAnimal.push({ breedId: breedId })
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке breedId:', error)
+                filterAnimal.push({ breedId: breedId })
             }
-            filterAnimal.push({[Op.or]: breedArray})
         }
 
         console.log(colorId)
@@ -284,7 +319,7 @@ class AnimalController {
                 attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                 include: {
                     model: Notice,
-                    where: {userId, noticeStatusId},
+                    where: {userId, noticeStatusId: 1},
                     attributes: ['event_date', 'address']
                 }}
             )
@@ -293,7 +328,7 @@ class AnimalController {
             if (filterAnimal.length === 0){
                 animals = await Animal.findAndCountAll({
                     limit, offset,
-                    attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                    attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: {
                         model: Notice,
                         where: filterNotice,
@@ -305,7 +340,7 @@ class AnimalController {
                 animals = await Animal.findAndCountAll({
                     where: {[Op.and]: filterAnimal},
                     limit, offset,
-                    attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                    attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: {
                         model: Notice,
                         where: filterNotice,
