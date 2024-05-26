@@ -4,7 +4,12 @@
       <img :src="arrowIcon" alt="Arrow Icon" class="arrow_icon" />
       {{ name_drop_down }}</button>
     <div v-if="isOpen" class="dropdown_content">
-      <atom-checkbox v-for="item in formattedDropdownList" :key="item.id" :label_checkbox="item.label"/>
+      <atom-checkbox
+          v-for="item in formattedDropdownList"
+          :key="item.id"
+          :label_checkbox="item.label"
+          @update:isChecked="updateCheckboxState(index, $event)"
+      />
     </div>
   </div>
 
@@ -12,6 +17,7 @@
 
 <script>
 import AtomCheckbox from "@/components/atoms/CheckBox.vue";
+import index from "vuex";
 
 export default {
   components: {
@@ -27,23 +33,31 @@ export default {
   },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      checkboxStates: {}
     }
   },
   computed: {
+    index() {
+      return index
+    },
     arrowIcon() {
       return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg');
     },
     formattedDropdownList() {
       return this.list_drop_down.map((item, index) => ({
         id: index,
-        label: item
+        label: item,
+        isChecked: this.checkboxStates[index] || false
       }));
     }
   },
   methods: {
     toggleDropdown() {
       this.isOpen = !this.isOpen;
+    },
+    updateCheckboxState(index, checked) {
+      this.$set(this.checkboxStates, index, checked);
     }
   }
 }

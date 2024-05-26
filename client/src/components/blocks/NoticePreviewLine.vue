@@ -40,7 +40,7 @@ export default {
           imageSrc: `http://localhost:5000/static/${item.photo.first}`,
           date: formattedDate,
           location: `г. ${item.notices[0].address.city}, р-н. ${item.notices[0].address.district}, ${item.notices[0].address.street}`,
-          color: item.colorId
+          color: item.color.color_name
         };
       });
     }
