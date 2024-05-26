@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const {Animal, Notice} = require('../models/models')
+const {Animal, Notice, User} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const {JSONB, DATE, Op} = require("sequelize");
 
@@ -137,7 +137,15 @@ class AnimalController {
         const {id} = req.params
         const animal = await Animal.findOne({
             where:{id},
-            include: {model: Notice}}
+                include: [
+                    {
+                        model: Notice,
+                        include: {
+                            model: User
+                        }
+                    }
+                ]
+        }
         )
         return res.json(animal)
     }

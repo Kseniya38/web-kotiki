@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   name: "block-photo-viewer",
   props: {
@@ -23,16 +24,17 @@ export default {
   data() {
     return {
       selectedIndex: 0,
+      photosArr: [],
     };
   },
   computed: {
     selectedPhoto() {
-      return this.photos[this.selectedIndex];
+      return this.photos[this.selectedIndex]
     },
   },
   methods: {
     selectPhoto(index) {
-      this.selectedIndex = index;
+      this.selectedIndex = index
     },
   },
 };
@@ -55,6 +57,7 @@ export default {
   align-items: center;
   overflow: hidden;
   border-radius: 8px;
+  margin-left: 10px;
 }
 
 .main_photo img {
