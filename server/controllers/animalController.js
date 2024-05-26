@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const {Animal, Notice, User} = require('../models/models')
+const {Animal, Notice, Color, AnimalStatus, AnimalType, User} = require('../models/models')
 const ApiError = require('../error/ApiError')
 const {JSONB, DATE, Op} = require("sequelize");
 
@@ -325,11 +325,25 @@ class AnimalController {
             animals = await Animal.findAll({
                 where: {[Op.and]: filterAnimal},
                 attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                include: {
-                    model: Notice,
-                    where: {userId, noticeStatusId: 1},
-                    attributes: ['event_date', 'address']
-                }}
+                include: [
+                    {
+                        model: Notice,
+                        where: {userId, noticeStatusId},
+                        attributes: ['event_date', 'address']
+                    },
+                    {
+                        model: Color,
+                        attributes: ['color_name']
+                    },
+                    {
+                        model: AnimalStatus,
+                        attributes: ['animal_status_name']
+                    },
+                    {
+                        model: AnimalType,
+                        attributes: ['animal_type_name']
+                    }
+                ]}
             )
         }
         else {
@@ -337,11 +351,25 @@ class AnimalController {
                 animals = await Animal.findAndCountAll({
                     limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                    include: {
-                        model: Notice,
-                        where: filterNotice,
-                        attributes: ['event_date', 'address']
-                    }}
+                    include: [
+                        {
+                            model: Notice,
+                            where: filterNotice,
+                            attributes: ['event_date', 'address']
+                        },
+                        {
+                            model: Color,
+                            attributes: ['color_name']
+                        },
+                        {
+                            model: AnimalStatus,
+                            attributes: ['animal_status_name']
+                        },
+                        {
+                            model: AnimalType,
+                            attributes: ['animal_type_name']
+                        }
+                    ]}
                 )
             }
             else if (filterAnimal.length !== 0){
@@ -349,11 +377,25 @@ class AnimalController {
                     where: {[Op.and]: filterAnimal},
                     limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                    include: {
-                        model: Notice,
-                        where: filterNotice,
-                        attributes: ['event_date', 'address']
-                    }}
+                    include: [
+                        {
+                            model: Notice,
+                            where: filterNotice,
+                            attributes: ['event_date', 'address']
+                        },
+                        {
+                            model: Color,
+                            attributes: ['color_name']
+                        },
+                        {
+                            model: AnimalStatus,
+                            attributes: ['animal_status_name']
+                        },
+                        {
+                            model: AnimalType,
+                            attributes: ['animal_type_name']
+                        }
+                    ]}
                 )
             }
         }
