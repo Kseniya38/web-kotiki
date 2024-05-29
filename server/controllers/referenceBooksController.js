@@ -11,6 +11,17 @@ const {
 
 class ReferenceBooksController {
     async getAll(req, res){
+        let referenceBooks = []
+        let a = []
+        let b = []
+        let c = []
+        let d = []
+        let e = []
+        let j = []
+        let g = []
+        let h = []
+
+
         const animal_types = await AnimalType.findAll()
         const breeds = await Breed.findAll()
         const animal_statuses = await AnimalStatus.findAll()
@@ -20,16 +31,43 @@ class ReferenceBooksController {
         const health = await Health.findAll()
         const sterilizations = await Sterilization.findAll()
 
-        return res.json([
-            {animal_types},
-            {breeds},
-            {animal_statuses},
-            {colors},
-            {ages},
-            {genders},
-            {health},
-            {sterilizations}
-        ])
+        for (let i = 0; i < animal_types.length; i++){
+            a.push(animal_types[i].animal_type_name)
+        }
+        for (let i = 0; i < breeds.length; i++){
+            b.push(breeds[i].animal_breed_name)
+        }
+        for (let i = 0; i < animal_statuses.length; i++){
+            c.push(animal_statuses[i].animal_status_name)
+        }
+        for (let i = 0; i < colors.length; i++){
+            d.push(colors[i].color_name)
+        }
+        for (let i = 0; i < ages.length; i++){
+            e.push(ages[i].age)
+        }
+        for (let i = 0; i < genders.length; i++){
+            j.push(genders[i].gender)
+        }
+        for (let i = 0; i < health.length; i++){
+            g.push(health[i].health)
+        }
+        for (let i = 0; i < sterilizations.length; i++){
+            h.push(sterilizations[i].sterilization)
+        }
+
+        const aa = {name_drop_down: "Тип животного",list_drop_down: a }
+        const bb = {name_drop_down: "Порода",list_drop_down: b }
+        const cc = {name_drop_down: "Статус животного",list_drop_down: c }
+        const dd = {name_drop_down: "Окрас",list_drop_down: d }
+        const ee = {name_drop_down: "Возраст",list_drop_down: e }
+        const jj = {name_drop_down: "Пол",list_drop_down: j }
+        const gg = {name_drop_down: "Состояние здоровья",list_drop_down: g }
+        const hh = {name_drop_down: "Стерилизация",list_drop_down: h }
+
+        referenceBooks.push(aa, bb, cc, dd, ee, jj, gg, hh)
+
+        return res.json(referenceBooks)
     }
 
     async create(req, res){

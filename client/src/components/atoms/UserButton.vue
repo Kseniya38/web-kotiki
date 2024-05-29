@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/Button.vue";
+import AtomButton from "@/components/atoms/Button.vue"
 
 export default {
   name: 'atom-user-button',
@@ -39,6 +39,10 @@ export default {
   font-size: 16px;
   padding: 0;
 }
+.login_button:hover, .login_button:focus {
+  color: #DFBEF9;
+  text-decoration: underline;
+}
 .user_button {
   padding: 0;
   max-height: 50px;
@@ -49,8 +53,13 @@ export default {
   margin-left: 40px;
   border-left: solid thin;
 }
+.user_icon:hover, .user_icon:focus {
+  background-color: #DFBEF9;
+}
 .user_icon {
   width: 46px;
   height: 46px;
+  background-color: white;
+  border-radius: 24px;
 }
 </style>

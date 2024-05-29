@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
+import AtomLocationIcon from "@/components/atoms/LocationIcon.vue"
 
 export default {
   name: 'atom-characteristic',

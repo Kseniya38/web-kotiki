@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       text: ''
-    };
+    }
   },
   methods: {
     adjustTextareaSize(event) {
@@ -33,7 +33,8 @@ textarea {
   max-width: 800px;
   overflow: auto;
   min-width: 300px;
-  font-family: Montserrat-Medium, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  color: #1C1B18;
   font-size: 16px;
   align-content: center;
   padding-left: 12px;

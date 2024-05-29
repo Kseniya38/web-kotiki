@@ -6,7 +6,6 @@
     <div class="contact_info_wrapper">
       <span>{{ displayedContactInfo }}</span>
     </div>
-
   </div>
 </template>
 
@@ -16,6 +15,7 @@ export default {
   props: {
     contact_info: String,
     contact_type: String,
+    user_status: Boolean
   },
   data() {
     return {
@@ -25,16 +25,18 @@ export default {
   computed: {
     displayedIcon() {
       if (this.contact_type === "phone") {
-        return require("@/assets/icons/phoneIcon.svg");
+        return require("@/assets/icons/phoneIcon.svg")
       } else if (this.contact_type === "link") {
-        return require("@/assets/icons/linkIcon.svg");
+        return require("@/assets/icons/linkIcon.svg")
       }
     },
     displayedContactInfo() {
-      if (this.isContactInfoVisible) {
+      if (!this.user_status) {
+        return this.contact_info.replace(/./g, "x")
+      } else if ( this.user_status && this.isContactInfoVisible) {
         return this.contact_info;
       } else {
-        return this.contact_info.replace(/./g, "x");
+        return this.contact_info.replace(/./g, "x")
       }
     },
   },

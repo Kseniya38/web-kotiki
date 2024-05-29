@@ -13,24 +13,25 @@
 
 <script>
 export default {
+  // переписать полностью компонент - слайдер не нужен, просто ряд фото с иконками удаления
   name: "block-photo-line",
   data() {
     return {
-      currentIndex: 0, // индекс текущего слайда
-    };
+      currentIndex: 0,
+    }
   },
   props: {
-    images: Array, // массив с изображениями
+    images: Array,
   },
   methods: {
     nextSlide() {
-      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+      this.currentIndex = (this.currentIndex + 1) % this.images.length
     },
     prevSlide() {
-      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+      this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length
     }
   }
-};
+}
 </script>
 
 <style scoped>

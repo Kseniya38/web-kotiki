@@ -1,12 +1,22 @@
 <template>
-  <button class="btn">
+  <button class="btn" :class="{ 'active': isButtonClicked }" @click="handleButtonClick">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-button'
+  name: 'atom-button',
+  data() {
+    return {
+      isButtonClicked: false
+    }
+  },
+  methods: {
+    handleButtonClick() {
+      this.isButtonClicked = true
+    }
+  }
 }
 </script>
 
@@ -20,5 +30,8 @@ export default {
   border: none;
   padding: 16px 32px;
   cursor: pointer;
+}
+.btn:hover, .btn:focus {
+  background-color: #6504B5;
 }
 </style>

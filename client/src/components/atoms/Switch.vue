@@ -21,7 +21,6 @@ export default {
     name_right_switch: String,
   },
 }
-
 </script>
 
 <style>

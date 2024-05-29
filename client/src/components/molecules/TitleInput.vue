@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AtomInput from "@/components/atoms/Input.vue";
-import AtomFieldName from "@/components/atoms/FieldName.vue";
+import AtomInput from "@/components/atoms/Input.vue"
+import AtomFieldName from "@/components/atoms/FieldName.vue"
 
 export default {
   name: 'molecule-title-input',

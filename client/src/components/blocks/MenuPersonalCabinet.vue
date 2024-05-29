@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import AtomLink from "@/components/atoms/Link.vue";
+import AtomLink from "@/components/atoms/Link.vue"
 
 export default {
   name: "block-menu-personal-cabinet",
@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       activeTab: "active",
-    };
+    }
   },
   methods: {
     setActiveTab(tab) {
-      this.activeTab = tab;
+      this.activeTab = tab
     },
   },
-};
+}
 </script>
 
 <style scoped>

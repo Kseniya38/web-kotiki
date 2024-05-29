@@ -2,14 +2,14 @@
   <div class="contact_container">
     <atom-field-name class="contacts_label" :name_field_label="'Контакты для связи'"/>
     <div class="contacts_list">
-        <atom-contact-item v-for="(item, index) in contacts_list" :key="index" :contact_type="item.contact_type" :contact_info="item.contact_info"/>
+        <atom-contact-item :user_status="user_status" v-for="(item, index) in contacts_list" :key="index" :contact_type="item.contact_type" :contact_info="item.contact_info"/>
     </div>
   </div>
 </template>
 
 <script>
-import AtomFieldName from "@/components/atoms/FieldName.vue";
-import AtomContactItem from "@/components/atoms/ContactButton.vue";
+import AtomFieldName from "@/components/atoms/FieldName.vue"
+import AtomContactItem from "@/components/atoms/ContactButton.vue"
 
 export default {
   name: "block-contacts",
@@ -19,6 +19,7 @@ export default {
       type: Array,
       required: true,
     },
+    user_status: Boolean
   },
 }
 </script>

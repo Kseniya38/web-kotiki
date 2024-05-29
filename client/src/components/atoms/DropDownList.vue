@@ -4,14 +4,20 @@
       <img :src="arrowIcon" alt="Arrow Icon" class="arrow_icon" />
       {{ name_drop_down }}</button>
     <div v-if="isOpen" class="dropdown_content">
-      <atom-checkbox v-for="item in list_drop_down" :label_checkbox="item"/>
+      <atom-checkbox
+          v-for="item in formattedDropdownList"
+          :key="item.id"
+          :label_checkbox="item.label"
+          :isChecked.sync="item.isChecked"
+          @update:isChecked="handleCheckboxStateChange(item.id, $event)"
+      />
     </div>
   </div>
 
 </template>
 
 <script>
-import AtomCheckbox from "@/components/atoms/CheckBox.vue";
+import AtomCheckbox from "@/components/atoms/CheckBox.vue"
 
 export default {
   components: {
@@ -27,17 +33,29 @@ export default {
   },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      checkboxStates: {}
     }
   },
   computed: {
     arrowIcon() {
-      return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg');
+      return this.isOpen ? require('@/assets/icons/upIcon.svg') : require('@/assets/icons/downIcon.svg')
+    },
+    formattedDropdownList() {
+      return this.list_drop_down.map((item, index) => ({
+        id: index,
+        label: item,
+        isChecked: this.checkboxStates[index] || false
+      }))
     }
   },
   methods: {
     toggleDropdown() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
+    },
+    handleCheckboxStateChange(id, isChecked) {
+      this.checkboxStates[id] = isChecked
+      this.$emit('update:checkboxStates', this.checkboxStates)
     }
   }
 }

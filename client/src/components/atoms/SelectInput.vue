@@ -1,11 +1,11 @@
 <template>
   <div class="select_input">
     <div class="custom_select_container">
-      <select v-model="selectedItem" :class="{ 'custom_select': true, 'open': isOpen }" @click="toggleDropdown">
+      <select class="select-option" v-model="selectedItem" :class="{ 'custom_select': true, 'open': isOpen }" @click="toggleDropdown">
         <option :value="null" disabled selected hidden></option>
-        <option v-for="item in select_items" :value="item">{{ item }}</option>
+        <option  v-for="item in select_items" :value="item">{{ item }}</option>
       </select>
-      <span class="placeholder_select_text">{{ placeholder_select_input }}</span>
+      <span class="placeholder_select_text" v-if="showPlaceholder">{{ placeholder_select_input }}</span>
     </div>
   </div>
 </template>
@@ -16,8 +16,9 @@ export default {
   data() {
     return {
       selectedItem: null,
-      isOpen: false
-    };
+      isOpen: false,
+      showPlaceholder: true
+    }
   },
   props: {
     select_items: Array,
@@ -25,7 +26,12 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
+    }
+  },
+  watch: {
+    selectedItem(newValue) {
+      this.showPlaceholder = newValue === null
     }
   }
 }
@@ -39,9 +45,12 @@ select {
 .custom_select_container {
   position: relative;
   display: inline-block;
-  font-family: Montserrat-Medium, sans-serif;
-  font-size: 16px;
   width: 100%;
+}
+.select-option{
+  font-family: 'Montserrat', sans-serif;
+  color: #1C1B18;
+  font-size: 16px;
 }
 .custom_select {
   appearance: none;

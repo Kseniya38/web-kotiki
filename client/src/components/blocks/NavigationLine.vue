@@ -20,8 +20,7 @@ export default {
   },
   methods: {
     goToStep(step) {
-      // переход к соответствующему шагу
-      console.log('Переход к шагу', step);
+      console.log('Переход к шагу', step)
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="sort_container">
-    <atom-field-name class="sort_label" :name_field_label="name_field_label"/>
+    <atom-field-name class="sort_label" :name_field_label="'Сортировать по дате'"/>
     <div >
       <button class="icon_btn_sort" @click="toggleSortDirection">
         <span>{{ sortDirection }}</span>
@@ -11,32 +11,30 @@
 </template>
 
 <script>
-import AtomFieldName from "@/components/atoms/FieldName.vue";
+import AtomFieldName from "@/components/atoms/FieldName.vue"
 
 export default {
   name: "molecule-sort-button",
   components: {AtomFieldName},
-  props: {
-    name_field_label: String
-  },
   data() {
     return {
-      isAscending: false,
-    };
+      isAscending: true,
+    }
   },
   computed: {
     arrowSortIcon() {
       return this.isAscending
           ? require("@/assets/icons/arrowUp.svg")
-          : require("@/assets/icons/arrowDown.svg");
+          : require("@/assets/icons/arrowDown.svg")
     },
     sortDirection() {
-      return this.isAscending ? "Сначала старые" : "Сначала новые";
+      return this.isAscending ? "Сначала новые" : "Сначала старые"
     },
   },
   methods: {
     toggleSortDirection() {
-      this.isAscending = !this.isAscending;
+      this.isAscending = !this.isAscending
+      this.$emit('sort', this.isAscending)
     },
   },
 }
@@ -55,6 +53,7 @@ export default {
   width: 193px;
   justify-content: space-between;
   padding: 0 16px 0 16px;
+  cursor: pointer;
 }
 .sort_label {
   font-weight: bold;

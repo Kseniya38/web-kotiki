@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AtomFieldName from "@/components/atoms/FieldName.vue";
-import AtomCheckbox from "@/components/atoms/CheckBox.vue";
+import AtomFieldName from "@/components/atoms/FieldName.vue"
+import AtomCheckbox from "@/components/atoms/CheckBox.vue"
 
 export default {
 
@@ -17,7 +17,7 @@ export default {
     name_field_label:String,
     list_drop_down: Array,
   },
-};
+}
 </script>
 
 <style >
