@@ -1,20 +1,41 @@
 <template>
   <div class ="search_line">
-    <atom-input class="search_input" :text_placeholder_input="'Начните вводить адрес...'"/>
-    <atom-button @click="$router.push('/search')">Найти</atom-button>
+    <atom-input class="search_input" :text_placeholder_input="'Поиск по городу'" :modelValue="inputValue" @update:modelValue="handleInputChange" />
+    <atom-button @click="handleButtonClick">Найти</atom-button>
   </div>
 </template>
 
 <script>
 import AtomInput from "@/components/atoms/Input.vue";
 import AtomButton from "@/components/atoms/Button.vue";
+import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: 'molecule-search-line',
   components: {AtomButton, AtomInput},
-  props: {
+  data() {
+    return {
+      inputValue: ''
+    }
   },
   methods: {
+    ...mapActions(['updatePreviewItems']),
+    handleInputChange(value) {
+      this.inputValue = value
+    },
+    async handleButtonClick() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/animal/', {
+          params: {
+            address: this.inputValue
+          }
+        });
+        this.$emit('search', response.data.rows);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
   }
 }
 </script>

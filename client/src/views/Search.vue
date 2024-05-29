@@ -5,7 +5,7 @@
       <block-filter-bar :items_drop_down="filterBarItems"/>
     </div>
     <div class="right_search_block">
-      <block-search-and-sort class="search_sort_line"/>
+      <block-search-and-sort class="search_sort_line" @search="handleSearch"/>
       <div class="search_results_container">
         <block-notice-preview-line class="results_line" :items_preview="previewItems"/>
       </div>
@@ -51,6 +51,9 @@ export default {
   },
   methods: {
     ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems', 'updatePreviewItems']),
+    handleSearch(data) {
+      this.updatePreviewItems(data);
+    },
     async handleLostPetClick(previewItems) {
       this.updateLostPetPreviewItems(previewItems)
     },

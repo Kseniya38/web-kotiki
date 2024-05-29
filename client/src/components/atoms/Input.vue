@@ -1,6 +1,6 @@
 <template>
   <div class="input_field">
-    <input :placeholder="text_placeholder_input">
+    <input :placeholder="text_placeholder_input" :value="modelValue" @input="handleInput" />
   </div>
 </template>
 
@@ -9,7 +9,13 @@ export default {
   name: 'atom-input',
   props: {
     text_placeholder_input: String,
+    modelValue: String,
   },
+  methods: {
+    handleInput(event) {
+      this.$emit('update:modelValue', event.target.value)
+    }
+  }
 }
 </script>
 
