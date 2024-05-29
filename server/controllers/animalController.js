@@ -3,8 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const {Animal, Notice, Color, AnimalStatus, AnimalType, User, Age, Gender, Breed, Health, Sterilization} = require('../models/models')
 const ApiError = require('../error/ApiError')
-const {JSONB, DATE, Op} = require("sequelize");
-
+const {JSONB, DATE, Op, Sequelize} = require('sequelize');
 class AnimalController {
     async create(req, res, next) {
         try {
@@ -197,16 +196,25 @@ class AnimalController {
 
         let filterAnimal = []
         let filterNotice = {noticeStatusId: 1}
-        let adr = {}
+        //let adr = {}
         let animals
 
-        if (address){
+        /*if (address){
             address = JSON.parse(address)
             if (address.hasOwnProperty('city')){adr.city = address.city}
             if (address.hasOwnProperty('district')){adr.district = address.district}
             if (address.hasOwnProperty('street')){adr.street = address.street}
             if (address.hasOwnProperty('house')){adr.house = address.house}
             filterNotice.address = adr
+        }*/
+
+        if (address) {
+            filterNotice.address = {
+                [Op.and]: [ Sequelize.where(
+                    Sequelize.fn('jsonb_extract_path_text', Sequelize.col('address'), 'city'),
+                    { [Op.like]: `%${address}%` }
+                )]
+            }
         }
 
         if (date_lowerRange && date_upperRange){
