@@ -114,12 +114,12 @@ export default {
           { name: "Окрас", value: response.data.color.color_name },
         ]
         this.optionalCharacteristics = [
-          {name: "Кличка", value: response.data.nickname || "Не указано"},
-          {name: "Возраст", value: response.data.age.age || "Не указано"},
-          {name: "Пол", value: response.data.gender.gender || "Не указано"},
-          {name: "Порода", value: response.data.breed|| "Не указано"},
-          {name: "Состояние здоровья", value: response.data.health.health || "Не указано"},
-          {name: "Стерилизация", value: response.data.sterilization.sterilization || "Не указано"}
+          {name: "Кличка", value: response.data.nickname ? response.data.nickname : "Не указано"},
+          {name: "Возраст", value: response.data.age ? response.data.age.age : "Не указано"},
+          {name: "Пол", value: response.data.gender ? response.data.gender.gender : "Не указано"},
+          {name: "Порода", value: response.data.breed ? response.data.breed.animal_breed_name : "Не указано"},
+          {name: "Состояние здоровья", value: response.data.health ? response.data.health.health : "Не указано"},
+          {name: "Стерилизация", value: response.data.sterilization ? response.data.sterilization.sterilization : "Не указано"}
         ]
         this.text_comment = response.data.notices[0].comment || "Не указано"
       } catch (error) {
