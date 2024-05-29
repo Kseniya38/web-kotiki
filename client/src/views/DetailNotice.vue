@@ -89,7 +89,7 @@ export default {
       }
     },
     setLatestPreviewItems() {
-      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 4)
+      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)).slice(0, 4)
     },
     async fetchNoticeDetails() {
       try {

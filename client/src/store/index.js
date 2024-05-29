@@ -13,6 +13,18 @@ export default createStore({
     },
     setPreviewItems(state, items) {
       state.previewItems = items
+    },
+    sortPreviewItems(state, isAscending) {
+      const items = state.previewItems.sort((a, b) => {
+        const dateA = new Date(a.notices[0].createdAt)
+        const dateB = new Date(b.notices[0].createdAt)
+        if (isAscending) {
+          return dateB - dateA
+        } else {
+          return dateA - dateB
+        }
+      })
+      state.previewItems = items
     }
   },
   actions: {
@@ -24,6 +36,9 @@ export default createStore({
     },
     updatePreviewItems({ commit }, items) {
       commit('setPreviewItems', items)
+    },
+    sortPreviewItems({ commit }, isAscending) {
+      commit('sortPreviewItems', isAscending)
     }
   },
   getters: {

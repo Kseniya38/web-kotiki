@@ -356,12 +356,12 @@ class AnimalController {
         if (userId){
             animals = await Animal.findAll({
                 where: {[Op.and]: filterAnimal},
-                attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                 include: [
                     {
                         model: Notice,
                         where: {userId, noticeStatusId: 1},
-                        attributes: ['event_date', 'address']
+                        attributes: ['event_date', 'address', 'createdAt']
                     },
                     {
                         model: Color,
@@ -387,7 +387,7 @@ class AnimalController {
                         {
                             model: Notice,
                             where: filterNotice,
-                            attributes: ['event_date', 'address']
+                            attributes: ['event_date', 'address', 'createdAt']
                         },
                         {
                             model: Color,
@@ -413,7 +413,7 @@ class AnimalController {
                         {
                             model: Notice,
                             where: filterNotice,
-                            attributes: ['event_date', 'address']
+                            attributes: ['event_date', 'address', 'createdAt']
                         },
                         {
                             model: Color,
