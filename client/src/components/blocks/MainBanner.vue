@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AtomMainIconsBar from "@/components/atoms/MainIconsBar.vue";
+import AtomMainIconsBar from "@/components/atoms/MainIconsBar.vue"
 
 export default {
   name: "block-main-banner",

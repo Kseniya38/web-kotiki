@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/Button.vue";
+import AtomButton from "@/components/atoms/Button.vue"
 
 export default {
   name: 'atom-user-button',

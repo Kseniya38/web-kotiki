@@ -1,5 +1,5 @@
 <template>
-  <div :class="['notice_preview', { 'active': notice_status === 'active', 'closed': notice_status === 'closed' }]">
+  <div :class="['notice_preview', { 'active': notice_status === 1, 'closed': notice_status === 2 }]">
     <div class="notice_container">
         <img :src="displayedImageSrc" alt="Фото питомца" class="notice_preview_image" />
       <atom-manage-notice-icons-bar v-if="user_status" :notice_status="notice_status" class="preview_icons_bar"/>
@@ -29,16 +29,11 @@ export default {
     date_preview: String,
     location_preview:String,
     color_preview:String,
-    //notice_status: String,
+    notice_status: Number,
     animal_status: Number,
     animal_type: Number,
     id: Number,
     user_status: Boolean,
-  },
-  data() {
-    return {
-      notice_status: 'active'
-    }
   },
   computed: {
     displayedImageSrc() {
@@ -53,7 +48,7 @@ export default {
       }
     }
   }
-};
+}
 </script>
 
 <style>

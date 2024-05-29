@@ -38,30 +38,14 @@ import { mapActions } from 'vuex'
 
 const date = ref()
 const InterpretationArray = [
-  { name: 'animalTypeId', list: [
-      { id: 4 }, { id: 5 }, { id: 3 }
-    ]},
-  { name: 'breedId', list: [
-      { id: 1 }, { id: 2 }, { id: 3 }
-    ]},
-  { name: 'animalStatusId', list: [
-      { id: 1 }, { id: 2 }
-    ]},
-  { name: 'colorId', list: [
-      { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }
-    ]},
-  { name: 'ageId', list: [
-      { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }
-    ]},
-  { name: 'genderId', list: [
-      { id: 1 }, { id: 2 }
-    ]},
-  { name: 'healthId', list: [
-      { id: 1 }, { id: 2 }, { id: 3 }
-    ]},
-  { name: 'sterilizationId', list: [
-      { id: 1 }, { id: 2 }
-    ]}
+  { name: 'animalTypeId', list: [ { id: 4 }, { id: 5 }, { id: 3 } ]},
+  { name: 'breedId', list: [ { id: 1 }, { id: 2 }, { id: 3 } ]},
+  { name: 'animalStatusId', list: [ { id: 1 }, { id: 2 } ]},
+  { name: 'colorId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 } ]},
+  { name: 'ageId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]},
+  { name: 'genderId', list: [ { id: 1 }, { id: 2 } ]},
+  { name: 'healthId', list: [ { id: 1 }, { id: 2 }, { id: 3 } ]},
+  { name: 'sterilizationId', list: [ { id: 1 }, { id: 2 } ]}
 ]
 
 onMounted(() => {
@@ -100,7 +84,7 @@ export default {
   data() {
     return {
       checkboxStates: {}
-    };
+    }
   },
   methods: {
     ...mapActions(['updatePreviewItems']),
@@ -129,10 +113,10 @@ export default {
       return response
     },
     formatFilters() {
-      const filters = {};
+      const filters = {}
 
       Object.keys(this.checkboxStates).forEach((key) => {
-        const checkboxState = this.checkboxStates[key];
+        const checkboxState = this.checkboxStates[key]
         const interpretationItem = InterpretationArray[key]
 
         if (interpretationItem) {

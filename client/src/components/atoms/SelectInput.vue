@@ -18,7 +18,7 @@ export default {
       selectedItem: null,
       isOpen: false,
       showPlaceholder: true
-    };
+    }
   },
   props: {
     select_items: Array,
@@ -26,12 +26,12 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.isOpen = !this.isOpen;
+      this.isOpen = !this.isOpen
     }
   },
   watch: {
     selectedItem(newValue) {
-      this.showPlaceholder = newValue === null;
+      this.showPlaceholder = newValue === null
     }
   }
 }

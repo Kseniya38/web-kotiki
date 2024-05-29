@@ -46,7 +46,7 @@ export default {
         id: index,
         label: item,
         isChecked: this.checkboxStates[index] || false
-      }));
+      }))
     }
   },
   methods: {

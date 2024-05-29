@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AtomP from "@/components/atoms/P.vue";
-import AtomH3 from "@/components/atoms/H3.vue";
+import AtomP from "@/components/atoms/P.vue"
+import AtomH3 from "@/components/atoms/H3.vue"
 
 export default {
   name: 'molecule-comment-infoblock',

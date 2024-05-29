@@ -18,7 +18,7 @@ export default {
   emits: ['update:isChecked'],
   methods: {
     handleCheckboxChange(event) {
-      this.$emit('update:isChecked', event.target.checked);
+      this.$emit('update:isChecked', event.target.checked)
     }
   }
 }

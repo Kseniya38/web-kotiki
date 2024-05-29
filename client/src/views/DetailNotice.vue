@@ -47,6 +47,7 @@ export default {
       noticeStatusId: 1,
       date_lowerRange: null,
       date_upperRange: null,
+
       contacts_list: [],
       photos: [],
       mandatoryCharacteristics: [],

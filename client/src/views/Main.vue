@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import BlockMainBanner from "@/components/blocks/MainBanner.vue";
-import MoleculeSearchLine from "@/components/molecules/SearchLine.vue";
-import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
-import axios from "axios";
+import BlockMainBanner from "@/components/blocks/MainBanner.vue"
+import MoleculeSearchLine from "@/components/molecules/SearchLine.vue"
+import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue"
+import axios from "axios"
 import { mapActions } from 'vuex'
 
 export default {
@@ -47,7 +47,7 @@ export default {
   methods: {
     ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems', 'updatePreviewItems']),
     handleSearch(data) {
-      this.updatePreviewItems(data);
+      this.updatePreviewItems(data)
     },
     handleLostPetClick(previewItems) {
       this.updateLostPetPreviewItems(previewItems)
@@ -78,13 +78,13 @@ export default {
         })
         this.previewItems = response.data.rows
         this.totalCount = response.data.count
-        this.setLatestPreviewItems();
+        this.setLatestPreviewItems()
       } catch (error) {
         console.error('Error fetching data:', error)
       }
     },
     setLatestPreviewItems() {
-      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)).slice(0, 4);
+      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)).slice(0, 4)
     },
   },
   mounted() {

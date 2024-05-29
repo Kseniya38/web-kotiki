@@ -1,6 +1,6 @@
 <template>
   <div class="preview_line">
-    <molecule-notice-preview class="item_preview_line" :user_status="user_status" v-for="(item, index) in formattedItems"
+    <molecule-notice-preview class="item_preview_line" :user_status="user_status" v-for="(item) in formattedItems"
                              :id="item.id"
                              :animal_type="item.animal_type"
                              :animal_status="item.animal_status"

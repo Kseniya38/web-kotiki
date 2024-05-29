@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import AtomInput from "@/components/atoms/Input.vue";
-import AtomButton from "@/components/atoms/Button.vue";
-import axios from "axios";
-import { mapActions } from "vuex";
+import AtomInput from "@/components/atoms/Input.vue"
+import AtomButton from "@/components/atoms/Button.vue"
+import axios from "axios"
+import { mapActions } from "vuex"
 
 export default {
   name: 'molecule-search-line',
@@ -35,11 +35,11 @@ export default {
           params: {
             address: this.inputValue
           }
-        });
-        this.$emit('search', response.data.rows);
+        })
+        this.$emit('search', response.data.rows)
         await this.router.replace({ name: 'Search' })
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error)
       }
     }
   }

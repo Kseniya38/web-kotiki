@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AtomTextarea from "@/components/atoms/TextArea.vue";
-import AtomH3 from "@/components/atoms/H3.vue";
+import AtomTextarea from "@/components/atoms/TextArea.vue"
+import AtomH3 from "@/components/atoms/H3.vue"
 
 export default {
   name: 'molecule-comment',

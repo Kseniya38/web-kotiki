@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       isAscending: true,
-    };
+    }
   },
   computed: {
     arrowSortIcon() {

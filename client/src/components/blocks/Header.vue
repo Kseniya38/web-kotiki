@@ -13,16 +13,17 @@
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/Button.vue";
-import AtomLogo from "@/components/atoms/Logo.vue";
-import AtomUserButton from "@/components/atoms/UserButton.vue";
-import axios from "axios";
+import AtomButton from "@/components/atoms/Button.vue"
+import AtomLogo from "@/components/atoms/Logo.vue"
+import AtomUserButton from "@/components/atoms/UserButton.vue"
+import axios from "axios"
 import { useRouter } from 'vue-router'
+
 export default {
   name: "block-header",
   setup() {
-    const router = useRouter();
-    return { router };
+    const router = useRouter()
+    return { router }
   },
   components: {
     AtomUserButton,
@@ -40,11 +41,11 @@ export default {
           params: {
             animalStatusId: 1
           }
-        });
+        })
         this.$store.dispatch('updateLostPetPreviewItems', response.data.rows)
         await this.router.push({ name: 'Search' })
       } catch (error) {
-        console.error('Error fetching lost pets:', error);
+        console.error('Error fetching lost pets:', error)
       }
     },
     async handleFoundPetClick() {
@@ -53,15 +54,15 @@ export default {
           params: {
             animalStatusId: 2
           }
-        });
+        })
         this.$store.dispatch('updateLostPetPreviewItems', response.data.rows)
         await this.router.push({ name: 'Search' })
       } catch (error) {
-        console.error('Error fetching lost pets:', error);
+        console.error('Error fetching lost pets:', error)
       }
     }
   },
-};
+}
 </script>
 
 <style>

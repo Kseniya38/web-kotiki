@@ -16,14 +16,15 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 import { useRouter } from 'vue-router'
-import {mapActions, mapMutations} from "vuex";
+import {mapActions, mapMutations} from "vuex"
+
 export default {
   name: 'atom-main-icons-bar',
   setup() {
-    const router = useRouter();
-    return { router };
+    const router = useRouter()
+    return { router }
   },
   methods: {
     ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems']),
@@ -34,11 +35,11 @@ export default {
           params: {
             animalStatusId: 1
           }
-        });
+        })
         this.$emit('handleLostPetClick', response.data.rows)
         await this.router.replace({ name: 'Search' })
       } catch (error) {
-        console.error('Error fetching lost pets:', error);
+        console.error('Error fetching lost pets:', error)
       }
     },
     async handleFoundPetClick() {
@@ -47,11 +48,11 @@ export default {
           params: {
             animalStatusId: 2
           }
-        });
+        })
         this.$emit('handleFoundPetClick', response.data.rows)
         await this.router.replace({ name: 'Search' })
       } catch (error) {
-        console.error('Error fetching lost pets:', error);
+        console.error('Error fetching lost pets:', error)
       }
     }
   }

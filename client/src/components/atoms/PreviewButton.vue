@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     handleButtonClick() {
-      this.isButtonClicked = true;
+      this.isButtonClicked = true
     }
   }
 }

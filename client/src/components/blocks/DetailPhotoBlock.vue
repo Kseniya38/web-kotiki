@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 export default {
   name: "block-photo-viewer",
   props: {
@@ -25,7 +24,7 @@ export default {
     return {
       selectedIndex: 0,
       photosArr: [],
-    };
+    }
   },
   computed: {
     selectedPhoto() {
@@ -37,7 +36,7 @@ export default {
       this.selectedIndex = index
     },
   },
-};
+}
 </script>
 
 <style scoped>

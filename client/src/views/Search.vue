@@ -55,7 +55,7 @@ export default {
       this.updatePreviewItems(data)
     },
     handleSort(isAscending) {
-      this.sortPreviewItems(isAscending);
+      this.sortPreviewItems(isAscending)
     },
     async handleLostPetClick(previewItems) {
       this.updateLostPetPreviewItems(previewItems)
@@ -93,7 +93,7 @@ export default {
     async fetchFilterBarData() {
       try {
         const response = await axios.get('http://localhost:5000/api/referenceBooks/')
-        this.filterBarItems = response.data;
+        this.filterBarItems = response.data
       } catch (error) {
         console.error('Error fetching reference books:', error)
       }
@@ -102,7 +102,7 @@ export default {
   computed: {
     ...mapGetters(['getPreviewItems']),
     previewItems() {
-      return this.getPreviewItems;
+      return this.getPreviewItems
     }
   },
   mounted() {

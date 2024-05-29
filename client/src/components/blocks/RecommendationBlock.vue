@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import AtomH2 from "@/components/atoms/H2.vue";
-import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue";
-import AtomLink from "@/components/atoms/Link.vue";
+import AtomH2 from "@/components/atoms/H2.vue"
+import BlockNoticePreviewLine from "@/components/blocks/NoticePreviewLine.vue"
+import AtomLink from "@/components/atoms/Link.vue"
 
 export default {
   name: "block-recommendations",
@@ -23,7 +23,7 @@ export default {
     value_h2: String,
     user_status: Boolean
   },
-};
+}
 </script>
 
 <style>
