@@ -12,12 +12,12 @@ export default {
   data() {
     return {
       isVisited: false,
-    };
+    }
   },
   methods: {
     handleClick(event) {
       this.isVisited = true;
-      this.$emit('click', event);
+      this.$emit('click', event)
     },
   }
 }

@@ -7,20 +7,30 @@
     </div>
     <div class="main_icons_bar_container" >
       <div class="main_icons_bar">
-        <atom-main-icons-bar />
+        <atom-main-icons-bar @handleLostPetClick="handle_lost_pet_click" @handleFoundPetClick="handle_found_pet_click" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AtomMainIconsBar from "@/components/atoms/MainIconsBar.vue";
+import AtomMainIconsBar from "@/components/atoms/MainIconsBar.vue"
 
 export default {
   name: "block-main-banner",
   components: {
     AtomMainIconsBar,
   },
+  props: {
+    handle_lost_pet_click: {
+      type: Function,
+      required: true
+    },
+    handle_found_pet_click: {
+      type: Function,
+      required: true
+    }
+  }
 }
 </script>
 

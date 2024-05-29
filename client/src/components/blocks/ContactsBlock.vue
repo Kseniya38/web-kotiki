@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import AtomFieldName from "@/components/atoms/FieldName.vue";
-import AtomContactItem from "@/components/atoms/ContactButton.vue";
+import AtomFieldName from "@/components/atoms/FieldName.vue"
+import AtomContactItem from "@/components/atoms/ContactButton.vue"
 
 export default {
   name: "block-contacts",

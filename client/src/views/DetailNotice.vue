@@ -3,7 +3,7 @@
   <atom-h1 :value_h1="'Объявление'" />
   <div class="notice_detail_container">
     <div class="notice_detail_left_column">
-      <block-photo-viewer :photos="photos" />
+      <block-photo-viewer :photos="photos"/>
     </div>
     <div class="notice_detail_right_column">
       <block-contacts :contacts_list="contacts_list" :user_status="user_status"/>
@@ -12,50 +12,132 @@
   </div>
   <molecule-comment-infoblock :text_p="text_comment" :value_h3="'Комментарий'" />
   </div>
-  <block-recommendations :items_preview="previewItems" :value_h2="'Рекомендуемые объявления'" :url="'/search'" />
+  <block-recommendations :items_preview="latestPreviewItems" :value_h2="'Рекомендуемые объявления'" :url="'/search'" />
 </template>
 
 <script>
-import AtomH1 from "@/components/atoms/H1.vue";
-import BlockPhotoViewer from "@/components/blocks/DetailPhotoBlock.vue";
-import BlockContacts from "@/components/blocks/ContactsBlock.vue";
-import MoleculeInfoblock from "@/components/molecules/Infoblock.vue";
-import AtomLocationIcon from "@/components/atoms/LocationIcon.vue";
-import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue";
-import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue";
+import AtomH1 from "@/components/atoms/H1.vue"
+import BlockPhotoViewer from "@/components/blocks/DetailPhotoBlock.vue"
+import BlockContacts from "@/components/blocks/ContactsBlock.vue"
+import MoleculeInfoblock from "@/components/molecules/Infoblock.vue"
+import AtomLocationIcon from "@/components/atoms/LocationIcon.vue"
+import MoleculeCommentInfoblock from "@/components/molecules/CommentInfoblock.vue"
+import BlockRecommendations from "@/components/blocks/RecommendationBlock.vue"
+import axios from "axios"
 
 export default {
   components: {BlockRecommendations, MoleculeCommentInfoblock, MoleculeInfoblock, BlockContacts, BlockPhotoViewer, AtomH1},
   data() {
     return {
-      contacts_list: [{contact_type:"phone", contact_info: "89041234567"}, {contact_type: "link", contact_info: "vk.com/blablabla123"}],
-      photos: [require('@/assets/pictures/test1.png'), require('@/assets/pictures/test2.jpg'), require('@/assets/pictures/test.png'), require('@/assets/pictures/dog.svg')],
-      previewItems:  [
-        { animal_type: "cat", animal_status: "lost", notice_status: "active", imageSrc: require('@/assets/pictures/test2.jpg'), date: "29 сентября 2023", location: "р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный" },
-        { animal_type: "dog", animal_status: "found", notice_status: "active", imageSrc: require('@/assets/pictures/test1.png'), date: "17 января 2024", location: "г. Ангарск, мкр Университетский, ул. Рабочая", color: "серый" },
-        { animal_type: "cat", animal_status: "found", notice_status: "active", imageSrc: "", date: "8 марта 2024", location: "г. Иркутск, р-н Октябрьский, ул. Байкальская", color: "белый, рыжий, черный, полосатый" },
-        { animal_type: "dog", animal_status: "lost", notice_status: "active", imageSrc: "", date: "1 мая 2023", location: "мкр Университетский", color: "серый" }
-      ],
-      mandatoryCharacteristics: [
-        {name: "Дата находки/пропажи", value: "2020-09-18"},
-        {name: "Дата публикации", value: "2020-09-19"},
-        {name: AtomLocationIcon, value: "г. Ангарск, мкр Университетский, ул. Рабочая"},
-        {name: "Окрас", value: "белый, рыжий, черный, полосатый"},
-      ],
-      optionalCharacteristics: [
-        {name: "Кличка", value: "Капитан"},
-        {name: "Возраст", value: "Подросток (0,5 - 1 год)"},
-        {name: "Пол", value: "Мальчик"},
-        {name: "Порода", value: "Кличка"},
-        {name: "Состояние здоровья", value:"Здоров"},
-        {name: "Стерилизация", value: "нет"}
-      ],
-      text_comment: "Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имениLorem ipsum решила выйти в большой мир грамматики."
+      previewItems: [],
+      latestPreviewItems: [],
+      page: 1,
+      limit: 9,
+      totalCount: 0,
+      sterilizationId: null,
+      healthId: null,
+      genderId: null,
+      ageId: null,
+      colorId: null,
+      animalStatusId: null,
+      animalTypeId: null,
+      breedId: null,
+      address: null,
+      userId: null,
+      noticeStatusId: 1,
+      date_lowerRange: null,
+      date_upperRange: null,
+
+      contacts_list: [],
+      photos: [],
+      mandatoryCharacteristics: [],
+      optionalCharacteristics: [],
+      text_comment: null,
+      id: null,
+      route: this.$route,
     }
   },
   props: {
     user_status: Boolean
-  }
+  },
+  methods: {
+    async fetchRecommendationsData() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/animal', {
+          params: {
+            page: this.page,
+            limit: this.limit,
+            sterilizationId: this.sterilizationId,
+            healthId: this.healthId,
+            genderId: this.genderId,
+            ageId: this.ageId,
+            colorId: this.colorId,
+            animalStatusId: this.animalStatusId,
+            animalTypeId: this.animalTypeId,
+            breedId: this.breedId,
+            address: this.address,
+            userId: this.userId,
+            noticeStatusId: this.noticeStatusId,
+            date_lowerRange: this.date_lowerRange,
+            date_upperRange: this.date_upperRange
+          }
+        })
+        this.previewItems = response.data.rows
+        this.totalCount = response.data.count
+        this.setLatestPreviewItems();
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    },
+    setLatestPreviewItems() {
+      this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)).slice(0, 4)
+    },
+    async fetchNoticeDetails() {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/animal/${this.id}`)
+        this.contacts_list = [ { contact_type: "phone", contact_info: response.data.notices[0].user.telephone } || '', { contact_type: "link", contact_info: response.data.notices[0].user.social_media } || '']
+
+        if (response.data.photo.first) this.photos[0] = `http://localhost:5000/static/${response.data.photo.first}`
+        if (response.data.photo.second) this.photos[1] = `http://localhost:5000/static/${response.data.photo.second}`
+        if (response.data.photo.third) this.photos[2] = `http://localhost:5000/static/${response.data.photo.third}`
+        if (response.data.photo.fourth) this.photos[3] = `http://localhost:5000/static/${response.data.photo.fourth}`
+        if (this.photos.length === 0) this.photos[0] = 'http://localhost:5000/static/noPhoto.svg'
+
+        const eventDate = new Date(response.data.notices[0].event_date)
+        const formattedEventDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`
+        const createdAtDate = new Date(response.data.notices[0].createdAt)
+        const formattedAtDate = `${createdAtDate.getDate()}.${createdAtDate.getMonth() + 1}.${createdAtDate.getFullYear()}`
+
+        this.mandatoryCharacteristics = [
+          { name: "Дата находки/пропажи", value: formattedEventDate },
+          { name: "Дата публикации", value: formattedAtDate },
+          { name: AtomLocationIcon, value: `г. ${response.data.notices[0].address.city}, р-н. ${response.data.notices[0].address.district || "не указан"}, ул. ${response.data.notices[0].address.street || "не указана"}` },
+          { name: "Окрас", value: response.data.color.color_name },
+        ]
+        this.optionalCharacteristics = [
+          {name: "Кличка", value: response.data.nickname ? response.data.nickname : "Не указано"},
+          {name: "Возраст", value: response.data.age ? response.data.age.age : "Не указано"},
+          {name: "Пол", value: response.data.gender ? response.data.gender.gender : "Не указано"},
+          {name: "Порода", value: response.data.breed ? response.data.breed.animal_breed_name : "Не указано"},
+          {name: "Состояние здоровья", value: response.data.health ? response.data.health.health : "Не указано"},
+          {name: "Стерилизация", value: response.data.sterilization ? response.data.sterilization.sterilization : "Не указано"}
+        ]
+        this.text_comment = response.data.notices[0].comment || "Не указано"
+      } catch (error) {
+        console.error('Error fetching notice details:', error)
+      }
+    },
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.id = to.params.id
+    this.fetchNoticeDetails()
+    next()
+  },
+  mounted() {
+    this.id = this.route.params.id
+    this.fetchNoticeDetails()
+    this.fetchRecommendationsData()
+  },
 }
 </script>
 

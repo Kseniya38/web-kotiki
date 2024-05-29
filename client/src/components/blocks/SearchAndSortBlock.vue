@@ -1,21 +1,27 @@
 <template>
   <div class ="search_sort_block">
-    <molecule-search-line class="search_line_block"/>
-    <molecule-sort-button class="sort_btn_block"/>
+    <molecule-search-line class="search_line_block" @search="handleSearch"/>
+    <molecule-sort-button class="sort_btn_block" @sort="handleSort"/>
   </div>
 </template>
 
 <script>
-
-
-import MoleculeSortButton from "@/components/molecules/SortButton.vue";
-import MoleculeSearchLine from "@/components/molecules/SearchLine.vue";
+import MoleculeSortButton from "@/components/molecules/SortButton.vue"
+import MoleculeSearchLine from "@/components/molecules/SearchLine.vue"
+import { mapActions } from "vuex"
 
 export default {
   name: 'block-search-and-sort',
   components: {MoleculeSortButton, MoleculeSearchLine},
-  props: {
-  },
+  methods: {
+    ...mapActions(['updatePreviewItems', 'sortPreviewItems']),
+    handleSearch(data) {
+      this.$emit('search', data)
+    },
+    handleSort(isAscending) {
+      this.$emit('sort', isAscending)
+    }
+  }
 }
 </script>
 

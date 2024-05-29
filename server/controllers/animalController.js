@@ -1,10 +1,9 @@
 const uuid = require('uuid')
 const path = require('path')
 const fs = require('fs')
-const {Animal, Notice} = require('../models/models')
+const {Animal, Notice, Color, AnimalStatus, AnimalType, User, Age, Gender, Breed, Health, Sterilization} = require('../models/models')
 const ApiError = require('../error/ApiError')
-const {JSONB, DATE, Op} = require("sequelize");
-
+const {JSONB, DATE, Op, Sequelize} = require('sequelize');
 class AnimalController {
     async create(req, res, next) {
         try {
@@ -137,7 +136,39 @@ class AnimalController {
         const {id} = req.params
         const animal = await Animal.findOne({
             where:{id},
-            include: {model: Notice}}
+                include: [
+                    {
+                        model: Notice,
+                        include: {
+                            model: User
+                        }
+                    },
+                    {
+                        model: Color,
+                        attributes: ['color_name']
+                    },
+                    {
+                        model: Age,
+                        attributes: ['age']
+                    },
+                    {
+                        model: Gender,
+                        attributes: ['gender']
+                    },
+                    {
+                        model: Breed,
+                        attributes: ['animal_breed_name']
+                    },
+                    {
+                        model: Health,
+                        attributes: ['health']
+                    },
+                    {
+                        model: Sterilization,
+                        attributes: ['sterilization']
+                    }
+                ]
+        }
         )
         return res.json(animal)
     }
@@ -165,16 +196,25 @@ class AnimalController {
 
         let filterAnimal = []
         let filterNotice = {noticeStatusId: 1}
-        let adr = {}
+        //let adr = {}
         let animals
 
-        if (address){
+        /*if (address){
             address = JSON.parse(address)
             if (address.hasOwnProperty('city')){adr.city = address.city}
             if (address.hasOwnProperty('district')){adr.district = address.district}
             if (address.hasOwnProperty('street')){adr.street = address.street}
             if (address.hasOwnProperty('house')){adr.house = address.house}
             filterNotice.address = adr
+        }*/
+
+        if (address) {
+            filterNotice.address = {
+                [Op.and]: [ Sequelize.where(
+                    Sequelize.fn('jsonb_extract_path_text', Sequelize.col('address'), 'city'),
+                    { [Op.like]: `%${address}%` }
+                )]
+            }
         }
 
         if (date_lowerRange && date_upperRange){
@@ -190,122 +230,200 @@ class AnimalController {
         }
 
         if (sterilizationId){
-            sterilizationId = JSON.parse(sterilizationId)
-            let sterilizationArray = []
-            for (let sterilizationIdElement of sterilizationId.numbers) {
-                let sterilization = {sterilizationId: sterilizationIdElement}
-                sterilizationArray.push(sterilization)
+            try {
+                sterilizationId = JSON.parse(sterilizationId)
+                if (Array.isArray(sterilizationId)) {
+                    let sterilizationArray = sterilizationId.map(id => ({sterilizationId: id}))
+                    filterAnimal.push({[Op.or]: sterilizationArray})
+                } else {
+                    filterAnimal.push({sterilizationId: sterilizationId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке sterilizationId:', error)
+                filterAnimal.push({ sterilizationId: sterilizationId })
             }
-            filterAnimal.push({[Op.or]: sterilizationArray})
         }
 
         if (healthId){
-            healthId = JSON.parse(healthId)
-            let healthArray = []
-            for (let healthIdElement of healthId.numbers) {
-                let health = {healthId: healthIdElement}
-                healthArray.push(health)
+            try {
+                healthId = JSON.parse(healthId)
+                if (Array.isArray(healthId)) {
+                    let healthArray = healthId.map(id => ({healthId: id}))
+                    filterAnimal.push({[Op.or]: healthArray})
+                } else {
+                    filterAnimal.push({healthId: healthId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке healthId:', error)
+                filterAnimal.push({ healthId: healthId })
             }
-            filterAnimal.push({[Op.or]: healthArray})
         }
 
         if (genderId){
-            genderId = JSON.parse(genderId)
-            let genderArray = []
-            for (let genderIdElement of genderId.numbers) {
-                let gender = {genderId: genderIdElement}
-                genderArray.push(gender)
+            try {
+                genderId = JSON.parse(genderId)
+                if (Array.isArray(genderId)) {
+                    let genderArray = genderId.map(id => ({genderId: id}))
+                    filterAnimal.push({[Op.or]: genderArray})
+                } else {
+                    filterAnimal.push({genderId: genderId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке genderId:', error)
+                filterAnimal.push({ genderId: genderId })
             }
-            filterAnimal.push({[Op.or]: genderArray})
         }
 
         if (ageId){
-            ageId = JSON.parse(ageId)
-            let ageArray = []
-            for (let ageIdElement of ageId.numbers) {
-                let age = {ageId: ageIdElement}
-                ageArray.push(age)
+            try {
+                ageId = JSON.parse(ageId)
+                if (Array.isArray(ageId)) {
+                    let ageArray = ageId.map(id => ({ageId: id}))
+                    filterAnimal.push({[Op.or]: ageArray})
+                } else {
+                    filterAnimal.push({ageId: ageId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке ageId:', error)
+                filterAnimal.push({ ageId: ageId })
             }
-            filterAnimal.push({[Op.or]: ageArray})
         }
 
         if (colorId){
-            colorId = JSON.parse(colorId)
-            let colorArray = []
-            for (let colorIdElement of colorId.numbers) {
-                let color = {colorId: colorIdElement}
-                colorArray.push(color)
+            try {
+                colorId = JSON.parse(colorId)
+                if (Array.isArray(colorId)) {
+                   let colorArray = colorId.map(id => ({colorId: id}))
+                    filterAnimal.push({[Op.or]: colorArray})
+                }    else {
+                    filterAnimal.push({colorId: colorId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке colorId:', error)
+                filterAnimal.push({ colorId: colorId })
             }
-            filterAnimal.push({[Op.or]: colorArray})
         }
 
-        if (animalStatusId){
-            animalStatusId = JSON.parse(animalStatusId)
-            let statusArray = []
-            for (let animalStatusIdElement of animalStatusId.numbers) {
-                let status = {animalStatusId: animalStatusIdElement}
-                statusArray.push(status)
+        if (animalStatusId) {
+            try {
+                animalStatusId = JSON.parse(animalStatusId)
+                if (Array.isArray(animalStatusId)) {
+                    let animalStatusArray = animalStatusId.map(id => ({ animalStatusId: id }))
+                    filterAnimal.push({ [Op.or]: animalStatusArray })
+                } else {
+                    filterAnimal.push({ animalStatusId: animalStatusId })
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке animalStatusId:', error)
+                filterAnimal.push({ animalStatusId: animalStatusId })
             }
-            filterAnimal.push({[Op.or]: statusArray})
         }
 
         if (animalTypeId){
-            animalTypeId = JSON.parse(animalTypeId)
-            let typeArray = []
-            for (let animalTypeIdElement of animalTypeId.numbers) {
-                let type = {animalTypeId: animalTypeIdElement}
-                typeArray.push(type)
+            try {
+                animalTypeId = JSON.parse(animalTypeId)
+                if (Array.isArray(animalTypeId)) {
+                    let animalTypeArray = animalTypeId.map(id => ({animalTypeId: id}))
+                    filterAnimal.push({[Op.or]: animalTypeArray})
+                }    else {
+                    filterAnimal.push({animalTypeId: animalTypeId})
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке animalTypeId:', error)
+                filterAnimal.push({ animalTypeId: animalTypeId })
             }
-            filterAnimal.push({[Op.or]: typeArray})
         }
 
         if (breedId){
-            breedId = JSON.parse(breedId)
-            let breedArray = []
-            for (let breedIdElement of breedId.numbers) {
-                let breed = {breedId: breedIdElement}
-                breedArray.push(breed)
+            try {
+                breedId = JSON.parse(breedId)
+                if (Array.isArray(breedId)) {
+                    let breedArray = breedId.map(id => ({ breedId: id }))
+                    filterAnimal.push({ [Op.or]: breedArray })
+                } else {
+                    filterAnimal.push({ breedId: breedId })
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке breedId:', error)
+                filterAnimal.push({ breedId: breedId })
             }
-            filterAnimal.push({[Op.or]: breedArray})
         }
-
-        console.log(colorId)
-        console.log(filterAnimal)
-        console.log(filterNotice)
 
         if (userId){
             animals = await Animal.findAll({
                 where: {[Op.and]: filterAnimal},
-                attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                include: {
-                    model: Notice,
-                    where: {userId, noticeStatusId},
-                    attributes: ['event_date', 'address']
-                }}
+                attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                include: [
+                    {
+                        model: Notice,
+                        where: {userId, noticeStatusId: 1},
+                        attributes: ['event_date', 'address', 'createdAt', 'noticeStatusId']
+                    },
+                    {
+                        model: Color,
+                        attributes: ['color_name']
+                    },
+                    {
+                        model: AnimalStatus,
+                        attributes: ['animal_status_name']
+                    },
+                    {
+                        model: AnimalType,
+                        attributes: ['animal_type_name']
+                    }
+                ]}
             )
         }
         else {
             if (filterAnimal.length === 0){
                 animals = await Animal.findAndCountAll({
                     limit, offset,
-                    attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                    include: {
-                        model: Notice,
-                        where: filterNotice,
-                        attributes: ['event_date', 'address']
-                    }}
+                    attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                    include: [
+                        {
+                            model: Notice,
+                            where: filterNotice,
+                            attributes: ['event_date', 'address', 'createdAt', 'noticeStatusId']
+                        },
+                        {
+                            model: Color,
+                            attributes: ['color_name']
+                        },
+                        {
+                            model: AnimalStatus,
+                            attributes: ['animal_status_name']
+                        },
+                        {
+                            model: AnimalType,
+                            attributes: ['animal_type_name']
+                        }
+                    ]}
                 )
             }
             else if (filterAnimal.length !== 0){
                 animals = await Animal.findAndCountAll({
                     where: {[Op.and]: filterAnimal},
                     limit, offset,
-                    attributes: ['photo', 'colorId', 'animalStatusId', 'animalTypeId'],
-                    include: {
-                        model: Notice,
-                        where: filterNotice,
-                        attributes: ['event_date', 'address']
-                    }}
+                    attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
+                    include: [
+                        {
+                            model: Notice,
+                            where: filterNotice,
+                            attributes: ['event_date', 'address', 'createdAt', 'noticeStatusId']
+                        },
+                        {
+                            model: Color,
+                            attributes: ['color_name']
+                        },
+                        {
+                            model: AnimalStatus,
+                            attributes: ['animal_status_name']
+                        },
+                        {
+                            model: AnimalType,
+                            attributes: ['animal_type_name']
+                        }
+                    ]}
                 )
             }
         }

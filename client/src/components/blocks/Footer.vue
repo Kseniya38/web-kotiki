@@ -2,8 +2,8 @@
   <div class="footer_block d_flex">
     <div class="footer d_flex">
       <atom-logo class="logo"/>
-      <atom-link class="footer_link" :url="politic_url" :text_link='"Политика конфиденциальности"'/>
-      <atom-link class="footer_link" :url="mail_url" :text_link='"Напишите нам: email@gmail.com"'/>
+      <atom-link class="footer_link" :url="'/test'" :text_link='"Политика конфиденциальности"'/>
+      <atom-link class="footer_link" :url="'https://www.pochta.ru/'" :text_link='"Напишите нам: email@gmail.com"'/>
       </div>
     </div>
 
@@ -11,8 +11,8 @@
 
 <script>
 
-import AtomLogo from "@/components/atoms/Logo.vue";
-import AtomLink from "@/components/atoms/Link.vue";
+import AtomLogo from "@/components/atoms/Logo.vue"
+import AtomLink from "@/components/atoms/Link.vue"
 
 export default {
   name: "block-footer",
@@ -20,16 +20,12 @@ export default {
     AtomLink,
     AtomLogo,
   },
-  props: {
-    politic_url:String,
-    mail_url: String,
-  },
   methods: {
     handleButtonClick() {
       // Логика обработки нажатия кнопки
     }
   },
-};
+}
 </script>
 
 <style>

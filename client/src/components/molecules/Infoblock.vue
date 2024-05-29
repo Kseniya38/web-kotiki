@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AtomCharacteristic from "@/components/atoms/Characteristic.vue";
+import AtomCharacteristic from "@/components/atoms/Characteristic.vue"
 
 export default {
   name: 'molecule-infoblock',
@@ -24,7 +24,7 @@ export default {
     },
     optional_characteristics: Array,
   },
-};
+}
 </script>
 
 <style>

@@ -3,8 +3,8 @@
   <div class="header d_flex">
     <atom-logo class="logo"/>
     <div class="d_flex btn_bar_header">
-    <atom-button class="pets_button" @click="$router.push('/search')">ПОТЕРЯННЫЕ ПИТОМЦЫ</atom-button>
-    <atom-button class="pets_button" @click="$router.push('/search')">НАЙДЕННЫЕ ПИТОМЦЫ</atom-button>
+    <atom-button class="pets_button" @click="handleLostPetClick">ПОТЕРЯННЫЕ ПИТОМЦЫ</atom-button>
+    <atom-button class="pets_button" @click="handleFoundPetClick">НАЙДЕННЫЕ ПИТОМЦЫ</atom-button>
     <atom-button class="create_notice_button">СОЗДАТЬ ОБЪЯВЛЕНИЕ</atom-button>
     <atom-user-button :user_status="user_status"/>
     </div>
@@ -13,12 +13,18 @@
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/Button.vue";
-import AtomLogo from "@/components/atoms/Logo.vue";
-import AtomUserButton from "@/components/atoms/UserButton.vue";
+import AtomButton from "@/components/atoms/Button.vue"
+import AtomLogo from "@/components/atoms/Logo.vue"
+import AtomUserButton from "@/components/atoms/UserButton.vue"
+import axios from "axios"
+import { useRouter } from 'vue-router'
 
 export default {
   name: "block-header",
+  setup() {
+    const router = useRouter()
+    return { router }
+  },
   components: {
     AtomUserButton,
     AtomLogo,
@@ -26,13 +32,37 @@ export default {
   },
   props: {
     user_status:Boolean,
+
   },
   methods: {
-    handleButtonClick() {
-      // Логика обработки нажатия кнопки
+    async handleLostPetClick() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/animal', {
+          params: {
+            animalStatusId: 1
+          }
+        })
+        this.$store.dispatch('updateLostPetPreviewItems', response.data.rows)
+        await this.router.push({ name: 'Search' })
+      } catch (error) {
+        console.error('Error fetching lost pets:', error)
+      }
+    },
+    async handleFoundPetClick() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/animal', {
+          params: {
+            animalStatusId: 2
+          }
+        })
+        this.$store.dispatch('updateLostPetPreviewItems', response.data.rows)
+        await this.router.push({ name: 'Search' })
+      } catch (error) {
+        console.error('Error fetching lost pets:', error)
+      }
     }
   },
-};
+}
 </script>
 
 <style>

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AtomFieldName from "@/components/atoms/FieldName.vue";
-import AtomSelectInput from "@/components/atoms/SelectInput.vue";
+import AtomFieldName from "@/components/atoms/FieldName.vue"
+import AtomSelectInput from "@/components/atoms/SelectInput.vue"
 export default {
   name: 'molecule-title-select',
   components: {AtomSelectInput, AtomFieldName},

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="checkbox" id="a_checkbox"/>
+    <input type="checkbox" id="a_checkbox" :checked="isChecked" @change="handleCheckboxChange"/>
     <label for="a_checkbox">{{label_checkbox}}</label>
   </div>
 </template>
@@ -9,7 +9,17 @@
 export default {
   name: 'atom-checkbox',
   props: {
-    label_checkbox: String
+    label_checkbox: String,
+    isChecked: {
+      type: Boolean,
+      default: false
+    }
+  },
+  emits: ['update:isChecked'],
+  methods: {
+    handleCheckboxChange(event) {
+      this.$emit('update:isChecked', event.target.checked)
+    }
   }
 }
 </script>

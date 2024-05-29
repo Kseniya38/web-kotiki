@@ -6,9 +6,8 @@
 </template>
 
 <script>
-
-import AtomEditButton from "@/components/atoms/EditButton.vue";
-import AtomDelButton from "@/components/atoms/DeleteButton.vue";
+import AtomEditButton from "@/components/atoms/EditButton.vue"
+import AtomDelButton from "@/components/atoms/DeleteButton.vue"
 
 export default {
   name: 'molecule-edit-delete-btn',

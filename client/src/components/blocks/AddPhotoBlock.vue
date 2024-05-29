@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import AtomButton from "@/components/atoms/Button.vue";
-import AtomP from "@/components/atoms/P.vue";
+import AtomButton from "@/components/atoms/Button.vue"
+import AtomP from "@/components/atoms/P.vue"
 
 export default {
   name: "block-add-photo",

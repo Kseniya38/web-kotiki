@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <block-header :user_status="user_status"/>
+    <block-header :user_status="user_status" :handle_lost_pet_click="handleLostPetClick" :handle_found_pet_click="handleFoundPetClick"/>
     <router-view :user_status="user_status"></router-view>
     <block-footer/>
   </div>
@@ -10,8 +10,11 @@
 import Main from "@/views/Main.vue";
 import BlockHeader from "@/components/blocks/Header.vue";
 import BlockFooter from "@/components/blocks/Footer.vue";
+import BlockMainBanner from "@/components/blocks/MainBanner.vue";
+import {mapActions} from "vuex";
 export default {
   components: {
+    BlockMainBanner,
     BlockFooter,
     BlockHeader,
     Main
@@ -20,6 +23,15 @@ export default {
     return {
       user_status: true
     }
+  },
+  methods: {
+    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems']),
+    handleLostPetClick(previewItems) {
+      this.updateLostPetPreviewItems(previewItems)
+    },
+    handleFoundPetClick(previewItems) {
+      this.updateFoundPetPreviewItems(previewItems)
+    },
   }
 }
 </script>

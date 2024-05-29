@@ -1,12 +1,22 @@
 <template>
-  <button class="btn">
+  <button class="btn" :class="{ 'active': isButtonClicked }" @click="handleButtonClick">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'atom-button'
+  name: 'atom-button',
+  data() {
+    return {
+      isButtonClicked: false
+    }
+  },
+  methods: {
+    handleButtonClick() {
+      this.isButtonClicked = true
+    }
+  }
 }
 </script>
 
