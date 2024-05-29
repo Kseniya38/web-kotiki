@@ -2,7 +2,7 @@
   <div>
     <block-main-banner :handle_lost_pet_click="handleLostPetClick" :handle_found_pet_click="handleFoundPetClick"/>
     <div class="search_line_main_container">
-      <molecule-search-line class="search_line_main"/>
+      <molecule-search-line class="search_line_main" @search="handleSearch" :router="$router" />
     </div >
     <div class="new_notices_main_container">
     <block-recommendations class="new_notices_main" :items_preview="latestPreviewItems" :value_h2="'Новые объявления'" :url="'/search'"/>
@@ -45,7 +45,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems']),
+    ...mapActions(['updateLostPetPreviewItems', 'updateFoundPetPreviewItems', 'updatePreviewItems']),
+    handleSearch(data) {
+      this.updatePreviewItems(data);
+    },
     handleLostPetClick(previewItems) {
       this.updateLostPetPreviewItems(previewItems)
     },

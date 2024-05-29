@@ -14,6 +14,11 @@ import { mapActions } from "vuex";
 export default {
   name: 'molecule-search-line',
   components: {AtomButton, AtomInput},
+  props: {
+    router: {
+      type: Object,
+    }
+  },
   data() {
     return {
       inputValue: ''
@@ -32,6 +37,7 @@ export default {
           }
         });
         this.$emit('search', response.data.rows);
+        await this.router.replace({ name: 'Search' })
       } catch (error) {
         console.error('Error fetching data:', error);
       }
