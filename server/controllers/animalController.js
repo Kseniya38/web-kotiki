@@ -42,7 +42,7 @@ class AnimalController {
                     }
                 }
             }
-            else if (animalTypeId === 3) {photo.first = "cat.jpg"}
+            else if (animalTypeId === 1) {photo.first = "cat.jpg"}
             else photo.first = "dog.jpg"
 
             const animal = await Animal.create({nickname,
@@ -110,8 +110,8 @@ class AnimalController {
                     }
                 }
             }
-            if (animalTypeId === "3") {newPhoto.first = "cat.jpg"}
-            if (animalTypeId === "5"){newPhoto.first = "dog.jpg"}
+            if (animalTypeId === "1") {newPhoto.first = "cat.jpg"}
+            if (animalTypeId === "2"){newPhoto.first = "dog.jpg"}
 
             await Animal.update({
                     nickname,

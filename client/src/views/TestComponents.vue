@@ -16,9 +16,9 @@
     <atom-link :url="'https://maps.app.goo.gl/tMDuWY99gNjRCzKa9'" :text_link="'Ссылка в Сибирь'"/>
 
     <h4>Иконки типа и статуса животного</h4>
-    <atom-animal-status-icon :animal_status=1 :animal_type=3 />
-    <atom-animal-status-icon :animal_status=2 :animal_type=5 />
-    <atom-animal-status-icon :animal_status=2 :animal_type=3 />
+    <atom-animal-status-icon :animal_status=1 :animal_type=1 />
+    <atom-animal-status-icon :animal_status=2 :animal_type=2 />
+    <atom-animal-status-icon :animal_status=2 :animal_type=1 />
 
     <h4>Иконки для Главной страницы</h4>
     <atom-main-icons-bar/>
@@ -27,8 +27,8 @@
     <atom-description-preview :date_preview="'2020-09-18'" :location_preview="location" :color_preview="color"/>
 
     <h4>Контакты для Детальной объявления</h4>
-    <atom-contact-item :user_status="user_status" :contact_type="'phone'" :contact_info="'89041234567'"/>
-    <atom-contact-item :user_status="user_status" :contact_type="'link'" :contact_info="'vk.com/blablabla123blablabla123blablabla123'"/>
+    <atom-contact-item :user_status="true" :contact_type="'phone'" :contact_info="'89041234567'"/>
+    <atom-contact-item :user_status="true" :contact_type="'link'" :contact_info="'vk.com/blablabla123blablabla123blablabla123'"/>
 
     <h4>Характеристики животного для Детальной объявления</h4>
     <atom-characteristic :name_characteristic="label" :value_characteristic="date"/>
@@ -69,9 +69,9 @@
     <atom-h3 :value_h3="'Молекулы для Главной, Поиска и Детальной объявления'"/>
 
     <h4>Превью объявления</h4>
-    <molecule-notice-preview :animal_status=1 :animal_type=3 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
-    <molecule-notice-preview :animal_status=2 :animal_type=3 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
-    <molecule-notice-preview :animal_status=2 :animal_type=5 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :animal_status=1 :animal_type=1 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :animal_status=2 :animal_type=1 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :animal_status=2 :animal_type=2 :notice_status=1 :date_preview="date" :location_preview="location" :color_preview="color"/>
 
     <h4>Поиск и сортировка</h4>
     <molecule-search-line/>
@@ -85,8 +85,8 @@
 
     <atom-h3 :value_h3="'Молекулы для Личного кабинета, Добавления и Редактирования объявления'"/>
 
-    <molecule-notice-preview :user_status=true :animal_status=2 :animal_type=3 :notice_status=1 :image_src_preview="''" :date_preview="date" :location_preview="location" :color_preview="color"/>
-    <molecule-notice-preview :user_status=true :animal_status=2 :animal_type=5 :notice_status=2 :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :user_status=true :animal_status=2 :animal_type=1 :notice_status=1 :image_src_preview="''" :date_preview="date" :location_preview="location" :color_preview="color"/>
+    <molecule-notice-preview :user_status=true :animal_status=2 :animal_type=2 :notice_status=2 :date_preview="date" :location_preview="location" :color_preview="color"/>
     <molecule-edit-delete-btn/>
     <molecule-comment :textarea_placeholder="placeholderTest" :value_h3="comment"/>
     <molecule-many-checkboxes :name_field_label="name_field_label" :list_drop_down="list"/>
