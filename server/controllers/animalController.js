@@ -189,10 +189,10 @@ class AnimalController {
             date_lowerRange,
             date_upperRange
         } = req.query
-        let {page, limit} = req.query
+        /*let {page, limit} = req.query
         page = page || 1
         limit = limit || 9
-        let offset = page * limit - limit
+        let offset = page * limit - limit*/
 
         let filterAnimal = []
         let filterNotice = {noticeStatusId: 1}
@@ -376,8 +376,8 @@ class AnimalController {
         }
         else {
             if (filterAnimal.length === 0){
-                animals = await Animal.findAndCountAll({
-                    limit, offset,
+                animals = await Animal.findAll({
+                    //limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: [
                         {
@@ -401,9 +401,9 @@ class AnimalController {
                 )
             }
             else if (filterAnimal.length !== 0){
-                animals = await Animal.findAndCountAll({
+                animals = await Animal.findAll({
                     where: {[Op.and]: filterAnimal},
-                    limit, offset,
+                    //limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: [
                         {
