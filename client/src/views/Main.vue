@@ -27,7 +27,7 @@ export default {
       previewItems: [],
       latestPreviewItems: [],
       page: 1,
-      limit: 9,
+      limit: 20,
       totalCount: 0,
       sterilizationId: null,
       healthId: null,
@@ -59,8 +59,8 @@ export default {
       try {
         const response = await axios.get('http://localhost:5000/api/animal', {
           params: {
-            page: this.page,
-            limit: this.limit,
+            //page: this.page,
+            //limit: this.limit,
             sterilizationId: this.sterilizationId,
             healthId: this.healthId,
             genderId: this.genderId,
@@ -84,6 +84,7 @@ export default {
       }
     },
     setLatestPreviewItems() {
+      console.log(this.previewItems)
       this.latestPreviewItems = this.previewItems.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)).slice(0, 4)
     },
   },

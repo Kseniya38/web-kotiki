@@ -38,13 +38,13 @@ import { mapActions } from 'vuex'
 
 const date = ref()
 const InterpretationArray = [
-  { name: 'animalTypeId', list: [ { id: 4 }, { id: 5 }, { id: 3 } ]},
-  { name: 'breedId', list: [ { id: 1 }, { id: 2 }, { id: 3 } ]},
+  { name: 'animalTypeId', list: [ { id: 1 }, { id: 2 } ]},
+  { name: 'breedId', list: [ { id: 1 }, { id: 2 } ]},
   { name: 'animalStatusId', list: [ { id: 1 }, { id: 2 } ]},
-  { name: 'colorId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 } ]},
+  { name: 'colorId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 } ]},
   { name: 'ageId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]},
   { name: 'genderId', list: [ { id: 1 }, { id: 2 } ]},
-  { name: 'healthId', list: [ { id: 1 }, { id: 2 }, { id: 3 } ]},
+  { name: 'healthId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 } ]},
   { name: 'sterilizationId', list: [ { id: 1 }, { id: 2 } ]}
 ]
 
@@ -89,10 +89,9 @@ export default {
   methods: {
     ...mapActions(['updatePreviewItems']),
     async handleButtonClick() {
-      console.log('Выбранные параметры:', this.checkboxStates)
       try {
         const response = await this.fetchFilteredItems()
-        await this.updatePreviewItems(response.data.rows)
+        await this.updatePreviewItems(response.data.rows.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)))
       } catch (error) {
         console.error('Error fetching filtered items:', error)
       }
@@ -101,12 +100,20 @@ export default {
       this.checkboxStates[index] = checkboxStates
     },
     async fetchFilteredItems() {
+      let date_lowerRange = null
+      let date_upperRange = null
+
+        if (this.date && this.date.length === 2) {
+          date_lowerRange = new Date(this.date[0].getFullYear(), this.date[0].getMonth(), this.date[0].getDate(), 0, 0, 0)
+          date_upperRange = new Date(this.date[1].getFullYear(), this.date[1].getMonth(), this.date[1].getDate(), 23, 59, 59)
+        }
+
       const filters = this.formatFilters()
       const params = {
-        page: 1,
-        limit: 9,
-        date_lowerRange: this.date[0].toISOString(),
-        date_upperRange: this.date[1].toISOString(),
+        //page: 1,
+        //limit: 20,
+        date_lowerRange: date_lowerRange?.toISOString(),
+        date_upperRange: date_upperRange?.toISOString(),
         ...filters
       }
       const response = await axios.get('http://localhost:5000/api/animal/', {params})
@@ -129,7 +136,6 @@ export default {
           }
         }
       })
-      console.log(filters)
       return filters
     }
 

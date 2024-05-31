@@ -129,7 +129,7 @@
     <block-notice-preview-line :items_preview="latestPreviewItems"/>
 
     <h4>Блок контактов для Детальной объявления</h4>
-    <block-contacts :contacts_list="contacts_list"/>
+    <block-contacts :user_status="true" :contacts_list="contacts_list"/>
 
     <h4>Блок фотографий для Детальной объявления</h4>
     <block-photo-viewer :photos="photos"/>
@@ -271,7 +271,7 @@ export default {
       previewItems: [],
       latestPreviewItems: [],
       page: 1,
-      limit: 9,
+      limit: 20,
       totalCount: 0,
       sterilizationId: null,
       healthId: null,
@@ -352,8 +352,8 @@ export default {
       try {
         const response = await axios.get('http://localhost:5000/api/animal', {
           params: {
-            page: this.page,
-            limit: this.limit,
+            //page: this.page,
+            //limit: this.limit,
             sterilizationId: this.sterilizationId,
             healthId: this.healthId,
             genderId: this.genderId,
@@ -381,7 +381,7 @@ export default {
     },
     async fetchNoticeDetails() {
       try {
-        const response = await axios.get(`http://localhost:5000/api/animal/37`)
+        const response = await axios.get(`http://localhost:5000/api/animal/15`)
         this.contacts_list = [ { contact_type: "phone", contact_info: response.data.notices[0].user.telephone } || '', { contact_type: "link", contact_info: response.data.notices[0].user.social_media } || '']
 
         if (response.data.photo.first) this.photos[0] = `http://localhost:5000/static/${response.data.photo.first}`

@@ -189,10 +189,10 @@ class AnimalController {
             date_lowerRange,
             date_upperRange
         } = req.query
-        /*let {page, limit} = req.query
+        let {page, limit} = req.query
         page = page || 1
-        limit = limit || 9
-        let offset = page * limit - limit*/
+        limit = limit || 20
+        let offset = page * limit - limit
 
         let filterAnimal = []
         let filterNotice = {noticeStatusId: 1}
@@ -220,7 +220,7 @@ class AnimalController {
         if (date_lowerRange && date_upperRange){
             const lowerRange = new Date(date_lowerRange)
             const upperRange = new Date(date_upperRange)
-            filterNotice.event_date = {[Op.between]: [lowerRange, upperRange]}
+            filterNotice.event_date = {[Op.gte]: lowerRange, [Op.lte]: upperRange}
         } else if (date_lowerRange && date_upperRange === undefined){
             const lowerRange = new Date(date_lowerRange)
             filterNotice.event_date = {[Op.gte]: lowerRange}
@@ -376,8 +376,8 @@ class AnimalController {
         }
         else {
             if (filterAnimal.length === 0){
-                animals = await Animal.findAll({
-                    //limit, offset,
+                animals = await Animal.findAndCountAll({
+                    limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: [
                         {
@@ -401,9 +401,9 @@ class AnimalController {
                 )
             }
             else if (filterAnimal.length !== 0){
-                animals = await Animal.findAll({
+                animals = await Animal.findAndCountAll({
                     where: {[Op.and]: filterAnimal},
-                    //limit, offset,
+                    limit, offset,
                     attributes: ['id', 'photo', 'colorId', 'animalStatusId', 'animalTypeId'],
                     include: [
                         {

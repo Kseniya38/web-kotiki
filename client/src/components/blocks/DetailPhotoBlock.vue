@@ -2,7 +2,7 @@
   <div class="photo_viewer">
     <div class="preview_photos">
       <div class="preview_photo" v-for="(photo, index) in photos" :key="index" @click="selectPhoto(index)" :class="{ 'active': selectedIndex === index }">
-        <img :src="photo" :alt="`Фото ${index + 1}`" />
+        <img :src="photo" :alt="`Фото`" />
       </div>
     </div>
     <div class="main_photo">
