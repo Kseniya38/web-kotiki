@@ -31,8 +31,8 @@ export default {
     return {
       previewItems: [],
       latestPreviewItems: [],
-      page: 1,
-      limit: 9,
+      //page: 1,
+      //limit: 20,
       totalCount: 0,
       sterilizationId: null,
       healthId: null,
@@ -96,7 +96,7 @@ export default {
       try {
         const response = await axios.get(`http://localhost:5000/api/animal/${this.id}`)
         this.contacts_list = [ { contact_type: "phone", contact_info: response.data.notices[0].user.telephone } || '', { contact_type: "link", contact_info: response.data.notices[0].user.social_media } || '']
-
+        this.photos = []
         if (response.data.photo.first) this.photos[0] = `http://localhost:5000/static/${response.data.photo.first}`
         if (response.data.photo.second) this.photos[1] = `http://localhost:5000/static/${response.data.photo.second}`
         if (response.data.photo.third) this.photos[2] = `http://localhost:5000/static/${response.data.photo.third}`

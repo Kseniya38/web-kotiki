@@ -31,8 +31,8 @@ export default {
     return {
       filterBarItems: [],
       previewItems: [],
-      page: 1,
-      limit: 9,
+      //page: 1,
+      //limit: 20,
       totalCount: 0,
       sterilizationId: null,
       healthId: null,
@@ -84,7 +84,7 @@ export default {
             date_upperRange: this.date_upperRange
           }
         })
-        this.updatePreviewItems(response.data.rows)
+        this.updatePreviewItems(response.data.rows.sort((a, b) => new Date(b.notices[0].createdAt) - new Date(a.notices[0].createdAt)))
         this.totalCount = response.data.count
       } catch (error) {
         console.error('Error fetching data:', error)

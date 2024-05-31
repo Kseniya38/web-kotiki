@@ -40,9 +40,9 @@ export default {
       if (this.image_src_preview) {
         return this.image_src_preview
       } else {
-        if (this.animal_type === 3) {
+        if (this.animal_type === 1) {
           return require('@/assets/pictures/cat.svg')
-        } else if (this.animal_type === 5) {
+        } else if (this.animal_type === 2) {
           return require('@/assets/pictures/dog.svg')
         }
       }

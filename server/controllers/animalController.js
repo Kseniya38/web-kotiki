@@ -42,7 +42,7 @@ class AnimalController {
                     }
                 }
             }
-            else if (animalTypeId === 3) {photo.first = "cat.jpg"}
+            else if (animalTypeId === 1) {photo.first = "cat.jpg"}
             else photo.first = "dog.jpg"
 
             const animal = await Animal.create({nickname,
@@ -110,8 +110,8 @@ class AnimalController {
                     }
                 }
             }
-            if (animalTypeId === "3") {newPhoto.first = "cat.jpg"}
-            if (animalTypeId === "5"){newPhoto.first = "dog.jpg"}
+            if (animalTypeId === "1") {newPhoto.first = "cat.jpg"}
+            if (animalTypeId === "2"){newPhoto.first = "dog.jpg"}
 
             await Animal.update({
                     nickname,
@@ -191,7 +191,7 @@ class AnimalController {
         } = req.query
         let {page, limit} = req.query
         page = page || 1
-        limit = limit || 9
+        limit = limit || 20
         let offset = page * limit - limit
 
         let filterAnimal = []
@@ -220,7 +220,7 @@ class AnimalController {
         if (date_lowerRange && date_upperRange){
             const lowerRange = new Date(date_lowerRange)
             const upperRange = new Date(date_upperRange)
-            filterNotice.event_date = {[Op.between]: [lowerRange, upperRange]}
+            filterNotice.event_date = {[Op.gte]: lowerRange, [Op.lte]: upperRange}
         } else if (date_lowerRange && date_upperRange === undefined){
             const lowerRange = new Date(date_lowerRange)
             filterNotice.event_date = {[Op.gte]: lowerRange}
