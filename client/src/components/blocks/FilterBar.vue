@@ -41,7 +41,7 @@ const InterpretationArray = [
   { name: 'animalTypeId', list: [ { id: 1 }, { id: 2 } ]},
   { name: 'breedId', list: [ { id: 1 }, { id: 2 } ]},
   { name: 'animalStatusId', list: [ { id: 1 }, { id: 2 } ]},
-  { name: 'colorId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 } ]},
+  { name: 'colorId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 9 }, { id: 7 }, { id: 8 }, { id: 6 } ]},
   { name: 'ageId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 } ]},
   { name: 'genderId', list: [ { id: 1 }, { id: 2 } ]},
   { name: 'healthId', list: [ { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 } ]},

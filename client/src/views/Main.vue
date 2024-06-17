@@ -57,7 +57,7 @@ export default {
     },
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/animal', {
+        const response = await axios.get('https://kseniya38.github.io/web-kotiki/api/animal', {
           params: {
             //page: this.page,
             //limit: this.limit,

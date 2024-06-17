@@ -342,7 +342,7 @@ export default {
     },
     async fetchFilterBarData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/referenceBooks/')
+        const response = await axios.get('https://kseniya38.github.io/web-kotiki/api/referenceBooks/')
         this.filterBarItems = response.data
       } catch (error) {
         console.error('Error fetching reference books:', error)
@@ -350,7 +350,7 @@ export default {
     },
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/animal', {
+        const response = await axios.get('https://kseniya38.github.io/web-kotiki/api/animal', {
           params: {
             //page: this.page,
             //limit: this.limit,
@@ -381,14 +381,14 @@ export default {
     },
     async fetchNoticeDetails() {
       try {
-        const response = await axios.get(`http://localhost:5000/api/animal/15`)
+        const response = await axios.get(`https://kseniya38.github.io/web-kotiki/api/animal/15`)
         this.contacts_list = [ { contact_type: "phone", contact_info: response.data.notices[0].user.telephone } || '', { contact_type: "link", contact_info: response.data.notices[0].user.social_media } || '']
 
-        if (response.data.photo.first) this.photos[0] = `http://localhost:5000/static/${response.data.photo.first}`
-        if (response.data.photo.second) this.photos[1] = `http://localhost:5000/static/${response.data.photo.second}`
-        if (response.data.photo.third) this.photos[2] = `http://localhost:5000/static/${response.data.photo.third}`
-        if (response.data.photo.fourth) this.photos[3] = `http://localhost:5000/static/${response.data.photo.fourth}`
-        if (this.photos.length === 0) this.photos[0] = 'http://localhost:5000/static/noPhoto.svg'
+        if (response.data.photo.first) this.photos[0] = `https://kseniya38.github.io/web-kotiki/static/${response.data.photo.first}`
+        if (response.data.photo.second) this.photos[1] = `https://kseniya38.github.io/web-kotiki/static/${response.data.photo.second}`
+        if (response.data.photo.third) this.photos[2] = `https://kseniya38.github.io/web-kotiki/static/${response.data.photo.third}`
+        if (response.data.photo.fourth) this.photos[3] = `https://kseniya38.github.io/web-kotiki/static/${response.data.photo.fourth}`
+        if (this.photos.length === 0) this.photos[0] = 'https://kseniya38.github.io/web-kotiki/static/noPhoto.svg'
 
         const eventDate = new Date(response.data.notices[0].event_date)
         const formattedEventDate = `${eventDate.getDate()}.${eventDate.getMonth() + 1}.${eventDate.getFullYear()}`
