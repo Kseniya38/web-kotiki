@@ -57,7 +57,7 @@ export default {
     },
     async fetchData() {
       try {
-        const response = await axios.get('http://localhost:5000/api/animal', {
+        const response = await axios.get('/api/animal', {
           params: {
             //page: this.page,
             //limit: this.limit,

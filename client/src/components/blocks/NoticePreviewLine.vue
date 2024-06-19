@@ -37,7 +37,7 @@ export default {
           animal_type: item.animalTypeId,
           animal_status: item.animalStatusId,
           notice_status: item.notices[0].noticeStatusId,
-          imageSrc: `http://localhost:5000/static/${item.photo.first}`,
+          imageSrc: `/static/${item.photo.first}`,
           date: formattedDate,
           location: `г. ${item.notices[0].address.city}, р-н. ${item.notices[0].address.district || "не указан"}, ул. ${item.notices[0].address.street || "не указана"}`,
           color: item.color.color_name

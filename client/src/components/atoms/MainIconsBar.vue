@@ -31,7 +31,7 @@ export default {
     ...mapMutations(['setLostPetPreviewItems', 'setFoundPetPreviewItems']),
     async handleLostPetClick() {
       try {
-        const response = await axios.get('http://localhost:5000/api/animal', {
+        const response = await axios.get('/api/animal', {
           params: {
             animalStatusId: 1
           }
@@ -44,7 +44,7 @@ export default {
     },
     async handleFoundPetClick() {
       try {
-        const response = await axios.get('http://localhost:5000/api/animal', {
+        const response = await axios.get('/api/animal', {
           params: {
             animalStatusId: 2
           }

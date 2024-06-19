@@ -116,7 +116,7 @@ export default {
         date_upperRange: date_upperRange?.toISOString(),
         ...filters
       }
-      const response = await axios.get('http://localhost:5000/api/animal/', {params})
+      const response = await axios.get('/api/animal/', {params})
       return response
     },
     formatFilters() {
